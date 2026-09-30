@@ -1,0 +1,313 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
+
+import 'app_localizations.dart';
+
+// ignore_for_file: type=lint
+
+/// The translations for English (`en`).
+class AppLocalizationsEn extends AppLocalizations {
+  AppLocalizationsEn([String locale = 'en']) : super(locale);
+
+  @override
+  String get appTitle => 'InvestCoach';
+
+  @override
+  String get tabCoach => 'Coach';
+
+  @override
+  String get tabNews => 'News';
+
+  @override
+  String get tabPortfolio => 'Portfolio';
+
+  @override
+  String get tabLearning => 'Learning';
+
+  @override
+  String get tabProfile => 'Profile';
+
+  @override
+  String get coachOnline => 'Online';
+
+  @override
+  String get coachOffline => 'Offline';
+
+  @override
+  String get onboardingTitle => 'Onboarding';
+
+  @override
+  String get featureInDevelopment => 'In development';
+
+  @override
+  String featureInDevelopmentDesc(String feature, String sprint) {
+    return 'The \"$feature\" screen will appear in $sprint.';
+  }
+
+  @override
+  String get sprint1to2 => 'sprints 1-2';
+
+  @override
+  String get sprint3 => 'sprint 3';
+
+  @override
+  String get sprint4 => 'sprint 4';
+
+  @override
+  String get onbWelcomeTitle => 'Meet your Coach';
+
+  @override
+  String get onbWelcomeText =>
+      'Every day we review Russian market news together and learn to make calm, thoughtful decisions. It will take less than a minute.';
+
+  @override
+  String get onbWelcomeStart => 'Let\'s start';
+
+  @override
+  String onbStep(int step, int total) {
+    return 'Step $step of $total';
+  }
+
+  @override
+  String get onbNameTitle => 'What\'s your name?';
+
+  @override
+  String get onbNameSubtitle => 'Coach will address you by your name';
+
+  @override
+  String get onbNameHint => 'Your name';
+
+  @override
+  String get onbNameError => 'Enter your name — at least 2 characters';
+
+  @override
+  String get onbContinue => 'Continue';
+
+  @override
+  String get onbBack => 'Back';
+
+  @override
+  String get onbExperienceTitle => 'Your investing experience';
+
+  @override
+  String get onbExperienceSubtitle => 'I\'ll tailor explanations to your level';
+
+  @override
+  String get onbExpBeginner => 'I\'m a beginner';
+
+  @override
+  String get onbExpBeginnerDesc => 'I\'ve never invested';
+
+  @override
+  String get onbExpIntermediate => 'I know the basics';
+
+  @override
+  String get onbExpIntermediateDesc => 'I know what stocks and bonds are';
+
+  @override
+  String get onbExpAdvanced => 'Experienced investor';
+
+  @override
+  String get onbExpAdvancedDesc => 'I invest regularly';
+
+  @override
+  String get onbGoalsTitle => 'What are we working on?';
+
+  @override
+  String get onbGoalsSubtitle => 'Pick at least one goal — more is fine';
+
+  @override
+  String get onbGoalNews => 'Understand market news';
+
+  @override
+  String get onbGoalBias => 'Spot my mistakes';
+
+  @override
+  String get onbGoalPortfolio => 'Manage a portfolio';
+
+  @override
+  String get onbGoalSaving => 'Save regularly';
+
+  @override
+  String get onbGoalsError => 'Pick at least one goal';
+
+  @override
+  String get onbRiskTitle => 'How bold are you?';
+
+  @override
+  String get onbRiskSubtitle => 'Coach will match this risk level';
+
+  @override
+  String get onbRiskConservative => 'Cautious';
+
+  @override
+  String get onbRiskConservativeDesc => 'Safety matters more than returns';
+
+  @override
+  String get onbRiskModerate => 'Moderate';
+
+  @override
+  String get onbRiskModerateDesc => 'Balance of risk and return';
+
+  @override
+  String get onbRiskAggressive => 'Bold';
+
+  @override
+  String get onbRiskAggressiveDesc => 'Ready for growth and volatility';
+
+  @override
+  String get onbStyleTitle => 'How should Coach talk to you?';
+
+  @override
+  String get onbStyleDetailed => 'In detail, with examples';
+
+  @override
+  String get onbStyleConcise => 'Brief, to the point';
+
+  @override
+  String get onbCreateCoach => 'Create my Coach';
+
+  @override
+  String get onbCreatingTitle => 'Creating your Coach…';
+
+  @override
+  String get onbCreatingText =>
+      'Setting up the tone and your learning portfolio';
+
+  @override
+  String greetingMorning(String name) {
+    return 'Good morning, $name!';
+  }
+
+  @override
+  String greetingDay(String name) {
+    return 'Good afternoon, $name!';
+  }
+
+  @override
+  String greetingEvening(String name) {
+    return 'Good evening, $name!';
+  }
+
+  @override
+  String get greetingFallback => 'Hi!';
+
+  @override
+  String discussNewsQuestion(String title) {
+    return 'Tell me about the news \"$title\" and what it means for my portfolio';
+  }
+
+  @override
+  String aboutNews(String title) {
+    return 'About the news: $title';
+  }
+
+  @override
+  String get allocStocks => 'Stocks';
+
+  @override
+  String get allocBonds => 'Bonds';
+
+  @override
+  String get allocEtf => 'Funds';
+
+  @override
+  String get allocOther => 'Other';
+
+  @override
+  String get todayImportant => 'Important today';
+
+  @override
+  String get quickActions => 'Quick questions';
+
+  @override
+  String get quickQ1 => 'What\'s happening in the market today?';
+
+  @override
+  String get quickQ2 => 'How is my portfolio?';
+
+  @override
+  String get quickQ3 => 'What is diversification?';
+
+  @override
+  String get quickQ4 => 'Explain it simply';
+
+  @override
+  String get chatInputHint => 'Ask Coach anything…';
+
+  @override
+  String get voiceComingSoon => 'Voice mode will arrive in the next update';
+
+  @override
+  String coachFirstMessage(String name) {
+    return 'Hi, $name! I\'m your Coach. I\'ll help you make sense of the news and make thoughtful decisions. Let\'s start with the most important thing?';
+  }
+
+  @override
+  String get portfolioCardTitle => 'Your portfolio';
+
+  @override
+  String get retry => 'Retry';
+
+  @override
+  String get somethingWentWrong => 'Something went wrong';
+
+  @override
+  String get noNewsForToday => 'No news yet today — check back later';
+
+  @override
+  String get todayImportantDiscuss => 'Discuss with Coach';
+
+  @override
+  String get newsImpactPortfolio => 'Affects your portfolio';
+
+  @override
+  String get newsNoImpact => 'No portfolio impact';
+
+  @override
+  String get chatThinking => 'Coach is thinking…';
+
+  @override
+  String get paywallTitle => 'You\'re out of questions for today';
+
+  @override
+  String get paywallText =>
+      'Free plan includes 8 questions a day. News+ at 149 ₽/month removes the limit.';
+
+  @override
+  String get paywallUpgrade => 'Upgrade to News+';
+
+  @override
+  String get paywallLater => 'Later';
+
+  @override
+  String get paywallStubHint =>
+      'Subscription checkout will arrive in the next update';
+
+  @override
+  String get voiceStart => 'Ask by voice';
+
+  @override
+  String get voiceListening => 'Listening…';
+
+  @override
+  String get voiceProcessing => 'Coach is thinking through it…';
+
+  @override
+  String get voiceSpeaking => 'Coach is answering';
+
+  @override
+  String get voiceDone => 'Done';
+
+  @override
+  String get voiceStop => 'Stop';
+
+  @override
+  String get voiceMockHint =>
+      'Real voice arrives in the next update; for now Coach \"hears\" you in demo mode';
+
+  @override
+  String biasChip(String bias) {
+    return 'Spotted: $bias';
+  }
+}

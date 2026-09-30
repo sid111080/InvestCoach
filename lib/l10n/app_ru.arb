@@ -1,0 +1,168 @@
+{
+  "@@locale": "ru",
+  "appTitle": "InvestCoach",
+  "tabCoach": "Коуч",
+  "tabNews": "Новости",
+  "tabPortfolio": "Портфель",
+  "tabLearning": "Обучение",
+  "tabProfile": "Профиль",
+  "coachOnline": "Онлайн",
+  "coachOffline": "Офлайн",
+  "onboardingTitle": "Онбординг",
+  "featureInDevelopment": "В разработке",
+  "featureInDevelopmentDesc": "Экран «{feature}» появится в {sprint}.",
+  "@featureInDevelopmentDesc": {
+    "placeholders": {
+      "feature": {
+        "type": "String"
+      },
+      "sprint": {
+        "type": "String"
+      }
+    }
+  },
+  "sprint1to2": "спринтах 1–2",
+  "sprint3": "спринте 3",
+  "sprint4": "спринте 4",
+
+  "onbWelcomeTitle": "Познакомься со своим Coach",
+  "onbWelcomeText": "Каждый день мы вместе разбираем новости российского рынка и учимся принимать спокойные, взвешенные решения. Это займёт меньше минуты.",
+  "onbWelcomeStart": "Давай начнём",
+  "onbStep": "Шаг {step} из {total}",
+  "@onbStep": {
+    "placeholders": {
+      "step": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "onbNameTitle": "Как тебя зовут?",
+  "onbNameSubtitle": "Coach будет обращаться к тебе по имени",
+  "onbNameHint": "Твоё имя",
+  "onbNameError": "Введи имя — минимум 2 символа",
+  "onbContinue": "Продолжить",
+  "onbBack": "Назад",
+  "onbExperienceTitle": "Твой опыт в инвестициях",
+  "onbExperienceSubtitle": "Подстрою объяснения под твой уровень",
+  "onbExpBeginner": "Я новичок",
+  "onbExpBeginnerDesc": "Никогда не инвестировал",
+  "onbExpIntermediate": "Понимаю основы",
+  "onbExpIntermediateDesc": "Знаю, что такое акции и облигации",
+  "onbExpAdvanced": "Опытный инвестор",
+  "onbExpAdvancedDesc": "Инвестирую регулярно",
+  "onbGoalsTitle": "Что тренируем?",
+  "onbGoalsSubtitle": "Выбери от одной цели — можно несколько",
+  "onbGoalNews": "Понимать новости рынка",
+  "onbGoalBias": "Замечать свои ошибки",
+  "onbGoalPortfolio": "Управлять портфелем",
+  "onbGoalSaving": "Регулярно откладывать",
+  "onbGoalsError": "Выбери хотя бы одну цель",
+  "onbRiskTitle": "Насколько ты смелый?",
+  "onbRiskSubtitle": "Так Coach подберёт уровень риска",
+  "onbRiskConservative": "Осторожный",
+  "onbRiskConservativeDesc": "Сохранность важнее доходности",
+  "onbRiskModerate": "Умеренный",
+  "onbRiskModerateDesc": "Баланс риска и доходности",
+  "onbRiskAggressive": "Смелый",
+  "onbRiskAggressiveDesc": "Готов к росту и волатильности",
+  "onbStyleTitle": "Как Coach говорит с тобой?",
+  "onbStyleDetailed": "Подробно, с примерами",
+  "onbStyleConcise": "Кратко, по сути",
+  "onbCreateCoach": "Создать Coach",
+  "onbCreatingTitle": "Создаём твоего Coach…",
+  "onbCreatingText": "Настраиваю тон общения и твой учебный портфель",
+
+  "greetingMorning": "Доброе утро, {name}!",
+  "@greetingMorning": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "greetingDay": "Добрый день, {name}!",
+  "@greetingDay": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "greetingEvening": "Добрый вечер, {name}!",
+  "@greetingEvening": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "greetingFallback": "Привет!",
+  "discussNewsQuestion": "Расскажи про новость «{title}» и что она значит для моего портфеля",
+  "@discussNewsQuestion": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "aboutNews": "О новости: {title}",
+  "@aboutNews": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "allocStocks": "Акции",
+  "allocBonds": "Облигации",
+  "allocEtf": "Фонды",
+  "allocOther": "Прочее",
+  "todayImportant": "Сегодня важно",
+  "quickActions": "Быстрые вопросы",
+  "quickQ1": "Что сегодня на рынке?",
+  "quickQ2": "Как мой портфель?",
+  "quickQ3": "Что такое диверсификация?",
+  "quickQ4": "Объясни проще",
+  "chatInputHint": "Спроси Coach что угодно…",
+  "voiceComingSoon": "Голосовой режим появится в следующем обновлении",
+  "coachFirstMessage": "Привет, {name}! Я — твой Coach. Я помогу разобраться с новостями и делать взвешенные решения. Давай начнём с главного?",
+  "@coachFirstMessage": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "portfolioCardTitle": "Твой портфель",
+  "retry": "Повторить",
+  "somethingWentWrong": "Что-то пошло не так",
+  "noNewsForToday": "Сегодня новостей пока нет — загляни позже",
+
+  "todayImportantDiscuss": "Обсудить с Coach",
+  "newsImpactPortfolio": "Влияет на твой портфель",
+  "newsNoImpact": "На портфель не влияет",
+  "chatThinking": "Coach думает…",
+  "paywallTitle": "Вопросы на сегодня закончились",
+  "paywallText": "Тариф Free — 8 вопросов в день. News+ за 149 ₽/мес — без ограничений.",
+  "paywallUpgrade": "Перейти на News+",
+  "paywallLater": "Позже",
+  "paywallStubHint": "Оплату подписки подключим в следующем обновлении",
+  "voiceStart": "Спроси голосом",
+  "voiceListening": "Слушаю тебя…",
+  "voiceProcessing": "Coach разбирает вопрос…",
+  "voiceSpeaking": "Coach отвечает",
+  "voiceDone": "Готово",
+  "voiceStop": "Остановить",
+  "voiceMockHint": "Голос подключим в следующем обновлении, а пока Coach «слышит» тебя в демо-режиме",
+  "biasChip": "Заметил: {bias}",
+  "@biasChip": {
+    "placeholders": {
+      "bias": {
+        "type": "String"
+      }
+    }
+  }
+}

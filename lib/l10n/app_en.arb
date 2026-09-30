@@ -1,0 +1,168 @@
+{
+  "@@locale": "en",
+  "appTitle": "InvestCoach",
+  "tabCoach": "Coach",
+  "tabNews": "News",
+  "tabPortfolio": "Portfolio",
+  "tabLearning": "Learning",
+  "tabProfile": "Profile",
+  "coachOnline": "Online",
+  "coachOffline": "Offline",
+  "onboardingTitle": "Onboarding",
+  "featureInDevelopment": "In development",
+  "featureInDevelopmentDesc": "The \"{feature}\" screen will appear in {sprint}.",
+  "@featureInDevelopmentDesc": {
+    "placeholders": {
+      "feature": {
+        "type": "String"
+      },
+      "sprint": {
+        "type": "String"
+      }
+    }
+  },
+  "sprint1to2": "sprints 1-2",
+  "sprint3": "sprint 3",
+  "sprint4": "sprint 4",
+
+  "onbWelcomeTitle": "Meet your Coach",
+  "onbWelcomeText": "Every day we review Russian market news together and learn to make calm, thoughtful decisions. It will take less than a minute.",
+  "onbWelcomeStart": "Let's start",
+  "onbStep": "Step {step} of {total}",
+  "@onbStep": {
+    "placeholders": {
+      "step": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "onbNameTitle": "What's your name?",
+  "onbNameSubtitle": "Coach will address you by your name",
+  "onbNameHint": "Your name",
+  "onbNameError": "Enter your name — at least 2 characters",
+  "onbContinue": "Continue",
+  "onbBack": "Back",
+  "onbExperienceTitle": "Your investing experience",
+  "onbExperienceSubtitle": "I'll tailor explanations to your level",
+  "onbExpBeginner": "I'm a beginner",
+  "onbExpBeginnerDesc": "I've never invested",
+  "onbExpIntermediate": "I know the basics",
+  "onbExpIntermediateDesc": "I know what stocks and bonds are",
+  "onbExpAdvanced": "Experienced investor",
+  "onbExpAdvancedDesc": "I invest regularly",
+  "onbGoalsTitle": "What are we working on?",
+  "onbGoalsSubtitle": "Pick at least one goal — more is fine",
+  "onbGoalNews": "Understand market news",
+  "onbGoalBias": "Spot my mistakes",
+  "onbGoalPortfolio": "Manage a portfolio",
+  "onbGoalSaving": "Save regularly",
+  "onbGoalsError": "Pick at least one goal",
+  "onbRiskTitle": "How bold are you?",
+  "onbRiskSubtitle": "Coach will match this risk level",
+  "onbRiskConservative": "Cautious",
+  "onbRiskConservativeDesc": "Safety matters more than returns",
+  "onbRiskModerate": "Moderate",
+  "onbRiskModerateDesc": "Balance of risk and return",
+  "onbRiskAggressive": "Bold",
+  "onbRiskAggressiveDesc": "Ready for growth and volatility",
+  "onbStyleTitle": "How should Coach talk to you?",
+  "onbStyleDetailed": "In detail, with examples",
+  "onbStyleConcise": "Brief, to the point",
+  "onbCreateCoach": "Create my Coach",
+  "onbCreatingTitle": "Creating your Coach…",
+  "onbCreatingText": "Setting up the tone and your learning portfolio",
+
+  "greetingMorning": "Good morning, {name}!",
+  "@greetingMorning": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "greetingDay": "Good afternoon, {name}!",
+  "@greetingDay": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "greetingEvening": "Good evening, {name}!",
+  "@greetingEvening": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "greetingFallback": "Hi!",
+  "discussNewsQuestion": "Tell me about the news \"{title}\" and what it means for my portfolio",
+  "@discussNewsQuestion": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "aboutNews": "About the news: {title}",
+  "@aboutNews": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "allocStocks": "Stocks",
+  "allocBonds": "Bonds",
+  "allocEtf": "Funds",
+  "allocOther": "Other",
+  "todayImportant": "Important today",
+  "quickActions": "Quick questions",
+  "quickQ1": "What's happening in the market today?",
+  "quickQ2": "How is my portfolio?",
+  "quickQ3": "What is diversification?",
+  "quickQ4": "Explain it simply",
+  "chatInputHint": "Ask Coach anything…",
+  "voiceComingSoon": "Voice mode will arrive in the next update",
+  "coachFirstMessage": "Hi, {name}! I'm your Coach. I'll help you make sense of the news and make thoughtful decisions. Let's start with the most important thing?",
+  "@coachFirstMessage": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "portfolioCardTitle": "Your portfolio",
+  "retry": "Retry",
+  "somethingWentWrong": "Something went wrong",
+  "noNewsForToday": "No news yet today — check back later",
+
+  "todayImportantDiscuss": "Discuss with Coach",
+  "newsImpactPortfolio": "Affects your portfolio",
+  "newsNoImpact": "No portfolio impact",
+  "chatThinking": "Coach is thinking…",
+  "paywallTitle": "You're out of questions for today",
+  "paywallText": "Free plan includes 8 questions a day. News+ at 149 ₽/month removes the limit.",
+  "paywallUpgrade": "Upgrade to News+",
+  "paywallLater": "Later",
+  "paywallStubHint": "Subscription checkout will arrive in the next update",
+  "voiceStart": "Ask by voice",
+  "voiceListening": "Listening…",
+  "voiceProcessing": "Coach is thinking through it…",
+  "voiceSpeaking": "Coach is answering",
+  "voiceDone": "Done",
+  "voiceStop": "Stop",
+  "voiceMockHint": "Real voice arrives in the next update; for now Coach \"hears\" you in demo mode",
+  "biasChip": "Spotted: {bias}",
+  "@biasChip": {
+    "placeholders": {
+      "bias": {
+        "type": "String"
+      }
+    }
+  }
+}
