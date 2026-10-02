@@ -6,6 +6,7 @@ import '../../../domain/entities/chat_context.dart';
 import '../../../domain/entities/chat_message.dart';
 import '../../../domain/entities/chat_session.dart';
 import '../../../domain/entities/chat_stream_event.dart';
+import '../../../domain/entities/voice_response.dart';
 import '../../../core/providers/repository_providers.dart';
 
 /// Провайдер сессии чата (главный экран Coach).
@@ -32,16 +33,27 @@ final class ChatSessionNotifier extends Notifier<ChatSession> {
   String get userName =>
       ref.read(currentUserProvider).value?.name ?? '';
 
+  /// Исчерпан ли дневной лимит Free-тарифа (8 Pull-запросов).
+  bool get isPullLimitReached {
+    final tier = ref.read(currentUserProvider).value?.tier ?? UserTier.free;
+    return tier == UserTier.free &&
+        state.pullRequestsUsed >= kFreeDailyPullLimit;
+  }
+
+  /// Идёт ли ответ Coach (текст или голос) — блокирует ввод.
+  bool get isBusy =>
+      state.phase == ChatSessionPhase.thinking ||
+      state.phase == ChatSessionPhase.streaming ||
+      state.phase == ChatSessionPhase.voice;
+
   /// Отправляет текстовый вопрос Coach.
   Future<void> sendText(String text, {ChatContext? context}) async {
     final trimmed = text.trim();
     if (trimmed.isEmpty) return;
-    if (_isBusy) return;
+    if (isBusy) return;
 
     // Лимит Free-тарифа: мягкий paywall вместо запроса.
-    final tier = ref.read(currentUserProvider).value?.tier ?? UserTier.free;
-    if (tier == UserTier.free &&
-        state.pullRequestsUsed >= kFreeDailyPullLimit) {
+    if (isPullLimitReached) {
       state = state.copyWith(phase: ChatSessionPhase.limitReached);
       return;
     }
@@ -168,12 +180,50 @@ final class ChatSessionNotifier extends Notifier<ChatSession> {
     }
   }
 
-  /// Голосовой режим активен — текстовый ввод блокируем.
-  bool get _isBusy {
-    final phase = state.phase;
-    return phase == ChatSessionPhase.thinking ||
-        phase == ChatSessionPhase.streaming ||
-        phase == ChatSessionPhase.voice;
+  /// Голосовой режим: вход (блокирует текстовый ввод).
+  void enterVoiceMode() {
+    if (state.phase == ChatSessionPhase.voice) return;
+    state = state.copyWith(phase: ChatSessionPhase.voice);
+  }
+
+  /// Голосовой режим: выход (после закрытия оверлея).
+  void exitVoiceMode() {
+    if (state.phase != ChatSessionPhase.voice) return;
+    state = state.copyWith(phase: ChatSessionPhase.idle);
+  }
+
+  /// Засчитывает голосовой запрос в дневной лимит Free.
+  void registerPullRequest() {
+    state = state.copyWith(
+      pullRequestsUsed: state.pullRequestsUsed + 1,
+    );
+  }
+
+  /// Добавляет завершённый голосовой обмен в историю чата:
+  /// вопрос пользователя + ответ Coach с подсказками.
+  void recordVoiceExchange(VoiceChatResponse response, {ChatContext? context}) {
+    state = state.copyWith(
+      messages: [
+        ...state.messages,
+        ChatMessage(
+          id: _nextId('user'),
+          role: ChatRole.user,
+          text: response.transcript,
+          status: ChatMessageStatus.completed,
+          sentAt: DateTime.now(),
+          context: context,
+        ),
+        ChatMessage(
+          id: _nextId('coach'),
+          role: ChatRole.coach,
+          text: response.responseText,
+          status: ChatMessageStatus.completed,
+          suggestedReplies: [...response.suggestedReplies],
+          biasDetected: [...response.biasDetected],
+          context: context,
+        ),
+      ],
+    );
   }
 
   String _nextId(String prefix) =>

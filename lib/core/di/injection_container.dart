@@ -2,6 +2,11 @@ import 'package:get_it/get_it.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../data/services/flutter_tts_synthesizer.dart';
+import '../../data/services/mock_speech_services.dart';
+import '../../data/services/speech_transcriber_impl.dart';
+import '../../domain/services/speech_synthesizer.dart';
+import '../../domain/services/speech_transcriber.dart';
 import '../../shared/onboarding/onboarding_state_repository.dart';
 import '../analytics/analytics_service.dart';
 import '../auth/auth_token_provider.dart';
@@ -32,6 +37,16 @@ void registerDependencies(AppConfig config) {
   );
   _singleton<CrashReportingService>(const NoOpCrashReportingService());
   _singleton<AuthTokenProvider>(const NoOpAuthTokenProvider());
+
+  // Голос (Voice-First): реальные SDK или демо-mock.
+  _singleton<SpeechTranscriber>(
+    config.useRealServices ? SpeechTranscriberImpl() : MockSpeechTranscriber(),
+  );
+  _singleton<SpeechSynthesizer>(
+    config.useRealServices
+        ? FlutterTtsSynthesizer()
+        : MockSpeechSynthesizer(),
+  );
 
   // Ядро сети.
   _singleton<AppErrorMapper>(const AppErrorMapper());
