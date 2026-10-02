@@ -44,5 +44,23 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
+# iOS (generated)
+**/ios/Flutter/Flutter-Debug.xcconfig
+**/ios/Flutter/Flutter-Release.xcconfig
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/ephemeral/
+**/ios/Flutter/GeneratedPluginRegistrant.swift
+**/ios/Pods/
+**/ios/Podfile.lock
+**/ios/Runner.xcodeproj/project.xcworkspace/
+
+# macOS (generated)
+**/macos/Flutter/Flutter-Debug.xcconfig
+**/macos/Flutter/Flutter-Release.xcconfig
+**/macos/Flutter/ephemeral/
+**/macos/Flutter/GeneratedPluginRegistrant.swift
+**/macos/Pods/
+**/macos/Runner.xcodeproj/project.xcworkspace/
+
 # Widget Preview related
 .widget_preview/
