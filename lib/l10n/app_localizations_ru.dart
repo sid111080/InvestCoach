@@ -236,10 +236,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get chatInputHint => 'Спроси Coach что угодно…';
 
   @override
-  String get voiceComingSoon =>
-      'Голосовой режим появится в следующем обновлении';
-
-  @override
   String coachFirstMessage(String name) {
     return 'Привет, $name! Я — твой Coach. Я помогу разобраться с новостями и делать взвешенные решения. Давай начнём с главного?';
   }
@@ -306,6 +302,19 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get voiceMockHint =>
       'Голос подключим в следующем обновлении, а пока Coach «слышит» тебя в демо-режиме';
+
+  @override
+  String get voiceTapToStop => 'Тапни по микрофону, чтобы остановить';
+
+  @override
+  String get voiceMicUnavailable =>
+      'Не удалось открыть микрофон. Проверь разрешения в настройках устройства';
+
+  @override
+  String get voiceAskAgain => 'Спросить ещё';
+
+  @override
+  String get voiceClose => 'Закрыть';
 
   @override
   String biasChip(String bias) {

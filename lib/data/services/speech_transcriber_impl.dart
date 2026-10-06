@@ -62,13 +62,9 @@ final class SpeechTranscriberImpl implements SpeechTranscriber {
   void _finalize(String text) {
     if (text.isEmpty) return;
     if (!_final.isClosed) _final.add(text);
-    unawaited(_stopAndClose());
-  }
-
-  Future<void> _stopAndClose() async {
-    await _stt.stop();
-    if (!_partial.isClosed) await _partial.close();
-    if (!_final.isClosed) await _final.close();
+    // Микрофон закрываем, а потоки держим: «Спросить ещё»
+    // снова открывает микрофон — потоки закрываются только в [dispose].
+    unawaited(_stt.stop());
   }
 
   @override
@@ -80,7 +76,7 @@ final class SpeechTranscriberImpl implements SpeechTranscriber {
   @override
   Future<void> stop() async {
     // Финальный результат придёт асинхронно через onResult
-    // (finalResult) — потоки закрываем только в [_finalize]/dispose.
+    // (finalResult); потоки не закрываем — только в [dispose].
     await _stt.stop();
   }
 

@@ -518,12 +518,6 @@ abstract class AppLocalizations {
   /// **'Спроси Coach что угодно…'**
   String get chatInputHint;
 
-  /// No description provided for @voiceComingSoon.
-  ///
-  /// In ru, this message translates to:
-  /// **'Голосовой режим появится в следующем обновлении'**
-  String get voiceComingSoon;
-
   /// No description provided for @coachFirstMessage.
   ///
   /// In ru, this message translates to:
@@ -649,6 +643,30 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Голос подключим в следующем обновлении, а пока Coach «слышит» тебя в демо-режиме'**
   String get voiceMockHint;
+
+  /// No description provided for @voiceTapToStop.
+  ///
+  /// In ru, this message translates to:
+  /// **'Тапни по микрофону, чтобы остановить'**
+  String get voiceTapToStop;
+
+  /// No description provided for @voiceMicUnavailable.
+  ///
+  /// In ru, this message translates to:
+  /// **'Не удалось открыть микрофон. Проверь разрешения в настройках устройства'**
+  String get voiceMicUnavailable;
+
+  /// No description provided for @voiceAskAgain.
+  ///
+  /// In ru, this message translates to:
+  /// **'Спросить ещё'**
+  String get voiceAskAgain;
+
+  /// No description provided for @voiceClose.
+  ///
+  /// In ru, this message translates to:
+  /// **'Закрыть'**
+  String get voiceClose;
 
   /// No description provided for @biasChip.
   ///

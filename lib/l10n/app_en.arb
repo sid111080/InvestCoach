@@ -127,7 +127,6 @@
   "quickQ3": "What is diversification?",
   "quickQ4": "Explain it simply",
   "chatInputHint": "Ask Coach anything…",
-  "voiceComingSoon": "Voice mode will arrive in the next update",
   "coachFirstMessage": "Hi, {name}! I'm your Coach. I'll help you make sense of the news and make thoughtful decisions. Let's start with the most important thing?",
   "@coachFirstMessage": {
     "placeholders": {
@@ -157,6 +156,10 @@
   "voiceDone": "Done",
   "voiceStop": "Stop",
   "voiceMockHint": "Real voice arrives in the next update; for now Coach \"hears\" you in demo mode",
+  "voiceTapToStop": "Tap the mic to stop",
+  "voiceMicUnavailable": "We couldn't open the microphone. Check your device permissions",
+  "voiceAskAgain": "Ask again",
+  "voiceClose": "Close",
   "biasChip": "Spotted: {bias}",
   "@biasChip": {
     "placeholders": {

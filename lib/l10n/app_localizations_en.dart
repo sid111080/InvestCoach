@@ -236,9 +236,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get chatInputHint => 'Ask Coach anything…';
 
   @override
-  String get voiceComingSoon => 'Voice mode will arrive in the next update';
-
-  @override
   String coachFirstMessage(String name) {
     return 'Hi, $name! I\'m your Coach. I\'ll help you make sense of the news and make thoughtful decisions. Let\'s start with the most important thing?';
   }
@@ -305,6 +302,19 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get voiceMockHint =>
       'Real voice arrives in the next update; for now Coach \"hears\" you in demo mode';
+
+  @override
+  String get voiceTapToStop => 'Tap the mic to stop';
+
+  @override
+  String get voiceMicUnavailable =>
+      'We couldn\'t open the microphone. Check your device permissions';
+
+  @override
+  String get voiceAskAgain => 'Ask again';
+
+  @override
+  String get voiceClose => 'Close';
 
   @override
   String biasChip(String bias) {

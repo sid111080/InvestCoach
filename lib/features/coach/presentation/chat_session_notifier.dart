@@ -180,6 +180,12 @@ final class ChatSessionNotifier extends Notifier<ChatSession> {
     }
   }
 
+  /// Лимит исчерпан (вход в голосовой режим без запуска микрофона) —
+  /// показываем paywall поверх чата.
+  void enterLimitReached() {
+    state = state.copyWith(phase: ChatSessionPhase.limitReached);
+  }
+
   /// Голосовой режим: вход (блокирует текстовый ввод).
   void enterVoiceMode() {
     if (state.phase == ChatSessionPhase.voice) return;

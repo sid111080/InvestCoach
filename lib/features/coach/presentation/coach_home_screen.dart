@@ -13,12 +13,14 @@ import '../../../domain/entities/daily_news.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../shared/widgets/coach_avatar.dart';
 import 'chat_session_notifier.dart';
+import 'voice_session_notifier.dart';
 import 'widgets/chat_message_bubble.dart';
 import 'widgets/coach_input_bar.dart';
 import 'widgets/daily_news_card.dart';
 import 'widgets/paywall_overlay.dart';
 import 'widgets/portfolio_mini_card.dart';
 import 'widgets/quick_actions_bar.dart';
+import 'widgets/voice_overlay.dart';
 
 /// Главный экран «Coach» — самый важный экран приложения.
 ///
@@ -69,15 +71,23 @@ class _CoachHomeScreenState extends ConsumerState<CoachHomeScreen> {
         );
   }
 
-  /// Спринт 1: голосовой режим — stub (Спринт 2).
+  /// Голосовой режим: вход в fullscreen-оверлей.
+  ///
+  /// Если дневной лимит Free исчерпан — мягкий paywall вместо оверлея.
   void _onVoiceTap() {
-    final l10n = AppLocalizations.of(context);
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(l10n.voiceComingSoon),
-        behavior: SnackBarBehavior.floating,
-      ),
-    );
+    final chat = ref.read(chatSessionProvider.notifier);
+    if (chat.isPullLimitReached) {
+      chat.enterLimitReached();
+      return;
+    }
+    chat.enterVoiceMode();
+    ref.read(voiceSessionProvider.notifier).start();
+  }
+
+  /// Выход из голосового режима: оверлей скрывается, сессия
+  /// освобождает микрофон/синтезатор (авто-dispose провайдера).
+  void _onVoiceClose() {
+    ref.read(chatSessionProvider.notifier).exitVoiceMode();
   }
 
   void _onPaywallUpgrade() {
@@ -166,6 +176,8 @@ class _CoachHomeScreenState extends ConsumerState<CoachHomeScreen> {
                     .read(chatSessionProvider.notifier)
                     .dismissLimitReached(),
               ),
+            if (session.phase == ChatSessionPhase.voice)
+              VoiceOverlay(onClose: _onVoiceClose),
             Positioned(
               left: 0,
               right: 0,

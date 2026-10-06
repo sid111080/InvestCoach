@@ -86,11 +86,11 @@ final class MockSpeechSynthesizer implements SpeechSynthesizer {
 
   Completer<void>? _done;
   Timer? _timer;
-  bool _stopped = false;
 
   @override
   Future<void> speak(String text, {String? audioUrl}) async {
-    if (text.trim().isEmpty || _stopped) return;
+    if (text.trim().isEmpty) return;
+    // Новая реплика — новый вывод (как в реальном TTS: stop → speak).
     final done = Completer<void>();
     _done = done;
     _timer = Timer(speakDuration, _complete);
@@ -105,13 +105,11 @@ final class MockSpeechSynthesizer implements SpeechSynthesizer {
 
   @override
   Future<void> stop() async {
-    _stopped = true;
     _complete();
   }
 
   @override
   Future<void> dispose() async {
-    _stopped = true;
     _complete();
   }
 }
