@@ -198,6 +198,11 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String discussLessonQuestion(String title) {
+    return 'Let\'s discuss the lesson \"$title\" — help me understand how to apply it';
+  }
+
+  @override
   String aboutNews(String title) {
     return 'About the news: $title';
   }
@@ -365,6 +370,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get learnLessonCompleted => 'Completed';
+
+  @override
+  String get learnLessonComplete => 'Finish';
 
   @override
   String get learnNoLessons =>

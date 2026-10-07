@@ -5,16 +5,19 @@ import '../../domain/repositories/learning_repository.dart';
 
 /// Mock [LearningRepository]: реалистичные данные для UI без backend.
 final class MockLearningRepository implements LearningRepository {
-  const MockLearningRepository({
+  MockLearningRepository({
     this.latency = const Duration(milliseconds: 600),
   });
 
   final Duration latency;
 
+  /// Отслеживает завершённые уроки (mock-состояние).
+  final Set<String> _completedLessons = {};
+
   @override
   Future<List<MicroLesson>> fetchRecommendedLessons() async {
     await Future<void>.delayed(latency);
-    return const [
+    return [
       MicroLesson(
         id: 'lesson_001',
         title: 'Что такое FOMO и как его заметить',
@@ -22,8 +25,16 @@ final class MockLearningRepository implements LearningRepository {
         difficulty: LessonDifficulty.easy,
         biasTag: 'FOMO',
         description:
-            'Коротко о том, почему «все покупают» — не аргумент, '
-            'и как сделать шаг назад.',
+            'FOMO (Fear Of Missing Out) — страх пропустить. '
+            'Когда все вокруг говорят о росте акции, а ты ещё не купил, '
+            'мозг начинает давить: «Сейчас или никогда».\n\n'
+            'Как заметить: если ты хочешь купить просто потому, что '
+            'акция уже выросла и «все об этом говорят», — это сигнал FOMO. '
+            'Попробуй сделать паузу в 10 минут и спроси себя: '
+            '«Я бы купил эту бумагу, если бы она не росла?» '
+            'Если ответ «нет» — скорее всего, ты реагируешь на эмоцию, '
+            'а не на фундамент.',
+        completed: _completedLessons.contains('lesson_001'),
       ),
       MicroLesson(
         id: 'lesson_002',
@@ -31,8 +42,16 @@ final class MockLearningRepository implements LearningRepository {
         durationSeconds: 60,
         difficulty: LessonDifficulty.easy,
         description:
-            'Почему 3–5 разных активов — уже хорошая защита '
-            'от резких движений рынка.',
+            'Представь, что весь твой портфель — одна акция. '
+            'Компания отчиталась плохо — и ты потерял 15% за день. '
+            'Теперь представь, что этот портфель разбит на 4–5 бумаг '
+            'из разных секторов: банки, нефть, IT, ритейл. '
+            'Одна просела — другие сгладили удар.\n\n'
+            'Диверсификация не гарантирует прибыль, но она снижает '
+            'риск резких просадок. Для учебного портфеля достаточно '
+            '3–5 позиций из разных отраслей, плюс немного облигаций '
+            'или ETF как «подушка».',
+        completed: _completedLessons.contains('lesson_002'),
       ),
       MicroLesson(
         id: 'lesson_003',
@@ -41,7 +60,16 @@ final class MockLearningRepository implements LearningRepository {
         difficulty: LessonDifficulty.medium,
         biasTag: 'Loss Aversion',
         description:
-            'Психология убытков и как не продавать на панике.',
+            'Исследования показывают: потеря 1000 ₽ ощущается '
+            'примерно в 2–2,5 раза сильнее, чем радость от прибыли '
+            'в 1000 ₽. Это называется loss aversion — асимметрия '
+            'восприятия выигрышей и проигрышей.\n\n'
+            'Практический риск: когда портфель проседает, '
+            'хочется «закрыть позицию и забыть». Но часто именно '
+            'в момент паники продают на минимуме. Правило: '
+            'решения о продаже принимай не в день просадки, '
+            'а через 1–2 дня, когда эмоция спадет.',
+        completed: _completedLessons.contains('lesson_003'),
       ),
       MicroLesson(
         id: 'lesson_004',
@@ -49,7 +77,18 @@ final class MockLearningRepository implements LearningRepository {
         durationSeconds: 60,
         difficulty: LessonDifficulty.medium,
         description:
-            'Три цифры, которые стоит проверить: выручка, EBITDA, долг.',
+            'Полный отчёт — 80 страниц. Но 90% полезной информации '
+            'умещается в трёх цифрах. Вот что стоит проверить:\n\n'
+            '1. Выручка — растёт или падает год к году? '
+            'Рост > 5% — хороший знак.\n'
+            '2. EBITDA (операционная прибыль) — компания '
+            'реально зарабатывает или живёт на кредитах?\n'
+            '3. Долг/EBITDA — если больше 3, компания '
+            'сильно закредитована.\n\n'
+            'Если все три цифры в порядке — компания здорова. '
+            'Если что-то «поплыло» — стоит поговорить с Coach '
+            'о том, как это влияет на твою позицию.',
+        completed: _completedLessons.contains('lesson_004'),
       ),
     ];
   }
@@ -57,6 +96,7 @@ final class MockLearningRepository implements LearningRepository {
   @override
   Future<void> completeLesson(String lessonId) async {
     await Future<void>.delayed(latency);
+    _completedLessons.add(lessonId);
   }
 
   @override

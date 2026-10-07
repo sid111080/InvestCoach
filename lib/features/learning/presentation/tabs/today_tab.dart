@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/providers/repository_providers.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -132,14 +133,14 @@ class _LessonCard extends ConsumerWidget {
                 isActive: !lesson.completed,
                 onPressed: lesson.completed
                     ? null
-                    : () => _completeLesson(ref),
+                    : () => _openLessonSheet(context, ref),
               ),
               const SizedBox(width: AppDimensions.spaceSm),
               _LessonActionButton(
                 label: l10n.learnLessonDiscuss,
                 icon: Icons.chat_bubble_outline,
                 isActive: true,
-                onPressed: () {},
+                onPressed: () => context.go('/coach', extra: lesson),
               ),
             ],
           ),
@@ -148,10 +149,23 @@ class _LessonCard extends ConsumerWidget {
     );
   }
 
-  void _completeLesson(WidgetRef ref) {
-    ref.read(learningRepositoryProvider).completeLesson(lesson.id);
-    // Обновляем список после завершения
-    ref.invalidate(recommendedLessonsProvider);
+  void _openLessonSheet(BuildContext context, WidgetRef ref) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: AppColors.surface,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (sheetContext) => _LessonDetailSheet(
+        lesson: lesson,
+        onComplete: () {
+          Navigator.pop(sheetContext);
+          ref.read(learningRepositoryProvider).completeLesson(lesson.id);
+          ref.invalidate(recommendedLessonsProvider);
+        },
+      ),
+    );
   }
 }
 
@@ -335,6 +349,118 @@ class _TabError extends StatelessWidget {
             label: Text(l10n.retry),
           ),
         ],
+      ),
+    );
+  }
+}
+
+/// Bottom sheet с контентом микро-урока.
+class _LessonDetailSheet extends StatelessWidget {
+  const _LessonDetailSheet({required this.lesson, required this.onComplete});
+
+  final MicroLesson lesson;
+  final VoidCallback onComplete;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    return Padding(
+      padding: EdgeInsets.only(
+        bottom: MediaQuery.of(context).viewInsets.bottom,
+      ),
+      child: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(AppDimensions.spaceLg),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Drag handle
+              Center(
+                child: Container(
+                  width: 36,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: AppColors.outline,
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
+              ),
+              const SizedBox(height: AppDimensions.spaceLg),
+              // Метка длительности + bias
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 4,
+                    ),
+                    decoration: BoxDecoration(
+                      color: AppColors.surfaceElevated,
+                      borderRadius: BorderRadius.circular(AppDimensions.radiusFull),
+                    ),
+                    child: Text(
+                      l10n.learnLessonDuration(lesson.durationSeconds),
+                      style: AppTextStyles.labelMedium,
+                    ),
+                  ),
+                  if (lesson.biasTag != null) ...[
+                    const SizedBox(width: AppDimensions.spaceXs),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 4,
+                      ),
+                      decoration: BoxDecoration(
+                        color: AppColors.primaryContainer,
+                        borderRadius: BorderRadius.circular(AppDimensions.radiusFull),
+                      ),
+                      child: Text(
+                        lesson.biasTag!,
+                        style: AppTextStyles.labelMedium
+                            .copyWith(color: AppColors.primary),
+                      ),
+                    ),
+                  ],
+                ],
+              ),
+              const SizedBox(height: AppDimensions.spaceMd),
+              // Заголовок
+              Text(
+                lesson.title,
+                style: AppTextStyles.titleLarge,
+              ),
+              const SizedBox(height: AppDimensions.spaceMd),
+              // Контент урока
+              if (lesson.description != null)
+                Text(
+                  lesson.description!,
+                  style: AppTextStyles.bodyLarge
+                      .copyWith(color: AppColors.textSecondary),
+                ),
+              const SizedBox(height: AppDimensions.spaceXl),
+              // Кнопка завершения
+              SizedBox(
+                width: double.infinity,
+                height: 50,
+                child: FilledButton(
+                  onPressed: onComplete,
+                  style: FilledButton.styleFrom(
+                    backgroundColor: AppColors.primary,
+                    foregroundColor: Colors.black,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(AppDimensions.radiusMd),
+                    ),
+                  ),
+                  child: Text(
+                    l10n.learnLessonComplete,
+                    style: AppTextStyles.labelLarge,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

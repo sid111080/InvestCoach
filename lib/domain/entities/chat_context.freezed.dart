@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ChatContext {
 
- ChatContextType get type; String? get newsId; String? get newsTitle;
+ ChatContextType get type; String? get newsId; String? get newsTitle; String? get lessonId; String? get lessonTitle;
 /// Create a copy of ChatContext
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -30,20 +30,20 @@ $ChatContextCopyWith<ChatContext> get copyWith => _$ChatContextCopyWithImpl<Chat
 @override
 bool operator ==(Object other) {
   final _this = this as ChatContext;
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChatContext&&(identical(other.type, _this.type) || other.type == _this.type)&&(identical(other.newsId, _this.newsId) || other.newsId == _this.newsId)&&(identical(other.newsTitle, _this.newsTitle) || other.newsTitle == _this.newsTitle));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChatContext&&(identical(other.type, _this.type) || other.type == _this.type)&&(identical(other.newsId, _this.newsId) || other.newsId == _this.newsId)&&(identical(other.newsTitle, _this.newsTitle) || other.newsTitle == _this.newsTitle)&&(identical(other.lessonId, _this.lessonId) || other.lessonId == _this.lessonId)&&(identical(other.lessonTitle, _this.lessonTitle) || other.lessonTitle == _this.lessonTitle));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
   final _this = this as ChatContext;
-  return Object.hash(runtimeType,_this.type,_this.newsId,_this.newsTitle);
+  return Object.hash(runtimeType,_this.type,_this.newsId,_this.newsTitle,_this.lessonId,_this.lessonTitle);
 }
 
 @override
 String toString() {
   final _this = this as ChatContext;
-  return 'ChatContext(type: ${_this.type}, newsId: ${_this.newsId}, newsTitle: ${_this.newsTitle})';
+  return 'ChatContext(type: ${_this.type}, newsId: ${_this.newsId}, newsTitle: ${_this.newsTitle}, lessonId: ${_this.lessonId}, lessonTitle: ${_this.lessonTitle})';
 }
 
 
@@ -54,7 +54,7 @@ abstract mixin class $ChatContextCopyWith<$Res>  {
   factory $ChatContextCopyWith(ChatContext value, $Res Function(ChatContext) _then) = _$ChatContextCopyWithImpl;
 @useResult
 $Res call({
- ChatContextType type, String? newsId, String? newsTitle
+ ChatContextType type, String? newsId, String? newsTitle, String? lessonId, String? lessonTitle
 });
 
 
@@ -71,11 +71,13 @@ class _$ChatContextCopyWithImpl<$Res>
 
 /// Create a copy of ChatContext
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? type = null,Object? newsId = freezed,Object? newsTitle = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? type = null,Object? newsId = freezed,Object? newsTitle = freezed,Object? lessonId = freezed,Object? lessonTitle = freezed,}) {
   return _then(ChatContext(
 type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
 as ChatContextType,newsId: freezed == newsId ? _self.newsId : newsId // ignore: cast_nullable_to_non_nullable
 as String?,newsTitle: freezed == newsTitle ? _self.newsTitle : newsTitle // ignore: cast_nullable_to_non_nullable
+as String?,lessonId: freezed == lessonId ? _self.lessonId : lessonId // ignore: cast_nullable_to_non_nullable
+as String?,lessonTitle: freezed == lessonTitle ? _self.lessonTitle : lessonTitle // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
@@ -158,10 +160,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( ChatContextType type,  String? newsId,  String? newsTitle)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( ChatContextType type,  String? newsId,  String? newsTitle,  String? lessonId,  String? lessonTitle)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ChatContext() when $default != null:
-return $default(_that.type,_that.newsId,_that.newsTitle);case _:
+return $default(_that.type,_that.newsId,_that.newsTitle,_that.lessonId,_that.lessonTitle);case _:
   return orElse();
 
 }
@@ -179,10 +181,10 @@ return $default(_that.type,_that.newsId,_that.newsTitle);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( ChatContextType type,  String? newsId,  String? newsTitle)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( ChatContextType type,  String? newsId,  String? newsTitle,  String? lessonId,  String? lessonTitle)  $default,) {final _that = this;
 switch (_that) {
 case _ChatContext():
-return $default(_that.type,_that.newsId,_that.newsTitle);}
+return $default(_that.type,_that.newsId,_that.newsTitle,_that.lessonId,_that.lessonTitle);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -196,10 +198,10 @@ return $default(_that.type,_that.newsId,_that.newsTitle);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( ChatContextType type,  String? newsId,  String? newsTitle)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( ChatContextType type,  String? newsId,  String? newsTitle,  String? lessonId,  String? lessonTitle)?  $default,) {final _that = this;
 switch (_that) {
 case _ChatContext() when $default != null:
-return $default(_that.type,_that.newsId,_that.newsTitle);case _:
+return $default(_that.type,_that.newsId,_that.newsTitle,_that.lessonId,_that.lessonTitle);case _:
   return null;
 
 }
@@ -211,12 +213,14 @@ return $default(_that.type,_that.newsId,_that.newsTitle);case _:
 @JsonSerializable()
 
 class _ChatContext extends ChatContext {
-  const _ChatContext({this.type = ChatContextType.general, this.newsId, this.newsTitle}): super._();
+  const _ChatContext({this.type = ChatContextType.general, this.newsId, this.newsTitle, this.lessonId, this.lessonTitle}): super._();
   factory _ChatContext.fromJson(Map<String, dynamic> json) => _$ChatContextFromJson(json);
 
 @override@JsonKey() final  ChatContextType type;
 @override final  String? newsId;
 @override final  String? newsTitle;
+@override final  String? lessonId;
+@override final  String? lessonTitle;
 
 /// Create a copy of ChatContext
 /// with the given fields replaced by the non-null parameter values.
@@ -231,18 +235,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ChatContext&&(identical(other.type, type) || other.type == type)&&(identical(other.newsId, newsId) || other.newsId == newsId)&&(identical(other.newsTitle, newsTitle) || other.newsTitle == newsTitle));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _ChatContext&&(identical(other.type, type) || other.type == type)&&(identical(other.newsId, newsId) || other.newsId == newsId)&&(identical(other.newsTitle, newsTitle) || other.newsTitle == newsTitle)&&(identical(other.lessonId, lessonId) || other.lessonId == lessonId)&&(identical(other.lessonTitle, lessonTitle) || other.lessonTitle == lessonTitle));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
-    return Object.hash(runtimeType,type,newsId,newsTitle);
+    return Object.hash(runtimeType,type,newsId,newsTitle,lessonId,lessonTitle);
 }
 
 @override
 String toString() {
-    return 'ChatContext(type: $type, newsId: $newsId, newsTitle: $newsTitle)';
+    return 'ChatContext(type: $type, newsId: $newsId, newsTitle: $newsTitle, lessonId: $lessonId, lessonTitle: $lessonTitle)';
 }
 
 
@@ -253,7 +257,7 @@ abstract mixin class _$ChatContextCopyWith<$Res> implements $ChatContextCopyWith
   factory _$ChatContextCopyWith(_ChatContext value, $Res Function(_ChatContext) _then) = __$ChatContextCopyWithImpl;
 @override @useResult
 $Res call({
- ChatContextType type, String? newsId, String? newsTitle
+ ChatContextType type, String? newsId, String? newsTitle, String? lessonId, String? lessonTitle
 });
 
 
@@ -270,11 +274,13 @@ class __$ChatContextCopyWithImpl<$Res>
 
 /// Create a copy of ChatContext
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? type = null,Object? newsId = freezed,Object? newsTitle = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? type = null,Object? newsId = freezed,Object? newsTitle = freezed,Object? lessonId = freezed,Object? lessonTitle = freezed,}) {
   return _then(_ChatContext(
 type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
 as ChatContextType,newsId: freezed == newsId ? _self.newsId : newsId // ignore: cast_nullable_to_non_nullable
 as String?,newsTitle: freezed == newsTitle ? _self.newsTitle : newsTitle // ignore: cast_nullable_to_non_nullable
+as String?,lessonId: freezed == lessonId ? _self.lessonId : lessonId // ignore: cast_nullable_to_non_nullable
+as String?,lessonTitle: freezed == lessonTitle ? _self.lessonTitle : lessonTitle // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }

@@ -198,6 +198,11 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
+  String discussLessonQuestion(String title) {
+    return 'Давай обсудим урок «$title» — помоги понять, как это применить';
+  }
+
+  @override
   String aboutNews(String title) {
     return 'О новости: $title';
   }
@@ -365,6 +370,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get learnLessonCompleted => 'Пройдено';
+
+  @override
+  String get learnLessonComplete => 'Завершить';
 
   @override
   String get learnNoLessons =>

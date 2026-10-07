@@ -10,6 +10,7 @@ import '../../../domain/entities/chat_context.dart';
 import '../../../domain/entities/chat_message.dart';
 import '../../../domain/entities/chat_session.dart';
 import '../../../domain/entities/daily_news.dart';
+import '../../../domain/entities/micro_lesson.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../shared/widgets/coach_avatar.dart';
 import 'chat_session_notifier.dart';
@@ -32,13 +33,21 @@ import 'widgets/voice_overlay.dart';
 /// Состояния: Loading (shimmer), Error (retry), No Internet
 /// (пузырь-ошибка с retry), Limit Reached (мягкий paywall).
 class CoachHomeScreen extends ConsumerStatefulWidget {
-  const CoachHomeScreen({super.key, this.now, this.initialNews});
+  const CoachHomeScreen({
+    super.key,
+    this.now,
+    this.initialNews,
+    this.initialLesson,
+  });
 
   /// Время для приветствия (инжектится в тестах).
   final DateTime? now;
 
   /// Новость из ленты «Новости» (GoRouter extra) — авто-обсуждение.
   final DailyNews? initialNews;
+
+  /// Микро-урок из «Обучения» (GoRouter extra) — авто-обсуждение.
+  final MicroLesson? initialLesson;
 
   @override
   ConsumerState<CoachHomeScreen> createState() => _CoachHomeScreenState();
@@ -53,6 +62,8 @@ class _CoachHomeScreenState extends ConsumerState<CoachHomeScreen> {
     ref.read(analyticsServiceProvider).screen('coach_home');
     if (widget.initialNews != null) {
       _discussNews(widget.initialNews!);
+    } else if (widget.initialLesson != null) {
+      _discussLesson(widget.initialLesson!);
     }
   }
 
@@ -73,6 +84,21 @@ class _CoachHomeScreenState extends ConsumerState<CoachHomeScreen> {
             type: ChatContextType.news,
             newsId: news.id,
             newsTitle: news.title,
+          ),
+        );
+  }
+
+  /// Обсуждение микро-урока: вопрос + контекст `lesson`.
+  void _discussLesson(MicroLesson lesson) {
+    final l10n = AppLocalizations.of(context);
+    ref
+        .read(chatSessionProvider.notifier)
+        .sendText(
+          l10n.discussLessonQuestion(lesson.title),
+          context: ChatContext(
+            type: ChatContextType.lesson,
+            lessonId: lesson.id,
+            lessonTitle: lesson.title,
           ),
         );
   }

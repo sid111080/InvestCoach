@@ -101,7 +101,7 @@ final onboardingCompletedProvider = FutureProvider<bool>((ref) {
 /// Обучение: уроки, Weekly Reviews, кейсы.
 final learningRepositoryProvider = Provider<LearningRepository>((ref) {
   final config = ref.watch(appConfigProvider);
-  if (_mock(config)) return const MockLearningRepository();
+  if (_mock(config)) return MockLearningRepository();
   return RemoteLearningRepository(ref.watch(apiClientProvider));
 });
 

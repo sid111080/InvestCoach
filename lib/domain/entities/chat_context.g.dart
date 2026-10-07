@@ -12,6 +12,8 @@ _ChatContext _$ChatContextFromJson(Map<String, dynamic> json) => _ChatContext(
       ChatContextType.general,
   newsId: json['newsId'] as String?,
   newsTitle: json['newsTitle'] as String?,
+  lessonId: json['lessonId'] as String?,
+  lessonTitle: json['lessonTitle'] as String?,
 );
 
 Map<String, dynamic> _$ChatContextToJson(_ChatContext instance) =>
@@ -19,9 +21,12 @@ Map<String, dynamic> _$ChatContextToJson(_ChatContext instance) =>
       'type': _$ChatContextTypeEnumMap[instance.type]!,
       'newsId': instance.newsId,
       'newsTitle': instance.newsTitle,
+      'lessonId': instance.lessonId,
+      'lessonTitle': instance.lessonTitle,
     };
 
 const _$ChatContextTypeEnumMap = {
   ChatContextType.general: 'general',
   ChatContextType.news: 'news',
+  ChatContextType.lesson: 'lesson',
 };

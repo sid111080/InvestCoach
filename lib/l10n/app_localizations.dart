@@ -446,6 +446,12 @@ abstract class AppLocalizations {
   /// **'Расскажи про новость «{title}» и что она значит для моего портфеля'**
   String discussNewsQuestion(String title);
 
+  /// No description provided for @discussLessonQuestion.
+  ///
+  /// In ru, this message translates to:
+  /// **'Давай обсудим урок «{title}» — помоги понять, как это применить'**
+  String discussLessonQuestion(String title);
+
   /// No description provided for @aboutNews.
   ///
   /// In ru, this message translates to:
@@ -757,6 +763,12 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Пройдено'**
   String get learnLessonCompleted;
+
+  /// No description provided for @learnLessonComplete.
+  ///
+  /// In ru, this message translates to:
+  /// **'Завершить'**
+  String get learnLessonComplete;
 
   /// No description provided for @learnNoLessons.
   ///

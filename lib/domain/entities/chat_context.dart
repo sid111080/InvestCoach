@@ -12,10 +12,14 @@ enum ChatContextType {
   /// Обсуждение конкретной новости (`news_id`).
   @JsonValue('news')
   news,
+
+  /// Обсуждение микро-урока (`lesson_id`).
+  @JsonValue('lesson')
+  lesson,
 }
 
-/// Контекст запроса к Coach: обычный вопрос
-/// или обсуждение новости дня.
+/// Контекст запроса к Coach: обычный вопрос,
+/// обсуждение новости или микро-урока.
 @freezed
 sealed class ChatContext with _$ChatContext {
   const factory ChatContext({
@@ -23,6 +27,8 @@ sealed class ChatContext with _$ChatContext {
     String? newsId,
     // Только для подписи пузыря в UI (в API не уходит).
     String? newsTitle,
+    String? lessonId,
+    String? lessonTitle,
   }) = _ChatContext;
 
   const ChatContext._();

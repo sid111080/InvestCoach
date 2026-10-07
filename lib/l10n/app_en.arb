@@ -108,6 +108,14 @@
       }
     }
   },
+  "discussLessonQuestion": "Let's discuss the lesson \"{title}\" — help me understand how to apply it",
+  "@discussLessonQuestion": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
   "aboutNews": "About the news: {title}",
   "@aboutNews": {
     "placeholders": {
@@ -190,6 +198,7 @@
   "learnLessonStart": "Start",
   "learnLessonDiscuss": "Discuss with Coach",
   "learnLessonCompleted": "Completed",
+  "learnLessonComplete": "Finish",
   "learnNoLessons": "No lessons today — Coach will pick new ones tomorrow",
   "learnReviewScore": "Process Score",
   "learnReviewInsights": "Key Insights",

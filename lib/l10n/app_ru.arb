@@ -108,6 +108,14 @@
       }
     }
   },
+  "discussLessonQuestion": "Давай обсудим урок «{title}» — помоги понять, как это применить",
+  "@discussLessonQuestion": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
   "aboutNews": "О новости: {title}",
   "@aboutNews": {
     "placeholders": {
@@ -190,6 +198,7 @@
   "learnLessonStart": "Пройти",
   "learnLessonDiscuss": "Обсудить с Coach",
   "learnLessonCompleted": "Пройдено",
+  "learnLessonComplete": "Завершить",
   "learnNoLessons": "Сегодня уроков нет — Coach подберёт новые завтра",
   "learnReviewScore": "Process Score",
   "learnReviewInsights": "Ключевые инсайты",
