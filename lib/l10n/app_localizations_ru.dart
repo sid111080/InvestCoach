@@ -215,6 +215,22 @@ class AppLocalizationsRu extends AppLocalizations {
   String get allocOther => 'Прочее';
 
   @override
+  String get portfolioPositions => 'Позиции';
+
+  @override
+  String get portfolioTrades => 'Последние сделки';
+
+  @override
+  String get portfolioEmpty =>
+      'Портфель ещё не создан. Coach подготовит его после онбординга.';
+
+  @override
+  String get tradeBuy => 'Покупка';
+
+  @override
+  String get tradeSell => 'Продажа';
+
+  @override
   String get todayImportant => 'Сегодня важно';
 
   @override
@@ -251,6 +267,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get noNewsForToday => 'Сегодня новостей пока нет — загляни позже';
+
+  @override
+  String get newsFeedTitle => 'Новости дня';
 
   @override
   String get todayImportantDiscuss => 'Обсудить с Coach';
@@ -319,5 +338,191 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String biasChip(String bias) {
     return 'Заметил: $bias';
+  }
+
+  @override
+  String get learnTabToday => 'Сегодня';
+
+  @override
+  String get learnTabReviews => 'Weekly Reviews';
+
+  @override
+  String get learnTabCases => 'Мои Кейсы';
+
+  @override
+  String get learnTabProgress => 'Прогресс';
+
+  @override
+  String learnLessonDuration(int seconds) {
+    return '$seconds сек';
+  }
+
+  @override
+  String get learnLessonStart => 'Пройти';
+
+  @override
+  String get learnLessonDiscuss => 'Обсудить с Coach';
+
+  @override
+  String get learnLessonCompleted => 'Пройдено';
+
+  @override
+  String get learnNoLessons =>
+      'Сегодня уроков нет — Coach подберёт новые завтра';
+
+  @override
+  String get learnReviewScore => 'Process Score';
+
+  @override
+  String get learnReviewInsights => 'Ключевые инсайты';
+
+  @override
+  String get learnReviewCompare => 'Сравнение с индексом';
+
+  @override
+  String get learnReviewYourReturn => 'Твой результат';
+
+  @override
+  String get learnReviewIndexReturn => 'Индекс';
+
+  @override
+  String get learnReviewDiscuss => 'Обсудить с Coach';
+
+  @override
+  String get learnReviewEmpty => 'Первый Weekly Review появится в конце недели';
+
+  @override
+  String get learnReviewHistory => 'История';
+
+  @override
+  String get learnCasesEmpty =>
+      'Сохранённых кейсов пока нет. Обсуди новость с Coach и нажми «Сохранить»';
+
+  @override
+  String get learnCasesSearch => 'Поиск по кейсам…';
+
+  @override
+  String get learnProgressStreak => 'Стрик';
+
+  @override
+  String learnProgressStreakDays(int count) {
+    return '$count дн.';
+  }
+
+  @override
+  String get learnProgressAvg => 'Среднее в день';
+
+  @override
+  String learnProgressAvgValue(int count) {
+    return '$count взаимодействий';
+  }
+
+  @override
+  String get learnProgressTopics => 'Топ темы';
+
+  @override
+  String get learnProgressBias => 'Bias-паттерны';
+
+  @override
+  String get learnProgressEmpty => 'Данных пока мало — возвращайся каждый день';
+
+  @override
+  String get profileTitle => 'Профиль';
+
+  @override
+  String get profileTierFree => 'Free';
+
+  @override
+  String get profileTierNewsPlus => 'News+';
+
+  @override
+  String get profileTierPro => 'Pro';
+
+  @override
+  String get profileStats30 => 'Статистика за 30 дней';
+
+  @override
+  String get profileStreak => 'Стрик';
+
+  @override
+  String profileStreakValue(int count) {
+    return '$count дн. подряд';
+  }
+
+  @override
+  String get profileAvgInteractions => 'Среднее в день';
+
+  @override
+  String profileAvgValue(int count) {
+    return '$count взаимодействий';
+  }
+
+  @override
+  String get profileTopTopics => 'Любимые темы';
+
+  @override
+  String get profileMyCoach => 'Мой Coach';
+
+  @override
+  String get profileStyleTitle => 'Стиль общения';
+
+  @override
+  String get profileStyleDetailed => 'Подробно, с примерами';
+
+  @override
+  String get profileStyleConcise => 'Кратко, по сути';
+
+  @override
+  String get profileStyleSaved => 'Стиль обновлён';
+
+  @override
+  String get profilePushTitle => 'Push-уведомления';
+
+  @override
+  String get profilePushDaily => 'Новость дня';
+
+  @override
+  String get profilePushReview => 'Weekly Review готов';
+
+  @override
+  String get profilePushLesson => 'Новый урок';
+
+  @override
+  String get profileUpgradeTitle => 'News+ за 149 ₽/мес';
+
+  @override
+  String get profileUpgradeText =>
+      'Безлимитные вопросы, все уроки, детальные разборы';
+
+  @override
+  String get profileUpgradeButton => 'Перейти на News+';
+
+  @override
+  String get profileUpgradeFeatures => 'Что даёт News+';
+
+  @override
+  String get profileFeatureUnlimited => 'Безлимитные Pull-запросы';
+
+  @override
+  String get profileFeatureLessons => 'Все микро-уроки и разборы';
+
+  @override
+  String get profileFeaturePriority => 'Приоритетная очередь Coach';
+
+  @override
+  String get profileAbout => 'О приложении';
+
+  @override
+  String profileAboutVersion(String version) {
+    return 'Версия $version';
+  }
+
+  @override
+  String get profileAboutDisclaimer =>
+      'InvestCoach — образовательное приложение. Не является индивидуальной инвестиционной рекомендацией.';
+
+  @override
+  String profilePullLeft(int left, int limit) {
+    return 'Осталось вопросов: $left из $limit';
   }
 }

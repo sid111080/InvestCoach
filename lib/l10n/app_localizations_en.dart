@@ -215,6 +215,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get allocOther => 'Other';
 
   @override
+  String get portfolioPositions => 'Positions';
+
+  @override
+  String get portfolioTrades => 'Recent Trades';
+
+  @override
+  String get portfolioEmpty =>
+      'Portfolio not created yet. Coach will set it up after onboarding.';
+
+  @override
+  String get tradeBuy => 'Buy';
+
+  @override
+  String get tradeSell => 'Sell';
+
+  @override
   String get todayImportant => 'Important today';
 
   @override
@@ -251,6 +267,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noNewsForToday => 'No news yet today — check back later';
+
+  @override
+  String get newsFeedTitle => 'Today\'s News';
 
   @override
   String get todayImportantDiscuss => 'Discuss with Coach';
@@ -319,5 +338,192 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String biasChip(String bias) {
     return 'Spotted: $bias';
+  }
+
+  @override
+  String get learnTabToday => 'Today';
+
+  @override
+  String get learnTabReviews => 'Weekly Reviews';
+
+  @override
+  String get learnTabCases => 'My Cases';
+
+  @override
+  String get learnTabProgress => 'Progress';
+
+  @override
+  String learnLessonDuration(int seconds) {
+    return '$seconds sec';
+  }
+
+  @override
+  String get learnLessonStart => 'Start';
+
+  @override
+  String get learnLessonDiscuss => 'Discuss with Coach';
+
+  @override
+  String get learnLessonCompleted => 'Completed';
+
+  @override
+  String get learnNoLessons =>
+      'No lessons today — Coach will pick new ones tomorrow';
+
+  @override
+  String get learnReviewScore => 'Process Score';
+
+  @override
+  String get learnReviewInsights => 'Key Insights';
+
+  @override
+  String get learnReviewCompare => 'Portfolio vs Index';
+
+  @override
+  String get learnReviewYourReturn => 'Your return';
+
+  @override
+  String get learnReviewIndexReturn => 'Index';
+
+  @override
+  String get learnReviewDiscuss => 'Discuss with Coach';
+
+  @override
+  String get learnReviewEmpty =>
+      'Your first Weekly Review will appear at the end of the week';
+
+  @override
+  String get learnReviewHistory => 'History';
+
+  @override
+  String get learnCasesEmpty =>
+      'No saved cases yet. Discuss a news story with Coach and tap \"Save\"';
+
+  @override
+  String get learnCasesSearch => 'Search cases…';
+
+  @override
+  String get learnProgressStreak => 'Streak';
+
+  @override
+  String learnProgressStreakDays(int count) {
+    return '$count days';
+  }
+
+  @override
+  String get learnProgressAvg => 'Avg per day';
+
+  @override
+  String learnProgressAvgValue(int count) {
+    return '$count interactions';
+  }
+
+  @override
+  String get learnProgressTopics => 'Top Topics';
+
+  @override
+  String get learnProgressBias => 'Bias Patterns';
+
+  @override
+  String get learnProgressEmpty => 'Not enough data yet — come back every day';
+
+  @override
+  String get profileTitle => 'Profile';
+
+  @override
+  String get profileTierFree => 'Free';
+
+  @override
+  String get profileTierNewsPlus => 'News+';
+
+  @override
+  String get profileTierPro => 'Pro';
+
+  @override
+  String get profileStats30 => '30-Day Stats';
+
+  @override
+  String get profileStreak => 'Streak';
+
+  @override
+  String profileStreakValue(int count) {
+    return '$count days in a row';
+  }
+
+  @override
+  String get profileAvgInteractions => 'Avg per day';
+
+  @override
+  String profileAvgValue(int count) {
+    return '$count interactions';
+  }
+
+  @override
+  String get profileTopTopics => 'Favorite Topics';
+
+  @override
+  String get profileMyCoach => 'My Coach';
+
+  @override
+  String get profileStyleTitle => 'Communication Style';
+
+  @override
+  String get profileStyleDetailed => 'Detailed, with examples';
+
+  @override
+  String get profileStyleConcise => 'Concise, to the point';
+
+  @override
+  String get profileStyleSaved => 'Style updated';
+
+  @override
+  String get profilePushTitle => 'Push Notifications';
+
+  @override
+  String get profilePushDaily => 'Daily News';
+
+  @override
+  String get profilePushReview => 'Weekly Review Ready';
+
+  @override
+  String get profilePushLesson => 'New Lesson';
+
+  @override
+  String get profileUpgradeTitle => 'News+ at 149 ₽/month';
+
+  @override
+  String get profileUpgradeText =>
+      'Unlimited questions, all lessons, detailed reviews';
+
+  @override
+  String get profileUpgradeButton => 'Upgrade to News+';
+
+  @override
+  String get profileUpgradeFeatures => 'What News+ gives you';
+
+  @override
+  String get profileFeatureUnlimited => 'Unlimited Pull requests';
+
+  @override
+  String get profileFeatureLessons => 'All micro-lessons and reviews';
+
+  @override
+  String get profileFeaturePriority => 'Priority Coach queue';
+
+  @override
+  String get profileAbout => 'About the App';
+
+  @override
+  String profileAboutVersion(String version) {
+    return 'Version $version';
+  }
+
+  @override
+  String get profileAboutDisclaimer =>
+      'InvestCoach is an educational app. It does not constitute individual investment advice.';
+
+  @override
+  String profilePullLeft(int left, int limit) {
+    return 'Questions left: $left of $limit';
   }
 }

@@ -120,6 +120,11 @@
   "allocBonds": "Bonds",
   "allocEtf": "Funds",
   "allocOther": "Other",
+  "portfolioPositions": "Positions",
+  "portfolioTrades": "Recent Trades",
+  "portfolioEmpty": "Portfolio not created yet. Coach will set it up after onboarding.",
+  "tradeBuy": "Buy",
+  "tradeSell": "Sell",
   "todayImportant": "Important today",
   "quickActions": "Quick questions",
   "quickQ1": "What's happening in the market today?",
@@ -139,6 +144,7 @@
   "retry": "Retry",
   "somethingWentWrong": "Something went wrong",
   "noNewsForToday": "No news yet today — check back later",
+  "newsFeedTitle": "Today's News",
 
   "todayImportantDiscuss": "Discuss with Coach",
   "newsImpactPortfolio": "Affects your portfolio",
@@ -165,6 +171,116 @@
     "placeholders": {
       "bias": {
         "type": "String"
+      }
+    }
+  },
+
+  "learnTabToday": "Today",
+  "learnTabReviews": "Weekly Reviews",
+  "learnTabCases": "My Cases",
+  "learnTabProgress": "Progress",
+  "learnLessonDuration": "{seconds} sec",
+  "@learnLessonDuration": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "learnLessonStart": "Start",
+  "learnLessonDiscuss": "Discuss with Coach",
+  "learnLessonCompleted": "Completed",
+  "learnNoLessons": "No lessons today — Coach will pick new ones tomorrow",
+  "learnReviewScore": "Process Score",
+  "learnReviewInsights": "Key Insights",
+  "learnReviewCompare": "Portfolio vs Index",
+  "learnReviewYourReturn": "Your return",
+  "learnReviewIndexReturn": "Index",
+  "learnReviewDiscuss": "Discuss with Coach",
+  "learnReviewEmpty": "Your first Weekly Review will appear at the end of the week",
+  "learnReviewHistory": "History",
+  "learnCasesEmpty": "No saved cases yet. Discuss a news story with Coach and tap \"Save\"",
+  "learnCasesSearch": "Search cases…",
+  "learnProgressStreak": "Streak",
+  "learnProgressStreakDays": "{count} days",
+  "@learnProgressStreakDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "learnProgressAvg": "Avg per day",
+  "learnProgressAvgValue": "{count} interactions",
+  "@learnProgressAvgValue": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "learnProgressTopics": "Top Topics",
+  "learnProgressBias": "Bias Patterns",
+  "learnProgressEmpty": "Not enough data yet — come back every day",
+
+  "profileTitle": "Profile",
+  "profileTierFree": "Free",
+  "profileTierNewsPlus": "News+",
+  "profileTierPro": "Pro",
+  "profileStats30": "30-Day Stats",
+  "profileStreak": "Streak",
+  "profileStreakValue": "{count} days in a row",
+  "@profileStreakValue": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "profileAvgInteractions": "Avg per day",
+  "profileAvgValue": "{count} interactions",
+  "@profileAvgValue": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "profileTopTopics": "Favorite Topics",
+  "profileMyCoach": "My Coach",
+  "profileStyleTitle": "Communication Style",
+  "profileStyleDetailed": "Detailed, with examples",
+  "profileStyleConcise": "Concise, to the point",
+  "profileStyleSaved": "Style updated",
+  "profilePushTitle": "Push Notifications",
+  "profilePushDaily": "Daily News",
+  "profilePushReview": "Weekly Review Ready",
+  "profilePushLesson": "New Lesson",
+  "profileUpgradeTitle": "News+ at 149 ₽/month",
+  "profileUpgradeText": "Unlimited questions, all lessons, detailed reviews",
+  "profileUpgradeButton": "Upgrade to News+",
+  "profileUpgradeFeatures": "What News+ gives you",
+  "profileFeatureUnlimited": "Unlimited Pull requests",
+  "profileFeatureLessons": "All micro-lessons and reviews",
+  "profileFeaturePriority": "Priority Coach queue",
+  "profileAbout": "About the App",
+  "profileAboutVersion": "Version {version}",
+  "@profileAboutVersion": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "profileAboutDisclaimer": "InvestCoach is an educational app. It does not constitute individual investment advice.",
+  "profilePullLeft": "Questions left: {left} of {limit}",
+  "@profilePullLeft": {
+    "placeholders": {
+      "left": {
+        "type": "int"
+      },
+      "limit": {
+        "type": "int"
       }
     }
   }

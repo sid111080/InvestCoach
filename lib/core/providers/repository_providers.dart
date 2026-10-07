@@ -2,19 +2,30 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../data/repos/mock_auth_repository.dart';
 import '../../data/repos/mock_chat_repository.dart';
+import '../../data/repos/mock_learning_repository.dart';
 import '../../data/repos/mock_news_repository.dart';
 import '../../data/repos/mock_portfolio_repository.dart';
+import '../../data/repos/mock_profile_repository.dart';
 import '../../data/repos/remote_auth_repository.dart';
 import '../../data/repos/remote_chat_repository.dart';
+import '../../data/repos/remote_learning_repository.dart';
 import '../../data/repos/remote_news_repository.dart';
 import '../../data/repos/remote_portfolio_repository.dart';
+import '../../data/repos/remote_profile_repository.dart';
 import '../../domain/entities/app_user.dart';
 import '../../domain/entities/daily_news.dart';
+import '../../domain/entities/micro_lesson.dart';
 import '../../domain/entities/portfolio_summary.dart';
+import '../../domain/entities/saved_case.dart';
+import '../../domain/entities/subscription_status.dart';
+import '../../domain/entities/user_stats.dart';
+import '../../domain/entities/weekly_review.dart';
 import '../../domain/repositories/auth_repository.dart';
 import '../../domain/repositories/chat_repository.dart';
+import '../../domain/repositories/learning_repository.dart';
 import '../../domain/repositories/news_repository.dart';
 import '../../domain/repositories/portfolio_repository.dart';
+import '../../domain/repositories/profile_repository.dart';
 import '../../shared/onboarding/onboarding_state_repository.dart';
 import '../config/app_config.dart';
 import '../di/injection_container.dart';
@@ -86,3 +97,49 @@ final onboardingCompletedProvider = FutureProvider<bool>((ref) {
   ref.keepAlive();
   return ref.watch(onboardingStateRepositoryProvider).isCompleted;
 });
+
+/// Обучение: уроки, Weekly Reviews, кейсы.
+final learningRepositoryProvider = Provider<LearningRepository>((ref) {
+  final config = ref.watch(appConfigProvider);
+  if (_mock(config)) return const MockLearningRepository();
+  return RemoteLearningRepository(ref.watch(apiClientProvider));
+});
+
+/// Рекомендованные микро-уроки на сегодня.
+final recommendedLessonsProvider = FutureProvider<List<MicroLesson>>((ref) {
+  return ref.watch(learningRepositoryProvider).fetchRecommendedLessons();
+});
+
+/// Текущий Weekly Review.
+final currentReviewProvider = FutureProvider<WeeklyReview?>((ref) {
+  return ref.watch(learningRepositoryProvider).fetchCurrentReview();
+});
+
+/// История Weekly Reviews.
+final reviewHistoryProvider = FutureProvider<List<WeeklyReview>>((ref) {
+  return ref.watch(learningRepositoryProvider).fetchReviewHistory();
+});
+
+/// Сохранённые кейсы.
+final savedCasesProvider = FutureProvider<List<SavedCase>>((ref) {
+  return ref.watch(learningRepositoryProvider).fetchCases();
+});
+
+/// Профиль: статистика, подписка, настройка Coach.
+final profileRepositoryProvider = Provider<ProfileRepository>((ref) {
+  final config = ref.watch(appConfigProvider);
+  if (_mock(config)) return const MockProfileRepository();
+  return RemoteProfileRepository(ref.watch(apiClientProvider));
+});
+
+/// Статистика пользователя за 30 дней.
+final userStatsProvider = FutureProvider<UserStats>((ref) {
+  return ref.watch(profileRepositoryProvider).fetchStats();
+});
+
+/// Статус подписки и лимиты.
+final subscriptionStatusProvider =
+    FutureProvider<SubscriptionStatus>((ref) {
+  return ref.watch(profileRepositoryProvider).fetchSubscriptionStatus();
+});
+

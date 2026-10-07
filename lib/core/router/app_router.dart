@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../domain/entities/daily_news.dart';
 import '../../features/auth/presentation/onboarding/onboarding_flow_screen.dart';
 import '../../features/coach/presentation/coach_home_screen.dart';
 import '../../features/learning/presentation/learning_screen.dart';
@@ -45,7 +46,9 @@ GoRouter createAppRouter({
           GoRoute(
             path: '/coach',
             name: 'coach',
-            builder: (context, state) => const CoachHomeScreen(),
+            builder: (context, state) => CoachHomeScreen(
+              initialNews: state.extra as DailyNews?,
+            ),
           ),
           GoRoute(
             path: '/news',

@@ -476,6 +476,36 @@ abstract class AppLocalizations {
   /// **'Прочее'**
   String get allocOther;
 
+  /// No description provided for @portfolioPositions.
+  ///
+  /// In ru, this message translates to:
+  /// **'Позиции'**
+  String get portfolioPositions;
+
+  /// No description provided for @portfolioTrades.
+  ///
+  /// In ru, this message translates to:
+  /// **'Последние сделки'**
+  String get portfolioTrades;
+
+  /// No description provided for @portfolioEmpty.
+  ///
+  /// In ru, this message translates to:
+  /// **'Портфель ещё не создан. Coach подготовит его после онбординга.'**
+  String get portfolioEmpty;
+
+  /// No description provided for @tradeBuy.
+  ///
+  /// In ru, this message translates to:
+  /// **'Покупка'**
+  String get tradeBuy;
+
+  /// No description provided for @tradeSell.
+  ///
+  /// In ru, this message translates to:
+  /// **'Продажа'**
+  String get tradeSell;
+
   /// No description provided for @todayImportant.
   ///
   /// In ru, this message translates to:
@@ -547,6 +577,12 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Сегодня новостей пока нет — загляни позже'**
   String get noNewsForToday;
+
+  /// No description provided for @newsFeedTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Новости дня'**
+  String get newsFeedTitle;
 
   /// No description provided for @todayImportantDiscuss.
   ///
@@ -673,6 +709,342 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Заметил: {bias}'**
   String biasChip(String bias);
+
+  /// No description provided for @learnTabToday.
+  ///
+  /// In ru, this message translates to:
+  /// **'Сегодня'**
+  String get learnTabToday;
+
+  /// No description provided for @learnTabReviews.
+  ///
+  /// In ru, this message translates to:
+  /// **'Weekly Reviews'**
+  String get learnTabReviews;
+
+  /// No description provided for @learnTabCases.
+  ///
+  /// In ru, this message translates to:
+  /// **'Мои Кейсы'**
+  String get learnTabCases;
+
+  /// No description provided for @learnTabProgress.
+  ///
+  /// In ru, this message translates to:
+  /// **'Прогресс'**
+  String get learnTabProgress;
+
+  /// No description provided for @learnLessonDuration.
+  ///
+  /// In ru, this message translates to:
+  /// **'{seconds} сек'**
+  String learnLessonDuration(int seconds);
+
+  /// No description provided for @learnLessonStart.
+  ///
+  /// In ru, this message translates to:
+  /// **'Пройти'**
+  String get learnLessonStart;
+
+  /// No description provided for @learnLessonDiscuss.
+  ///
+  /// In ru, this message translates to:
+  /// **'Обсудить с Coach'**
+  String get learnLessonDiscuss;
+
+  /// No description provided for @learnLessonCompleted.
+  ///
+  /// In ru, this message translates to:
+  /// **'Пройдено'**
+  String get learnLessonCompleted;
+
+  /// No description provided for @learnNoLessons.
+  ///
+  /// In ru, this message translates to:
+  /// **'Сегодня уроков нет — Coach подберёт новые завтра'**
+  String get learnNoLessons;
+
+  /// No description provided for @learnReviewScore.
+  ///
+  /// In ru, this message translates to:
+  /// **'Process Score'**
+  String get learnReviewScore;
+
+  /// No description provided for @learnReviewInsights.
+  ///
+  /// In ru, this message translates to:
+  /// **'Ключевые инсайты'**
+  String get learnReviewInsights;
+
+  /// No description provided for @learnReviewCompare.
+  ///
+  /// In ru, this message translates to:
+  /// **'Сравнение с индексом'**
+  String get learnReviewCompare;
+
+  /// No description provided for @learnReviewYourReturn.
+  ///
+  /// In ru, this message translates to:
+  /// **'Твой результат'**
+  String get learnReviewYourReturn;
+
+  /// No description provided for @learnReviewIndexReturn.
+  ///
+  /// In ru, this message translates to:
+  /// **'Индекс'**
+  String get learnReviewIndexReturn;
+
+  /// No description provided for @learnReviewDiscuss.
+  ///
+  /// In ru, this message translates to:
+  /// **'Обсудить с Coach'**
+  String get learnReviewDiscuss;
+
+  /// No description provided for @learnReviewEmpty.
+  ///
+  /// In ru, this message translates to:
+  /// **'Первый Weekly Review появится в конце недели'**
+  String get learnReviewEmpty;
+
+  /// No description provided for @learnReviewHistory.
+  ///
+  /// In ru, this message translates to:
+  /// **'История'**
+  String get learnReviewHistory;
+
+  /// No description provided for @learnCasesEmpty.
+  ///
+  /// In ru, this message translates to:
+  /// **'Сохранённых кейсов пока нет. Обсуди новость с Coach и нажми «Сохранить»'**
+  String get learnCasesEmpty;
+
+  /// No description provided for @learnCasesSearch.
+  ///
+  /// In ru, this message translates to:
+  /// **'Поиск по кейсам…'**
+  String get learnCasesSearch;
+
+  /// No description provided for @learnProgressStreak.
+  ///
+  /// In ru, this message translates to:
+  /// **'Стрик'**
+  String get learnProgressStreak;
+
+  /// No description provided for @learnProgressStreakDays.
+  ///
+  /// In ru, this message translates to:
+  /// **'{count} дн.'**
+  String learnProgressStreakDays(int count);
+
+  /// No description provided for @learnProgressAvg.
+  ///
+  /// In ru, this message translates to:
+  /// **'Среднее в день'**
+  String get learnProgressAvg;
+
+  /// No description provided for @learnProgressAvgValue.
+  ///
+  /// In ru, this message translates to:
+  /// **'{count} взаимодействий'**
+  String learnProgressAvgValue(int count);
+
+  /// No description provided for @learnProgressTopics.
+  ///
+  /// In ru, this message translates to:
+  /// **'Топ темы'**
+  String get learnProgressTopics;
+
+  /// No description provided for @learnProgressBias.
+  ///
+  /// In ru, this message translates to:
+  /// **'Bias-паттерны'**
+  String get learnProgressBias;
+
+  /// No description provided for @learnProgressEmpty.
+  ///
+  /// In ru, this message translates to:
+  /// **'Данных пока мало — возвращайся каждый день'**
+  String get learnProgressEmpty;
+
+  /// No description provided for @profileTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Профиль'**
+  String get profileTitle;
+
+  /// No description provided for @profileTierFree.
+  ///
+  /// In ru, this message translates to:
+  /// **'Free'**
+  String get profileTierFree;
+
+  /// No description provided for @profileTierNewsPlus.
+  ///
+  /// In ru, this message translates to:
+  /// **'News+'**
+  String get profileTierNewsPlus;
+
+  /// No description provided for @profileTierPro.
+  ///
+  /// In ru, this message translates to:
+  /// **'Pro'**
+  String get profileTierPro;
+
+  /// No description provided for @profileStats30.
+  ///
+  /// In ru, this message translates to:
+  /// **'Статистика за 30 дней'**
+  String get profileStats30;
+
+  /// No description provided for @profileStreak.
+  ///
+  /// In ru, this message translates to:
+  /// **'Стрик'**
+  String get profileStreak;
+
+  /// No description provided for @profileStreakValue.
+  ///
+  /// In ru, this message translates to:
+  /// **'{count} дн. подряд'**
+  String profileStreakValue(int count);
+
+  /// No description provided for @profileAvgInteractions.
+  ///
+  /// In ru, this message translates to:
+  /// **'Среднее в день'**
+  String get profileAvgInteractions;
+
+  /// No description provided for @profileAvgValue.
+  ///
+  /// In ru, this message translates to:
+  /// **'{count} взаимодействий'**
+  String profileAvgValue(int count);
+
+  /// No description provided for @profileTopTopics.
+  ///
+  /// In ru, this message translates to:
+  /// **'Любимые темы'**
+  String get profileTopTopics;
+
+  /// No description provided for @profileMyCoach.
+  ///
+  /// In ru, this message translates to:
+  /// **'Мой Coach'**
+  String get profileMyCoach;
+
+  /// No description provided for @profileStyleTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Стиль общения'**
+  String get profileStyleTitle;
+
+  /// No description provided for @profileStyleDetailed.
+  ///
+  /// In ru, this message translates to:
+  /// **'Подробно, с примерами'**
+  String get profileStyleDetailed;
+
+  /// No description provided for @profileStyleConcise.
+  ///
+  /// In ru, this message translates to:
+  /// **'Кратко, по сути'**
+  String get profileStyleConcise;
+
+  /// No description provided for @profileStyleSaved.
+  ///
+  /// In ru, this message translates to:
+  /// **'Стиль обновлён'**
+  String get profileStyleSaved;
+
+  /// No description provided for @profilePushTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Push-уведомления'**
+  String get profilePushTitle;
+
+  /// No description provided for @profilePushDaily.
+  ///
+  /// In ru, this message translates to:
+  /// **'Новость дня'**
+  String get profilePushDaily;
+
+  /// No description provided for @profilePushReview.
+  ///
+  /// In ru, this message translates to:
+  /// **'Weekly Review готов'**
+  String get profilePushReview;
+
+  /// No description provided for @profilePushLesson.
+  ///
+  /// In ru, this message translates to:
+  /// **'Новый урок'**
+  String get profilePushLesson;
+
+  /// No description provided for @profileUpgradeTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'News+ за 149 ₽/мес'**
+  String get profileUpgradeTitle;
+
+  /// No description provided for @profileUpgradeText.
+  ///
+  /// In ru, this message translates to:
+  /// **'Безлимитные вопросы, все уроки, детальные разборы'**
+  String get profileUpgradeText;
+
+  /// No description provided for @profileUpgradeButton.
+  ///
+  /// In ru, this message translates to:
+  /// **'Перейти на News+'**
+  String get profileUpgradeButton;
+
+  /// No description provided for @profileUpgradeFeatures.
+  ///
+  /// In ru, this message translates to:
+  /// **'Что даёт News+'**
+  String get profileUpgradeFeatures;
+
+  /// No description provided for @profileFeatureUnlimited.
+  ///
+  /// In ru, this message translates to:
+  /// **'Безлимитные Pull-запросы'**
+  String get profileFeatureUnlimited;
+
+  /// No description provided for @profileFeatureLessons.
+  ///
+  /// In ru, this message translates to:
+  /// **'Все микро-уроки и разборы'**
+  String get profileFeatureLessons;
+
+  /// No description provided for @profileFeaturePriority.
+  ///
+  /// In ru, this message translates to:
+  /// **'Приоритетная очередь Coach'**
+  String get profileFeaturePriority;
+
+  /// No description provided for @profileAbout.
+  ///
+  /// In ru, this message translates to:
+  /// **'О приложении'**
+  String get profileAbout;
+
+  /// No description provided for @profileAboutVersion.
+  ///
+  /// In ru, this message translates to:
+  /// **'Версия {version}'**
+  String profileAboutVersion(String version);
+
+  /// No description provided for @profileAboutDisclaimer.
+  ///
+  /// In ru, this message translates to:
+  /// **'InvestCoach — образовательное приложение. Не является индивидуальной инвестиционной рекомендацией.'**
+  String get profileAboutDisclaimer;
+
+  /// No description provided for @profilePullLeft.
+  ///
+  /// In ru, this message translates to:
+  /// **'Осталось вопросов: {left} из {limit}'**
+  String profilePullLeft(int left, int limit);
 }
 
 class _AppLocalizationsDelegate

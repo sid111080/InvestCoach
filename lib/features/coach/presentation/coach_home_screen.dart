@@ -32,10 +32,13 @@ import 'widgets/voice_overlay.dart';
 /// Состояния: Loading (shimmer), Error (retry), No Internet
 /// (пузырь-ошибка с retry), Limit Reached (мягкий paywall).
 class CoachHomeScreen extends ConsumerStatefulWidget {
-  const CoachHomeScreen({super.key, this.now});
+  const CoachHomeScreen({super.key, this.now, this.initialNews});
 
   /// Время для приветствия (инжектится в тестах).
   final DateTime? now;
+
+  /// Новость из ленты «Новости» (GoRouter extra) — авто-обсуждение.
+  final DailyNews? initialNews;
 
   @override
   ConsumerState<CoachHomeScreen> createState() => _CoachHomeScreenState();
@@ -48,6 +51,9 @@ class _CoachHomeScreenState extends ConsumerState<CoachHomeScreen> {
   void initState() {
     super.initState();
     ref.read(analyticsServiceProvider).screen('coach_home');
+    if (widget.initialNews != null) {
+      _discussNews(widget.initialNews!);
+    }
   }
 
   @override

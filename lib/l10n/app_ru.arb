@@ -120,6 +120,11 @@
   "allocBonds": "Облигации",
   "allocEtf": "Фонды",
   "allocOther": "Прочее",
+  "portfolioPositions": "Позиции",
+  "portfolioTrades": "Последние сделки",
+  "portfolioEmpty": "Портфель ещё не создан. Coach подготовит его после онбординга.",
+  "tradeBuy": "Покупка",
+  "tradeSell": "Продажа",
   "todayImportant": "Сегодня важно",
   "quickActions": "Быстрые вопросы",
   "quickQ1": "Что сегодня на рынке?",
@@ -139,6 +144,7 @@
   "retry": "Повторить",
   "somethingWentWrong": "Что-то пошло не так",
   "noNewsForToday": "Сегодня новостей пока нет — загляни позже",
+  "newsFeedTitle": "Новости дня",
 
   "todayImportantDiscuss": "Обсудить с Coach",
   "newsImpactPortfolio": "Влияет на твой портфель",
@@ -165,6 +171,116 @@
     "placeholders": {
       "bias": {
         "type": "String"
+      }
+    }
+  },
+
+  "learnTabToday": "Сегодня",
+  "learnTabReviews": "Weekly Reviews",
+  "learnTabCases": "Мои Кейсы",
+  "learnTabProgress": "Прогресс",
+  "learnLessonDuration": "{seconds} сек",
+  "@learnLessonDuration": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "learnLessonStart": "Пройти",
+  "learnLessonDiscuss": "Обсудить с Coach",
+  "learnLessonCompleted": "Пройдено",
+  "learnNoLessons": "Сегодня уроков нет — Coach подберёт новые завтра",
+  "learnReviewScore": "Process Score",
+  "learnReviewInsights": "Ключевые инсайты",
+  "learnReviewCompare": "Сравнение с индексом",
+  "learnReviewYourReturn": "Твой результат",
+  "learnReviewIndexReturn": "Индекс",
+  "learnReviewDiscuss": "Обсудить с Coach",
+  "learnReviewEmpty": "Первый Weekly Review появится в конце недели",
+  "learnReviewHistory": "История",
+  "learnCasesEmpty": "Сохранённых кейсов пока нет. Обсуди новость с Coach и нажми «Сохранить»",
+  "learnCasesSearch": "Поиск по кейсам…",
+  "learnProgressStreak": "Стрик",
+  "learnProgressStreakDays": "{count} дн.",
+  "@learnProgressStreakDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "learnProgressAvg": "Среднее в день",
+  "learnProgressAvgValue": "{count} взаимодействий",
+  "@learnProgressAvgValue": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "learnProgressTopics": "Топ темы",
+  "learnProgressBias": "Bias-паттерны",
+  "learnProgressEmpty": "Данных пока мало — возвращайся каждый день",
+
+  "profileTitle": "Профиль",
+  "profileTierFree": "Free",
+  "profileTierNewsPlus": "News+",
+  "profileTierPro": "Pro",
+  "profileStats30": "Статистика за 30 дней",
+  "profileStreak": "Стрик",
+  "profileStreakValue": "{count} дн. подряд",
+  "@profileStreakValue": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "profileAvgInteractions": "Среднее в день",
+  "profileAvgValue": "{count} взаимодействий",
+  "@profileAvgValue": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "profileTopTopics": "Любимые темы",
+  "profileMyCoach": "Мой Coach",
+  "profileStyleTitle": "Стиль общения",
+  "profileStyleDetailed": "Подробно, с примерами",
+  "profileStyleConcise": "Кратко, по сути",
+  "profileStyleSaved": "Стиль обновлён",
+  "profilePushTitle": "Push-уведомления",
+  "profilePushDaily": "Новость дня",
+  "profilePushReview": "Weekly Review готов",
+  "profilePushLesson": "Новый урок",
+  "profileUpgradeTitle": "News+ за 149 ₽/мес",
+  "profileUpgradeText": "Безлимитные вопросы, все уроки, детальные разборы",
+  "profileUpgradeButton": "Перейти на News+",
+  "profileUpgradeFeatures": "Что даёт News+",
+  "profileFeatureUnlimited": "Безлимитные Pull-запросы",
+  "profileFeatureLessons": "Все микро-уроки и разборы",
+  "profileFeaturePriority": "Приоритетная очередь Coach",
+  "profileAbout": "О приложении",
+  "profileAboutVersion": "Версия {version}",
+  "@profileAboutVersion": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "profileAboutDisclaimer": "InvestCoach — образовательное приложение. Не является индивидуальной инвестиционной рекомендацией.",
+  "profilePullLeft": "Осталось вопросов: {left} из {limit}",
+  "@profilePullLeft": {
+    "placeholders": {
+      "left": {
+        "type": "int"
+      },
+      "limit": {
+        "type": "int"
       }
     }
   }
