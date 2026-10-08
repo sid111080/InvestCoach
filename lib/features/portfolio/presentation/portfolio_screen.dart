@@ -4,7 +4,6 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:intl/intl.dart';
 
 import '../../../core/providers/repository_providers.dart';
-import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_dimensions.dart';
 import '../../../core/theme/app_text_styles.dart';
 import '../../../domain/entities/portfolio_position.dart';
@@ -14,6 +13,7 @@ import '../../../l10n/app_localizations.dart';
 import '../../../shared/widgets/app_button.dart';
 import '../../../shared/widgets/app_card.dart';
 import '../../../shared/widgets/shimmer_skeleton.dart';
+import '../../../core/theme/theme_provider.dart';
 
 /// Экран «Портфель»: сводка, пирт-чарт аллокации,
 /// позиции, история сделок с Instant Trade Feedback.
@@ -25,10 +25,10 @@ class PortfolioScreen extends ConsumerWidget {
     final summaryAsync = ref.watch(portfolioSummaryProvider);
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: context.palette.background,
       body: RefreshIndicator(
-        color: AppColors.primary,
-        backgroundColor: AppColors.surface,
+        color: context.palette.primary,
+        backgroundColor: context.palette.surface,
         onRefresh: () async => ref.invalidate(portfolioSummaryProvider),
         child: summaryAsync.when(
           loading: () => const _PortfolioLoading(),
@@ -106,10 +106,10 @@ class _SummaryHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     final change = summary.dailyChangePercent;
     final isPositive = change >= 0;
-    final changeColor = isPositive ? AppColors.success : AppColors.error;
+    final changeColor = isPositive ? context.palette.success : context.palette.error;
 
     return AppCard(
-      color: AppColors.surface,
+      color: context.palette.surface,
       radius: AppDimensions.radiusLg,
       padding: const EdgeInsets.all(AppDimensions.spaceLg),
       child: Column(
@@ -156,24 +156,27 @@ class _AllocationChart extends StatelessWidget {
 
   final Map<String, double> allocation;
 
-  static const _colors = [
-    AppColors.primary,
-    Color(0xFF3B82F6),
-    Color(0xFFF59E0B),
-    Color(0xFF8B5CF6),
-  ];
+  /// Цвета сегментов: первый — акцент темы, остальные — фиксированные
+  /// различимые цвета для типов активов.
+  List<Color> _colors(BuildContext context) => [
+        context.palette.primary,
+        const Color(0xFF3B82F6),
+        const Color(0xFFF59E0B),
+        const Color(0xFF8B5CF6),
+      ];
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final entries = allocation.entries.toList();
     if (entries.isEmpty) return const SizedBox.shrink();
+    final colors = _colors(context);
 
     final pieData = [
       for (var i = 0; i < entries.length; i++)
         PieChartSectionData(
           value: entries[i].value,
-          color: _colors[i % _colors.length],
+          color: colors[i % colors.length],
           title: '${entries[i].value.toStringAsFixed(0)}%',
           radius: 60,
           titleStyle: const TextStyle(
@@ -206,7 +209,7 @@ class _AllocationChart extends StatelessWidget {
                       width: 10,
                       height: 10,
                       decoration: BoxDecoration(
-                        color: _colors[i % _colors.length],
+                        color: colors[i % colors.length],
                         shape: BoxShape.circle,
                       ),
                     ),
@@ -268,7 +271,7 @@ class _PositionRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isPositive = position.dayChangePercent >= 0;
-    final changeColor = isPositive ? AppColors.success : AppColors.error;
+    final changeColor = isPositive ? context.palette.success : context.palette.error;
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: AppDimensions.spaceSm),
@@ -288,7 +291,7 @@ class _PositionRow extends StatelessWidget {
                 Text(
                   position.ticker,
                   style: AppTextStyles.labelSmall.copyWith(
-                    color: AppColors.textSecondary,
+                    color: context.palette.textSecondary,
                   ),
                 ),
               ],
@@ -306,7 +309,7 @@ class _PositionRow extends StatelessWidget {
                 Text(
                   '${position.quantity} шт',
                   style: AppTextStyles.labelSmall.copyWith(
-                    color: AppColors.textSecondary,
+                    color: context.palette.textSecondary,
                   ),
                 ),
               ],
@@ -359,21 +362,21 @@ class _TradeCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final isBuy = trade.side == TradeSide.buy;
-    final sideColor = isBuy ? AppColors.success : AppColors.error;
+    final sideColor = isBuy ? context.palette.success : context.palette.error;
 
     final toneColor = switch (trade.feedbackTone) {
-      'positive' => AppColors.success,
-      'caution' => AppColors.warning,
-      _ => AppColors.textSecondary,
+      'positive' => context.palette.success,
+      'caution' => context.palette.warning,
+      _ => context.palette.textSecondary,
     };
 
     return Container(
       margin: const EdgeInsets.only(bottom: AppDimensions.spaceMd),
       padding: const EdgeInsets.all(AppDimensions.spaceMd),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: context.palette.surface,
         borderRadius: BorderRadius.circular(AppDimensions.radiusMd),
-        border: Border.all(color: AppColors.outline),
+        border: Border.all(color: context.palette.outline),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -425,7 +428,7 @@ class _TradeCard extends StatelessWidget {
                     child: Text(
                       trade.coachFeedback!,
                       style: AppTextStyles.bodySmall.copyWith(
-                        color: AppColors.textPrimary,
+                        color: context.palette.textPrimary,
                       ),
                     ),
                   ),
@@ -501,7 +504,7 @@ class _PortfolioError extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(Icons.error_outline, color: AppColors.error, size: 40),
+              Icon(Icons.error_outline, color: context.palette.error, size: 40),
               const SizedBox(height: AppDimensions.spaceMd),
               Text(
                 l10n.somethingWentWrong,
@@ -540,14 +543,14 @@ class _PortfolioEmpty extends StatelessWidget {
             children: [
               Icon(
                 Icons.pie_chart_outline,
-                color: AppColors.textSecondary,
+                color: context.palette.textSecondary,
                 size: 40,
               ),
               const SizedBox(height: AppDimensions.spaceMd),
               Text(
                 l10n.portfolioEmpty,
                 style: AppTextStyles.bodyMedium.copyWith(
-                  color: AppColors.textSecondary,
+                  color: context.palette.textSecondary,
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -568,7 +571,7 @@ class _GhostBar extends StatelessWidget {
       width: 120,
       height: 16,
       decoration: BoxDecoration(
-        color: AppColors.surfaceElevated,
+        color: context.palette.surfaceElevated,
         borderRadius: BorderRadius.circular(AppDimensions.radiusSm),
       ),
     );

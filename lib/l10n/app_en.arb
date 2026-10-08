@@ -292,5 +292,10 @@
         "type": "int"
       }
     }
-  }
+  },
+  "themeSelectTitle": "Choose your theme",
+  "themeSelectSubtitle": "Every morning starts with a mood. Pick yours.",
+  "themeSelectStart": "Get Started",
+  "profileThemeSection": "Interface Theme",
+  "profileThemeHint": "You can change it anytime"
 }

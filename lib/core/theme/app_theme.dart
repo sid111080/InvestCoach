@@ -1,31 +1,31 @@
 import 'package:flutter/material.dart';
 
-import 'app_colors.dart';
 import 'app_dimensions.dart';
 import 'app_text_styles.dart';
+import 'theme_palette.dart';
 
 /// Тёмная тема InvestCoach (MVP — только dark).
-ThemeData buildAppTheme() {
+ThemeData buildAppTheme(ThemePalette p) {
   final colorScheme = ColorScheme.dark().copyWith(
-    primary: AppColors.primary,
-    onPrimary: AppColors.onPrimary,
-    primaryContainer: AppColors.primaryContainer,
-    onPrimaryContainer: AppColors.onPrimaryContainer,
-    secondary: AppColors.textSecondary,
-    onSecondary: AppColors.background,
-    secondaryContainer: AppColors.surface,
-    onSecondaryContainer: AppColors.textPrimary,
-    error: AppColors.error,
-    errorContainer: AppColors.errorContainer,
-    onError: AppColors.onError,
-    surface: AppColors.surface,
-    onSurface: AppColors.textPrimary,
+    primary: p.primary,
+    onPrimary: p.onPrimary,
+    primaryContainer: p.primaryContainer,
+    onPrimaryContainer: p.onPrimaryContainer,
+    secondary: p.textSecondary,
+    onSecondary: p.background,
+    secondaryContainer: p.surface,
+    onSecondaryContainer: p.textPrimary,
+    error: p.error,
+    errorContainer: p.errorContainer,
+    onError: p.onError,
+    surface: p.surface,
+    onSurface: p.textPrimary,
   );
 
   return ThemeData(
     brightness: Brightness.dark,
     colorScheme: colorScheme,
-    scaffoldBackgroundColor: AppColors.background,
+    scaffoldBackgroundColor: p.background,
     textTheme: const TextTheme(
       displaySmall: AppTextStyles.display,
       headlineSmall: AppTextStyles.titleLarge,
@@ -38,39 +38,40 @@ ThemeData buildAppTheme() {
       labelMedium: AppTextStyles.labelMedium,
       labelSmall: AppTextStyles.labelSmall,
     ),
-    iconTheme: const IconThemeData(
-      color: AppColors.textSecondary,
+    // Иконки по умолчанию — яркий акцент темы (яркие иконки везде).
+    iconTheme: IconThemeData(
+      color: p.primary,
       size: 22,
     ),
-    appBarTheme: const AppBarTheme(
-      backgroundColor: AppColors.background,
-      foregroundColor: AppColors.textPrimary,
+    appBarTheme: AppBarTheme(
+      backgroundColor: p.background,
+      foregroundColor: p.textPrimary,
       elevation: 0,
       scrolledUnderElevation: 0,
       centerTitle: false,
     ),
     cardTheme: CardThemeData(
-      color: AppColors.surface,
+      color: p.surface,
       elevation: 0,
       margin: EdgeInsets.zero,
       clipBehavior: Clip.antiAlias,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(AppDimensions.radiusMd),
-        side: const BorderSide(color: AppColors.outline),
+        side: BorderSide(color: p.outline),
       ),
     ),
     navigationBarTheme: NavigationBarThemeData(
       height: 64,
-      backgroundColor: AppColors.surface,
+      backgroundColor: p.surface,
       elevation: 0,
-      indicatorColor: AppColors.primaryContainer,
+      indicatorColor: p.primaryContainer,
       labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
       iconTheme: WidgetStateProperty.resolveWith(
         (states) => IconThemeData(
           size: 24,
           color: states.contains(WidgetState.selected)
-              ? AppColors.primary
-              : AppColors.textSecondary,
+              ? p.primary
+              : p.textSecondary,
         ),
       ),
       labelTextStyle: const WidgetStatePropertyAll(
@@ -82,16 +83,16 @@ ThemeData buildAppTheme() {
         ),
       ),
     ),
-    chipTheme: const ChipThemeData(
-      backgroundColor: AppColors.surface,
-      selectedColor: AppColors.primaryContainer,
-      checkmarkColor: AppColors.primary,
-      side: BorderSide(color: AppColors.outline),
+    chipTheme: ChipThemeData(
+      backgroundColor: p.surface,
+      selectedColor: p.primaryContainer,
+      checkmarkColor: p.primary,
+      side: BorderSide(color: p.outline),
       labelStyle: TextStyle(
         fontFamily: AppFonts.body,
         fontSize: 13,
         fontWeight: FontWeight.w500,
-        color: AppColors.textPrimary,
+        color: p.textPrimary,
       ),
     ),
   );

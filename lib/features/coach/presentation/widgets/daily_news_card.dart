@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/providers/repository_providers.dart';
-import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_dimensions.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../domain/entities/daily_news.dart';
@@ -10,6 +9,7 @@ import '../../../../l10n/app_localizations.dart';
 import '../../../../shared/widgets/app_button.dart';
 import '../../../../shared/widgets/app_card.dart';
 import '../../../../shared/widgets/shimmer_skeleton.dart';
+import '../../../../core/theme/theme_provider.dart';
 
 /// Акцентная карточка «Сегодня важно» (`GET /news/daily`).
 ///
@@ -33,7 +33,7 @@ class DailyNewsCard extends ConsumerWidget {
           error: (error, stackTrace) => AppCard(
             child: Column(
               children: [
-                Icon(Icons.error_outline, color: AppColors.error, size: 24),
+                Icon(Icons.error_outline, color: context.palette.error, size: 24),
                 const SizedBox(height: AppDimensions.spaceSm),
                 Text(
                   l10n.somethingWentWrong,
@@ -55,7 +55,7 @@ class DailyNewsCard extends ConsumerWidget {
                 child: Text(
                   l10n.noNewsForToday,
                   style: AppTextStyles.bodyMedium.copyWith(
-                    color: AppColors.textSecondary,
+                    color: context.palette.textSecondary,
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -83,7 +83,7 @@ class _NewsContent extends StatelessWidget {
     final impact = news.portfolioImpactPercent;
 
     return AppCard(
-      color: AppColors.primaryContainer,
+      color: context.palette.primaryContainer,
       radius: AppDimensions.radiusLg,
       padding: const EdgeInsets.all(AppDimensions.spaceLg),
       child: Column(
@@ -94,13 +94,13 @@ class _NewsContent extends StatelessWidget {
               Icon(
                 Icons.trending_up,
                 size: 16,
-                color: AppColors.onPrimaryContainer,
+                color: context.palette.onPrimaryContainer,
               ),
               const SizedBox(width: AppDimensions.spaceXs),
               Text(
                 l10n.todayImportant.toUpperCase(),
                 style: AppTextStyles.labelSmall.copyWith(
-                  color: AppColors.onPrimaryContainer,
+                  color: context.palette.onPrimaryContainer,
                 ),
               ),
             ],
@@ -116,7 +116,7 @@ class _NewsContent extends StatelessWidget {
           Text(
             news.summary,
             style: AppTextStyles.bodyMedium.copyWith(
-              color: AppColors.textPrimary.withValues(alpha: 0.75),
+              color: context.palette.textPrimary.withValues(alpha: 0.75),
             ),
           ),
           const SizedBox(height: AppDimensions.spaceMd),
@@ -126,8 +126,8 @@ class _NewsContent extends StatelessWidget {
                 hasImpact ? Icons.insights : Icons.remove,
                 size: 16,
                 color: hasImpact
-                    ? AppColors.onPrimaryContainer
-                    : AppColors.textSecondary,
+                    ? context.palette.onPrimaryContainer
+                    : context.palette.textSecondary,
               ),
               const SizedBox(width: AppDimensions.space2xs),
               Expanded(
@@ -137,8 +137,8 @@ class _NewsContent extends StatelessWidget {
                       : l10n.newsNoImpact,
                   style: AppTextStyles.labelMedium.copyWith(
                     color: hasImpact
-                        ? AppColors.onPrimaryContainer
-                        : AppColors.textSecondary,
+                        ? context.palette.onPrimaryContainer
+                        : context.palette.textSecondary,
                   ),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
@@ -150,7 +150,7 @@ class _NewsContent extends StatelessWidget {
                   '${impact >= 0 ? '+' : '−'}'
                   '${impact.abs().toStringAsFixed(1).replaceAll('.', ',')}',
                   style: AppTextStyles.labelMedium.copyWith(
-                    color: AppColors.onPrimaryContainer,
+                    color: context.palette.onPrimaryContainer,
                   ),
                 ),
               ],
@@ -176,7 +176,7 @@ class _NewsCardGhost extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppCard(
-      color: AppColors.primaryContainer,
+      color: context.palette.primaryContainer,
       radius: AppDimensions.radiusLg,
       padding: const EdgeInsets.all(AppDimensions.spaceLg),
       child: const Column(
@@ -218,7 +218,7 @@ class _GhostBar extends StatelessWidget {
       width: width,
       height: height,
       decoration: BoxDecoration(
-        color: AppColors.surfaceElevated,
+        color: context.palette.surfaceElevated,
         borderRadius: BorderRadius.circular(radius),
       ),
     );

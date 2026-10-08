@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/providers/repository_providers.dart';
-import '../../../core/theme/app_colors.dart';
 import '../../../l10n/app_localizations.dart';
 import 'tabs/cases_tab.dart';
 import 'tabs/progress_tab.dart';
 import 'tabs/reviews_tab.dart';
 import 'tabs/today_tab.dart';
+import '../../../core/theme/theme_provider.dart';
 
 /// Экран «Обучение» — Top Tab Bar с 4 вкладками:
 /// Сегодня / Weekly Reviews / Мои Кейсы / Прогресс.
@@ -38,14 +38,14 @@ class _LearningScreenState extends ConsumerState<LearningScreen>
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: context.palette.background,
       body: Column(
         children: [
           TabBar(
             controller: _tabController,
-            labelColor: AppColors.primary,
-            unselectedLabelColor: AppColors.textSecondary,
-            indicatorColor: AppColors.primary,
+            labelColor: context.palette.primary,
+            unselectedLabelColor: context.palette.textSecondary,
+            indicatorColor: context.palette.primary,
             indicatorWeight: 2.5,
             labelStyle: const TextStyle(
               fontFamily: 'Inter',

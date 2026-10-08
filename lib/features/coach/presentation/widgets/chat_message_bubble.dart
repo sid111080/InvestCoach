@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_dimensions.dart';
 import '../../../../core/theme/app_text_styles.dart';
+import '../../../../core/theme/theme_palette.dart';
+import '../../../../core/theme/theme_provider.dart';
 import '../../../../domain/entities/chat_message.dart';
 import '../../../../l10n/app_localizations.dart';
 
 /// Пузырь сообщения в области чата.
 ///
-/// Coach: surface-фон, подпись контекста (новость), состояния
-/// «думает» / streaming / ошибка с retry, подсказки и bias
-/// после финального ответа. Пользователь: emerald-фон справа.
+/// Coach: тёмный surface-фон (спокойно), подпись контекста (новость),
+/// состояния «думает» / streaming / ошибка с retry, подсказки и bias
+/// после финального ответа. Пользователь: **яркий акцент темы** справа —
+/// сообщения пользователя подсвечиваются цветом темы.
 class ChatMessageBubble extends StatelessWidget {
   const ChatMessageBubble({
     super.key,
@@ -33,6 +35,7 @@ class ChatMessageBubble extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+    final palette = context.palette;
 
     return Padding(
       padding: const EdgeInsets.symmetric(
@@ -43,7 +46,7 @@ class ChatMessageBubble extends StatelessWidget {
           ? Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _bubble(l10n),
+                _bubble(l10n, palette),
                 if (message.status == ChatMessageStatus.completed) ...[
                   if (message.suggestedReplies.isNotEmpty)
                     Padding(
@@ -73,7 +76,7 @@ class ChatMessageBubble extends StatelessWidget {
                           for (final bias in message.biasDetected)
                             _Chip(
                               label: l10n.biasChip(_prettifyBias(bias)),
-                              color: AppColors.warning,
+                              color: palette.warning,
                               onTap: null,
                             ),
                         ],
@@ -88,13 +91,13 @@ class ChatMessageBubble extends StatelessWidget {
                 constraints: const BoxConstraints(
                   maxWidth: _maxBubbleWidth,
                 ),
-                child: _bubble(l10n),
+                child: _bubble(l10n, palette),
               ),
             ),
     );
   }
 
-  Widget _bubble(AppLocalizations l10n) {
+  Widget _bubble(AppLocalizations l10n, ThemePalette palette) {
     final failed = message.status == ChatMessageStatus.failed;
     final isThinking = message.status == ChatMessageStatus.thinking;
 
@@ -104,9 +107,11 @@ class ChatMessageBubble extends StatelessWidget {
         vertical: AppDimensions.spaceSm,
       ),
       decoration: BoxDecoration(
+        // Coach — спокойный тёмный surface (или красный при ошибке);
+        // пользователь — яркий акцент темы.
         color: message.isCoach
-            ? (failed ? AppColors.errorContainer : AppColors.surface)
-            : AppColors.primaryContainer,
+            ? (failed ? palette.errorContainer : palette.surface)
+            : palette.primary,
         borderRadius: BorderRadius.only(
           topLeft: const Radius.circular(AppDimensions.radiusMd),
           topRight: const Radius.circular(AppDimensions.radiusMd),
@@ -129,7 +134,7 @@ class ChatMessageBubble extends StatelessWidget {
                 message.context!.newsTitle ?? '',
               ),
               style: AppTextStyles.labelSmall.copyWith(
-                color: AppColors.textSecondary,
+                color: palette.textSecondary,
               ),
             ),
             const SizedBox(height: AppDimensions.space2xs),
@@ -143,14 +148,14 @@ class ChatMessageBubble extends StatelessWidget {
                   height: 14,
                   child: CircularProgressIndicator(
                     strokeWidth: 2,
-                    color: AppColors.primary,
+                    color: palette.primary,
                   ),
                 ),
                 const SizedBox(width: AppDimensions.spaceXs),
                 Text(
                   l10n.chatThinking,
                   style: AppTextStyles.bodyMedium.copyWith(
-                    color: AppColors.textSecondary,
+                    color: palette.textSecondary,
                   ),
                 ),
               ],
@@ -163,10 +168,8 @@ class ChatMessageBubble extends StatelessWidget {
                       : AppTextStyles.bodyMedium)
                   .copyWith(
                     color: message.isCoach
-                        ? (failed
-                            ? AppColors.onError
-                            : AppColors.textPrimary)
-                        : AppColors.onPrimaryContainer,
+                        ? (failed ? palette.onError : palette.textPrimary)
+                        : palette.onPrimary,
                   ),
             ),
           if (failed) ...[
@@ -179,13 +182,13 @@ class ChatMessageBubble extends StatelessWidget {
                   Icon(
                     Icons.refresh,
                     size: 14,
-                    color: AppColors.onError,
+                    color: palette.onError,
                   ),
                   const SizedBox(width: AppDimensions.space2xs),
                   Text(
                     l10n.retry,
                     style: AppTextStyles.labelMedium.copyWith(
-                      color: AppColors.onError,
+                      color: palette.onError,
                     ),
                   ),
                 ],
@@ -210,15 +213,16 @@ class _Chip extends StatelessWidget {
   const _Chip({
     required this.label,
     required this.onTap,
-    this.color = AppColors.textPrimary,
+    this.color,
   });
 
   final String label;
   final VoidCallback? onTap;
-  final Color color;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.palette;
     final enabled = onTap != null;
     return GestureDetector(
       onTap: enabled ? onTap : null,
@@ -228,14 +232,14 @@ class _Chip extends StatelessWidget {
           vertical: AppDimensions.spaceXs,
         ),
         decoration: BoxDecoration(
-          color: AppColors.surfaceElevated,
+          color: palette.surfaceElevated,
           borderRadius: BorderRadius.circular(AppDimensions.radiusFull),
-          border: Border.all(color: AppColors.outline),
+          border: Border.all(color: palette.outline),
         ),
         child: Text(
           label,
           style: AppTextStyles.labelMedium.copyWith(
-            color: enabled ? color : AppColors.textSecondary,
+            color: enabled ? (color ?? palette.primary) : palette.textSecondary,
           ),
           maxLines: 1,
         ),

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_dimensions.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../domain/entities/chat_session.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../shared/widgets/voice_button.dart';
 import '../chat_session_notifier.dart';
+import '../../../../core/theme/theme_provider.dart';
 
 /// Строка ввода чата: поле вопроса + круглая кнопка микрофона.
 ///
@@ -59,10 +59,10 @@ class _CoachInputBarState extends ConsumerState<CoachInputBar> {
                 vertical: AppDimensions.spaceSm,
               ),
               decoration: BoxDecoration(
-                color: AppColors.surface,
+                color: context.palette.surface,
                 borderRadius:
                     BorderRadius.circular(AppDimensions.radiusFull),
-                border: Border.all(color: AppColors.outline),
+                border: Border.all(color: context.palette.outline),
               ),
               child: Row(
                 children: [
@@ -71,7 +71,7 @@ class _CoachInputBarState extends ConsumerState<CoachInputBar> {
                       controller: _controller,
                       focusNode: _focusNode,
                       style: AppTextStyles.bodyMedium.copyWith(
-                        color: AppColors.textPrimary,
+                        color: context.palette.textPrimary,
                       ),
                       maxLines: 1,
                       enabled: !busy,
@@ -81,7 +81,7 @@ class _CoachInputBarState extends ConsumerState<CoachInputBar> {
                         isDense: true,
                         hintText: l10n.chatInputHint,
                         hintStyle: AppTextStyles.bodyMedium.copyWith(
-                          color: AppColors.textSecondary,
+                          color: context.palette.textSecondary,
                         ),
                       ),
                     ),
@@ -92,7 +92,7 @@ class _CoachInputBarState extends ConsumerState<CoachInputBar> {
                       height: 18,
                       child: CircularProgressIndicator(
                         strokeWidth: 2,
-                        color: AppColors.primary,
+                        color: context.palette.primary,
                       ),
                     )
                   else
@@ -104,8 +104,8 @@ class _CoachInputBarState extends ConsumerState<CoachInputBar> {
                           Icons.send,
                           size: 20,
                           color: _controller.text.trim().isEmpty
-                              ? AppColors.textSecondary
-                              : AppColors.primary,
+                              ? context.palette.textSecondary
+                              : context.palette.primary,
                         ),
                       ),
                     ),

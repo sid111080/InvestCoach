@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/providers/app_providers.dart';
-import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_dimensions.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../domain/entities/chat_session.dart';
@@ -11,6 +10,7 @@ import '../../../../l10n/app_localizations.dart';
 import '../../../../shared/widgets/app_button.dart';
 import '../../../../shared/widgets/voice_button.dart';
 import '../voice_session_notifier.dart';
+import '../../../../core/theme/theme_provider.dart';
 
 /// Fullscreen-оверлей голосового режима (Voice-First).
 ///
@@ -33,7 +33,7 @@ class VoiceOverlay extends ConsumerWidget {
       child: Stack(
         children: [
           Positioned.fill(
-            child: ColoredBox(color: AppColors.overlay),
+            child: ColoredBox(color: context.palette.overlay),
           ),
           // Без flutter_animate: оверлей — ConsumerWidget, перестраивается
           // на каждой фазе, и fadeIn перезапускался бы на каждом rebuild
@@ -137,11 +137,11 @@ class _IconButton extends StatelessWidget {
         child: Container(
           width: AppDimensions.minTapTarget,
           height: AppDimensions.minTapTarget,
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: AppColors.surface,
+            color: context.palette.surface,
           ),
-          child: Icon(icon, color: AppColors.textPrimary, size: 22),
+          child: Icon(icon, color: context.palette.textPrimary, size: 22),
         ),
       ),
     );
@@ -255,7 +255,7 @@ class _ProcessingView extends StatelessWidget {
           height: 44,
           child: CircularProgressIndicator(
             strokeWidth: 3,
-            color: AppColors.primary,
+            color: context.palette.primary,
           ),
         ),
         const SizedBox(height: AppDimensions.spaceXl),
@@ -380,12 +380,12 @@ class _FailedView extends StatelessWidget {
           width: 64,
           height: 64,
           decoration: BoxDecoration(
-            color: AppColors.error.withValues(alpha: 0.15),
+            color: context.palette.error.withValues(alpha: 0.15),
             shape: BoxShape.circle,
           ),
-          child: const Icon(
+          child: Icon(
             Icons.error_outline,
-            color: AppColors.error,
+            color: context.palette.error,
             size: 30,
           ),
         ),
@@ -426,9 +426,9 @@ class _TranscriptCard extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(AppDimensions.spaceLg),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: context.palette.surface,
         borderRadius: BorderRadius.circular(AppDimensions.radiusMd),
-        border: Border.all(color: AppColors.outline),
+        border: Border.all(color: context.palette.outline),
       ),
       child: Text(
         text,
@@ -451,9 +451,9 @@ class _ResponseCard extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(AppDimensions.spaceLg),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: context.palette.surface,
         borderRadius: BorderRadius.circular(AppDimensions.radiusLg),
-        border: Border.all(color: AppColors.outline),
+        border: Border.all(color: context.palette.outline),
       ),
       child: Text(
         text,
@@ -477,13 +477,13 @@ class _SuggestionPill extends StatelessWidget {
         vertical: AppDimensions.spaceXs,
       ),
       decoration: BoxDecoration(
-        color: AppColors.primaryContainer,
+        color: context.palette.primaryContainer,
         borderRadius: BorderRadius.circular(AppDimensions.radiusFull),
       ),
       child: Text(
         text,
         style: AppTextStyles.labelMedium.copyWith(
-          color: AppColors.onPrimaryContainer,
+          color: context.palette.onPrimaryContainer,
         ),
       ),
     );

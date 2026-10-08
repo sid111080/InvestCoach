@@ -533,4 +533,20 @@ class AppLocalizationsRu extends AppLocalizations {
   String profilePullLeft(int left, int limit) {
     return 'Осталось вопросов: $left из $limit';
   }
+
+  @override
+  String get themeSelectTitle => 'Выберите тему';
+
+  @override
+  String get themeSelectSubtitle =>
+      'Каждое утро начинается с настроения. Выберите свой.';
+
+  @override
+  String get themeSelectStart => 'Начать';
+
+  @override
+  String get profileThemeSection => 'Тема интерфейса';
+
+  @override
+  String get profileThemeHint => 'Можно поменять в любой момент';
 }

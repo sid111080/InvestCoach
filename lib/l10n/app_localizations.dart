@@ -1057,6 +1057,36 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Осталось вопросов: {left} из {limit}'**
   String profilePullLeft(int left, int limit);
+
+  /// No description provided for @themeSelectTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Выберите тему'**
+  String get themeSelectTitle;
+
+  /// No description provided for @themeSelectSubtitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Каждое утро начинается с настроения. Выберите свой.'**
+  String get themeSelectSubtitle;
+
+  /// No description provided for @themeSelectStart.
+  ///
+  /// In ru, this message translates to:
+  /// **'Начать'**
+  String get themeSelectStart;
+
+  /// No description provided for @profileThemeSection.
+  ///
+  /// In ru, this message translates to:
+  /// **'Тема интерфейса'**
+  String get profileThemeSection;
+
+  /// No description provided for @profileThemeHint.
+  ///
+  /// In ru, this message translates to:
+  /// **'Можно поменять в любой момент'**
+  String get profileThemeHint;
 }
 
 class _AppLocalizationsDelegate

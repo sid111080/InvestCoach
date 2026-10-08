@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/errors/app_exception.dart';
-import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_dimensions.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../domain/entities/user_preferences.dart';
@@ -9,6 +8,7 @@ import '../../../../l10n/app_localizations.dart';
 import '../../../../shared/widgets/app_button.dart';
 import '../../../../shared/widgets/coach_avatar.dart';
 import '../widgets/onboarding_option_card.dart';
+import '../../../../core/theme/theme_provider.dart';
 
 /// Заголовок шага: крупный тайтл + вторичный подзаголовок.
 class _StepHeader extends StatelessWidget {
@@ -63,7 +63,7 @@ class _RequestError extends StatelessWidget {
         const SizedBox(height: AppDimensions.spaceSm),
         Text(
           error.userMessage,
-          style: AppTextStyles.bodySmall.copyWith(color: AppColors.error),
+          style: AppTextStyles.bodySmall.copyWith(color: context.palette.error),
         ),
         const SizedBox(height: AppDimensions.spaceXs),
         AppButton(
@@ -235,13 +235,13 @@ class _OnboardingNamePageState extends State<OnboardingNamePage> {
                   decoration: InputDecoration(
                     hintText: l10n.onbNameHint,
                     filled: true,
-                    fillColor: AppColors.surface,
+                    fillColor: context.palette.surface,
                     enabledBorder: _border(
                       _showNameError && !_nameIsValid
-                          ? AppColors.error
-                          : AppColors.outline,
+                          ? context.palette.error
+                          : context.palette.outline,
                     ),
-                    focusedBorder: _border(AppColors.primary),
+                    focusedBorder: _border(context.palette.primary),
                   ),
                 ),
                 if (_showNameError && !_nameIsValid) ...[
@@ -249,7 +249,7 @@ class _OnboardingNamePageState extends State<OnboardingNamePage> {
                   Text(
                     l10n.onbNameError,
                     style: AppTextStyles.bodySmall
-                        .copyWith(color: AppColors.error),
+                        .copyWith(color: context.palette.error),
                   ),
                 ],
                 if (widget.error != null)
@@ -412,7 +412,7 @@ class OnboardingGoalsPage extends StatelessWidget {
                   Text(
                     l10n.onbGoalsError,
                     style: AppTextStyles.bodySmall
-                        .copyWith(color: AppColors.error),
+                        .copyWith(color: context.palette.error),
                   ),
                 ],
               ],

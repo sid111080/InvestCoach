@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/providers/app_providers.dart';
 import '../../../core/providers/repository_providers.dart';
-import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_dimensions.dart';
 import '../../../core/theme/app_text_styles.dart';
 import '../../../domain/entities/chat_context.dart';
@@ -22,6 +21,7 @@ import 'widgets/paywall_overlay.dart';
 import 'widgets/portfolio_mini_card.dart';
 import 'widgets/quick_actions_bar.dart';
 import 'widgets/voice_overlay.dart';
+import '../../../core/theme/theme_provider.dart';
 
 /// Главный экран «Coach» — самый важный экран приложения.
 ///
@@ -263,7 +263,7 @@ class _Header extends StatelessWidget {
             Text(
               l10n.coachOnline,
               style: AppTextStyles.labelSmall.copyWith(
-                color: AppColors.success,
+                color: context.palette.success,
               ),
             ),
           ],

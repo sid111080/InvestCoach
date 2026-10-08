@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/providers/repository_providers.dart';
-import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_dimensions.dart';
 import '../../../core/theme/app_text_styles.dart';
+import '../../../core/theme/theme_palette.dart';
+import '../../../core/theme/theme_provider.dart';
 import '../../../domain/entities/app_user.dart';
 import '../../../domain/entities/subscription_status.dart';
 import '../../../domain/entities/user_preferences.dart';
@@ -23,10 +24,10 @@ class ProfileScreen extends ConsumerWidget {
     final subAsync = ref.watch(subscriptionStatusProvider);
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: context.palette.background,
       body: RefreshIndicator(
-        color: AppColors.primary,
-        backgroundColor: AppColors.surface,
+        color: context.palette.primary,
+        backgroundColor: context.palette.surface,
         onRefresh: () async {
           ref.invalidate(userStatsProvider);
           ref.invalidate(subscriptionStatusProvider);
@@ -73,6 +74,10 @@ class ProfileScreen extends ConsumerWidget {
             const _PushSection(),
             const SizedBox(height: AppDimensions.spaceLg),
 
+            // Тема интерфейса
+            const _ThemeSection(),
+            const SizedBox(height: AppDimensions.spaceLg),
+
             // О приложении
             const _AboutSection(),
           ],
@@ -97,9 +102,9 @@ class _ProfileHeader extends StatelessWidget {
       UserTier.pro => l10n.profileTierPro,
     };
     final tierColor = switch (user.tier) {
-      UserTier.free => AppColors.textSecondary,
-      UserTier.newsPlus => AppColors.primary,
-      UserTier.pro => AppColors.warning,
+      UserTier.free => context.palette.textSecondary,
+      UserTier.newsPlus => context.palette.primary,
+      UserTier.pro => context.palette.warning,
     };
 
     return Row(
@@ -110,14 +115,14 @@ class _ProfileHeader extends StatelessWidget {
           height: 64,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: AppColors.primaryContainer,
+            color: context.palette.primaryContainer,
           ),
           child: Center(
             child: Text(
               user.name.isNotEmpty ? user.name[0].toUpperCase() : '?',
               style: AppTextStyles.display.copyWith(
                 fontSize: 28,
-                color: AppColors.onPrimaryContainer,
+                color: context.palette.onPrimaryContainer,
               ),
             ),
           ),
@@ -170,9 +175,9 @@ class _ProfileHeaderGhost extends StatelessWidget {
           child: Container(
             width: 64,
             height: 64,
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: AppColors.surface,
+              color: context.palette.surface,
             ),
           ),
         ),
@@ -214,7 +219,7 @@ class _StatsSection extends StatelessWidget {
             Expanded(
               child: _StatTile(
                 icon: Icons.local_fire_department,
-                iconColor: AppColors.warning,
+                iconColor: context.palette.warning,
                 label: l10n.profileStreak,
                 value: l10n.profileStreakValue(stats.currentStreak),
               ),
@@ -223,7 +228,7 @@ class _StatsSection extends StatelessWidget {
             Expanded(
               child: _StatTile(
                 icon: Icons.trending_up,
-                iconColor: AppColors.primary,
+                iconColor: context.palette.primary,
                 label: l10n.profileAvgInteractions,
                 value: l10n.profileAvgValue(
                   stats.avgInteractionsPerDay.round(),
@@ -250,7 +255,7 @@ class _StatsSection extends StatelessWidget {
                     vertical: 6,
                   ),
                   decoration: BoxDecoration(
-                    color: AppColors.surfaceElevated,
+                    color: context.palette.surfaceElevated,
                     borderRadius: BorderRadius.circular(
                       AppDimensions.radiusFull,
                     ),
@@ -286,9 +291,9 @@ class _StatTile extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(AppDimensions.spaceMd),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: context.palette.surface,
         borderRadius: BorderRadius.circular(AppDimensions.radiusMd),
-        border: Border.all(color: AppColors.outline),
+        border: Border.all(color: context.palette.outline),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -329,15 +334,15 @@ class _SubscriptionSection extends ConsumerWidget {
           Container(
             padding: const EdgeInsets.all(AppDimensions.spaceMd),
             decoration: BoxDecoration(
-              color: AppColors.surface,
+              color: context.palette.surface,
               borderRadius: BorderRadius.circular(AppDimensions.radiusMd),
-              border: Border.all(color: AppColors.outline),
+              border: Border.all(color: context.palette.outline),
             ),
             child: Row(
               children: [
                 Icon(
                   Icons.chat_bubble_outline,
-                  color: AppColors.textSecondary,
+                  color: context.palette.textSecondary,
                   size: 20,
                 ),
                 const SizedBox(width: AppDimensions.spaceSm),
@@ -360,13 +365,13 @@ class _SubscriptionSection extends ConsumerWidget {
           Container(
             padding: const EdgeInsets.all(AppDimensions.spaceLg),
             decoration: BoxDecoration(
-              gradient: const LinearGradient(
-                colors: [AppColors.primaryContainer, AppColors.surface],
+              gradient: LinearGradient(
+                colors: [context.palette.primaryContainer, context.palette.surface],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
               borderRadius: BorderRadius.circular(AppDimensions.radiusXl),
-              border: Border.all(color: AppColors.primary.withAlpha(60)),
+              border: Border.all(color: context.palette.primary.withAlpha(60)),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -374,14 +379,14 @@ class _SubscriptionSection extends ConsumerWidget {
                 Text(
                   l10n.profileUpgradeTitle,
                   style: AppTextStyles.titleLarge.copyWith(
-                    color: AppColors.onPrimaryContainer,
+                    color: context.palette.onPrimaryContainer,
                   ),
                 ),
                 const SizedBox(height: AppDimensions.spaceXs),
                 Text(
                   l10n.profileUpgradeText,
                   style: AppTextStyles.bodySmall.copyWith(
-                    color: AppColors.textSecondary,
+                    color: context.palette.textSecondary,
                   ),
                 ),
                 const SizedBox(height: AppDimensions.spaceMd),
@@ -410,8 +415,8 @@ class _SubscriptionSection extends ConsumerWidget {
                           .upgradeSubscription(UserTier.newsPlus);
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primary,
-                      foregroundColor: AppColors.onPrimary,
+                      backgroundColor: context.palette.primary,
+                      foregroundColor: context.palette.onPrimary,
                       padding: const EdgeInsets.symmetric(vertical: 14),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(
@@ -444,12 +449,12 @@ class _UpgradeFeature extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Icon(icon, size: 16, color: AppColors.onPrimaryContainer),
+        Icon(icon, size: 16, color: context.palette.onPrimaryContainer),
         const SizedBox(width: AppDimensions.spaceXs),
         Text(
           label,
           style: AppTextStyles.bodySmall.copyWith(
-            color: AppColors.onPrimaryContainer,
+            color: context.palette.onPrimaryContainer,
           ),
         ),
       ],
@@ -559,20 +564,20 @@ class _StyleOption extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(AppDimensions.spaceMd),
         decoration: BoxDecoration(
-          color: isSelected ? AppColors.primaryContainer : AppColors.surface,
+          color: isSelected ? context.palette.primaryContainer : context.palette.surface,
           borderRadius: BorderRadius.circular(AppDimensions.radiusMd),
           border: Border.all(
-            color: isSelected ? AppColors.primary : AppColors.outline,
+            color: isSelected ? context.palette.primary : context.palette.outline,
           ),
         ),
         child: Row(
           children: [
             if (isSelected)
-              Icon(Icons.check_circle, color: AppColors.primary, size: 20)
+              Icon(Icons.check_circle, color: context.palette.primary, size: 20)
             else
               Icon(
                 Icons.radio_button_unchecked,
-                color: AppColors.textSecondary,
+                color: context.palette.textSecondary,
                 size: 20,
               ),
             const SizedBox(width: AppDimensions.spaceSm),
@@ -581,8 +586,8 @@ class _StyleOption extends StatelessWidget {
                 label,
                 style: AppTextStyles.bodyMedium.copyWith(
                   color: isSelected
-                      ? AppColors.onPrimaryContainer
-                      : AppColors.textPrimary,
+                      ? context.palette.onPrimaryContainer
+                      : context.palette.textPrimary,
                 ),
               ),
             ),
@@ -616,9 +621,9 @@ class _PushSection extends StatelessWidget {
         const SizedBox(height: AppDimensions.spaceSm),
         Container(
           decoration: BoxDecoration(
-            color: AppColors.surface,
+            color: context.palette.surface,
             borderRadius: BorderRadius.circular(AppDimensions.radiusMd),
-            border: Border.all(color: AppColors.outline),
+            border: Border.all(color: context.palette.outline),
           ),
           child: Column(
             children: [
@@ -626,12 +631,12 @@ class _PushSection extends StatelessWidget {
                 label: l10n.profilePushDaily,
                 initiallyOn: true,
               ),
-              const Divider(height: 1, indent: 16, color: AppColors.outline),
+              Divider(height: 1, indent: 16, color: context.palette.outline),
               _PushToggleRow(
                 label: l10n.profilePushReview,
                 initiallyOn: true,
               ),
-              const Divider(height: 1, indent: 16, color: AppColors.outline),
+              Divider(height: 1, indent: 16, color: context.palette.outline),
               _PushToggleRow(
                 label: l10n.profilePushLesson,
                 initiallyOn: false,
@@ -683,7 +688,7 @@ class _PushToggleRowState extends State<_PushToggleRow> {
           ),
           Switch(
             value: _value,
-            activeThumbColor: AppColors.primary,
+            activeThumbColor: context.palette.primary,
             onChanged: (v) => setState(() => _value = v),
           ),
         ],
@@ -710,9 +715,9 @@ class _AboutSection extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(AppDimensions.spaceMd),
           decoration: BoxDecoration(
-            color: AppColors.surface,
+            color: context.palette.surface,
             borderRadius: BorderRadius.circular(AppDimensions.radiusMd),
-            border: Border.all(color: AppColors.outline),
+            border: Border.all(color: context.palette.outline),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -760,9 +765,9 @@ class _GhostCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(AppDimensions.spaceMd),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: context.palette.surface,
         borderRadius: BorderRadius.circular(AppDimensions.radiusMd),
-        border: Border.all(color: AppColors.outline),
+        border: Border.all(color: context.palette.outline),
       ),
       child: const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -790,7 +795,7 @@ class _GhostBar extends StatelessWidget {
       width: width,
       height: height,
       decoration: BoxDecoration(
-        color: AppColors.surfaceElevated,
+        color: context.palette.surfaceElevated,
         borderRadius: BorderRadius.circular(AppDimensions.radiusSm),
       ),
     );
@@ -807,9 +812,9 @@ class _SubscriptionGhost extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(AppDimensions.spaceMd),
         decoration: BoxDecoration(
-          color: AppColors.surface,
+          color: context.palette.surface,
           borderRadius: BorderRadius.circular(AppDimensions.radiusMd),
-          border: Border.all(color: AppColors.outline),
+          border: Border.all(color: context.palette.outline),
         ),
         child: const Row(
           children: [
@@ -835,13 +840,13 @@ class _SectionError extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(AppDimensions.spaceMd),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: context.palette.surface,
         borderRadius: BorderRadius.circular(AppDimensions.radiusMd),
-        border: Border.all(color: AppColors.error.withAlpha(60)),
+        border: Border.all(color: context.palette.error.withAlpha(60)),
       ),
       child: Row(
         children: [
-          Icon(Icons.error_outline, color: AppColors.error, size: 20),
+          Icon(Icons.error_outline, color: context.palette.error, size: 20),
           const SizedBox(width: AppDimensions.spaceSm),
           Expanded(
             child: Text(
@@ -854,11 +859,120 @@ class _SectionError extends StatelessWidget {
             child: Text(
               l10n.retry,
               style: AppTextStyles.labelMedium.copyWith(
-                color: AppColors.primary,
+                color: context.palette.primary,
               ),
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+/// Секция «Тема интерфейса» — переключение между 5 палитрами.
+class _ThemeSection extends ConsumerWidget {
+  const _ThemeSection();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    final currentPalette = ref.watch(themePaletteProvider);
+
+    return Container(
+      padding: const EdgeInsets.all(AppDimensions.spaceMd),
+      decoration: BoxDecoration(
+        color: context.palette.surface,
+        borderRadius: BorderRadius.circular(AppDimensions.radiusMd),
+        border: Border.all(color: context.palette.outline),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            l10n.profileThemeSection,
+            style: AppTextStyles.titleSmall
+                .copyWith(color: context.palette.textPrimary),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            l10n.profileThemeHint,
+            style: AppTextStyles.bodySmall
+                .copyWith(color: context.palette.textSecondary),
+          ),
+          const SizedBox(height: AppDimensions.spaceMd),
+          // Чипсы тем
+          Wrap(
+            spacing: AppDimensions.spaceXs,
+            runSpacing: AppDimensions.spaceXs,
+            children: [
+              for (final palette in allPalettes)
+                _ThemeChip(
+                  palette: palette,
+                  isSelected: palette.id == currentPalette.id,
+                  onTap: () {
+                    ref
+                        .read(themePaletteProvider.notifier)
+                        .setTheme(palette.id);
+                  },
+                ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// Чип одной темы с цветным индикатором.
+class _ThemeChip extends StatelessWidget {
+  const _ThemeChip({
+    required this.palette,
+    required this.isSelected,
+    required this.onTap,
+  });
+
+  final ThemePalette palette;
+  final bool isSelected;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppDimensions.spaceMd,
+          vertical: AppDimensions.spaceXs,
+        ),
+        decoration: BoxDecoration(
+          color: isSelected ? palette.primaryContainer : context.palette.surfaceElevated,
+          borderRadius: BorderRadius.circular(AppDimensions.radiusFull),
+          border: Border.all(
+            color: isSelected ? palette.primary : context.palette.outline,
+            width: isSelected ? 2 : 1,
+          ),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // Цветной кружок
+            Container(
+              width: 12,
+              height: 12,
+              decoration: BoxDecoration(
+                color: palette.primary,
+                shape: BoxShape.circle,
+              ),
+            ),
+            const SizedBox(width: 6),
+            Text(
+              palette.name,
+              style: AppTextStyles.labelMedium
+                  .copyWith(color: isSelected ? palette.onPrimaryContainer : context.palette.textSecondary),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_dimensions.dart';
+import '../../core/theme/theme_provider.dart';
 
 /// Аватар Coach со статусом «Онлайн».
 ///
@@ -29,12 +29,12 @@ class CoachAvatar extends StatelessWidget {
           Container(
             width: size,
             height: size,
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               shape: BoxShape.circle,
               gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
-                colors: [AppColors.primary, AppColors.primaryContainer],
+                colors: [context.palette.primary, context.palette.primaryContainer],
               ),
             ),
             child: Icon(
@@ -51,10 +51,10 @@ class CoachAvatar extends StatelessWidget {
                 width: AppDimensions.statusDotSize,
                 height: AppDimensions.statusDotSize,
                 decoration: BoxDecoration(
-                  color: AppColors.success,
+                  color: context.palette.success,
                   shape: BoxShape.circle,
                   border: Border.all(
-                    color: AppColors.background,
+                    color: context.palette.background,
                     width: 2,
                   ),
                 ),

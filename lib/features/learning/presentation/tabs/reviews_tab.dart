@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_dimensions.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../domain/entities/weekly_review.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../shared/widgets/shimmer_skeleton.dart';
+import '../../../../core/theme/theme_provider.dart';
 
 /// Вкладка «Weekly Reviews» — текущий разбор + история.
 class ReviewsTab extends ConsumerWidget {
@@ -58,9 +58,9 @@ class _CurrentReviewCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(AppDimensions.spaceXl),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: context.palette.surface,
         borderRadius: BorderRadius.circular(AppDimensions.radiusXl),
-        border: Border.all(color: AppColors.outline),
+        border: Border.all(color: context.palette.outline),
       ),
       child: Column(
         children: [
@@ -103,8 +103,8 @@ class _CurrentReviewCard extends StatelessWidget {
             child: ElevatedButton.icon(
               onPressed: () {},
               style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.primary,
-                foregroundColor: AppColors.onPrimary,
+                backgroundColor: context.palette.primary,
+                foregroundColor: context.palette.onPrimary,
                 padding: const EdgeInsets.symmetric(vertical: 14),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(AppDimensions.radiusMd),
@@ -145,9 +145,9 @@ class _ScoreCircle extends StatelessWidget {
               value: ratio,
               strokeWidth: 8,
               strokeCap: StrokeCap.round,
-              backgroundColor: AppColors.surfaceElevated,
-              valueColor: const AlwaysStoppedAnimation<Color>(
-                AppColors.primary,
+              backgroundColor: context.palette.surfaceElevated,
+              valueColor: AlwaysStoppedAnimation<Color>(
+                context.palette.primary,
               ),
             ),
           ),
@@ -182,7 +182,7 @@ class _ComparisonRow extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(AppDimensions.spaceMd),
       decoration: BoxDecoration(
-        color: AppColors.surfaceElevated,
+        color: context.palette.surfaceElevated,
         borderRadius: BorderRadius.circular(AppDimensions.radiusMd),
       ),
       child: Row(
@@ -196,7 +196,7 @@ class _ComparisonRow extends StatelessWidget {
           Container(
             width: 1,
             height: 32,
-            color: AppColors.outline,
+            color: context.palette.outline,
           ),
           _ComparisonItem(
             label: l10n.learnReviewIndexReturn,
@@ -227,7 +227,7 @@ class _ComparisonItem extends StatelessWidget {
         Text(
           '${value >= 0 ? '+' : ''}${value.toStringAsFixed(1)}%',
           style: AppTextStyles.titleMedium.copyWith(
-            color: isPositive ? AppColors.success : AppColors.error,
+            color: isPositive ? context.palette.success : context.palette.error,
           ),
         ),
         const SizedBox(height: 4),
@@ -251,18 +251,18 @@ class _InsightChip extends StatelessWidget {
         vertical: AppDimensions.spaceSm,
       ),
       decoration: BoxDecoration(
-        color: AppColors.surfaceElevated,
+        color: context.palette.surfaceElevated,
         borderRadius: BorderRadius.circular(AppDimensions.radiusMd),
       ),
       child: Row(
         children: [
-          Icon(Icons.lightbulb_outline, size: 16, color: AppColors.warning),
+          Icon(Icons.lightbulb_outline, size: 16, color: context.palette.warning),
           const SizedBox(width: AppDimensions.spaceXs),
           Expanded(
             child: Text(
               text,
               style: AppTextStyles.bodySmall.copyWith(
-                color: AppColors.textPrimary,
+                color: context.palette.textPrimary,
               ),
             ),
           ),
@@ -311,9 +311,9 @@ class _HistoryCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(AppDimensions.spaceMd),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: context.palette.surface,
         borderRadius: BorderRadius.circular(AppDimensions.radiusMd),
-        border: Border.all(color: AppColors.outline),
+        border: Border.all(color: context.palette.outline),
       ),
       child: Row(
         children: [
@@ -323,13 +323,13 @@ class _HistoryCard extends StatelessWidget {
             height: 44,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: AppColors.primaryContainer,
+              color: context.palette.primaryContainer,
             ),
             child: Center(
               child: Text(
                 review.processScore.toStringAsFixed(1),
                 style: AppTextStyles.titleSmall.copyWith(
-                  color: AppColors.onPrimaryContainer,
+                  color: context.palette.onPrimaryContainer,
                 ),
               ),
             ),
@@ -371,9 +371,9 @@ class _ReviewsLoading extends StatelessWidget {
           width: double.infinity,
           padding: const EdgeInsets.all(AppDimensions.spaceXl),
           decoration: BoxDecoration(
-            color: AppColors.surface,
+            color: context.palette.surface,
             borderRadius: BorderRadius.circular(AppDimensions.radiusXl),
-            border: Border.all(color: AppColors.outline),
+            border: Border.all(color: context.palette.outline),
           ),
           child: const Column(
             children: [
@@ -404,7 +404,7 @@ class _GhostBar extends StatelessWidget {
       width: width,
       height: height,
       decoration: BoxDecoration(
-        color: AppColors.surfaceElevated,
+        color: context.palette.surfaceElevated,
         borderRadius: BorderRadius.circular(AppDimensions.radiusSm),
       ),
     );
@@ -419,22 +419,22 @@ class _ReviewsEmpty extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(AppDimensions.spaceXl),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: context.palette.surface,
         borderRadius: BorderRadius.circular(AppDimensions.radiusXl),
-        border: Border.all(color: AppColors.outline),
+        border: Border.all(color: context.palette.outline),
       ),
       child: Column(
         children: [
           Icon(
             Icons.event_note_outlined,
-            color: AppColors.textSecondary,
+            color: context.palette.textSecondary,
             size: 48,
           ),
           const SizedBox(height: AppDimensions.spaceMd),
           Text(
             l10n.learnReviewEmpty,
             style: AppTextStyles.bodyMedium.copyWith(
-              color: AppColors.textSecondary,
+              color: context.palette.textSecondary,
             ),
             textAlign: TextAlign.center,
           ),
@@ -457,7 +457,7 @@ class _ReviewsError extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(Icons.error_outline, color: AppColors.error, size: 40),
+          Icon(Icons.error_outline, color: context.palette.error, size: 40),
           const SizedBox(height: AppDimensions.spaceMd),
           Text(
             l10n.somethingWentWrong,

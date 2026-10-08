@@ -9,8 +9,10 @@ import '../../features/learning/presentation/learning_screen.dart';
 import '../../features/news/presentation/news_screen.dart';
 import '../../features/portfolio/presentation/portfolio_screen.dart';
 import '../../features/profile/presentation/profile_screen.dart';
+import '../../features/theme_selection/presentation/theme_selection_screen.dart';
 import 'app_shell.dart';
 import 'onboarding_state_flag.dart';
+import 'theme_selected_flag.dart';
 
 /// Роутер приложения.
 ///
@@ -20,21 +22,39 @@ import 'onboarding_state_flag.dart';
 /// роутер перепроверяет маршрут сам (после завершения онбординга).
 GoRouter createAppRouter({
   required OnboardingStateFlag onboardingFlag,
+  required ThemeSelectedFlag themeFlag,
 }) {
   return GoRouter(
     initialLocation: '/coach',
     debugLogDiagnostics: kDebugMode,
     refreshListenable: onboardingFlag,
     redirect: (context, state) {
-      final atOnboarding = state.matchedLocation == '/onboarding';
+      final loc = state.matchedLocation;
+
+      // Экран выбора темы: показываем только при первом запуске.
+      if (loc == '/theme') {
+        if (themeFlag.selected) {
+          return onboardingFlag.completed ? '/coach' : '/onboarding';
+        }
+        return null;
+      }
+
+      // Тема не выбрана → сначала выбор темы.
+      if (!themeFlag.selected) return '/theme';
+
+      // Онбординг.
+      final atOnboarding = loc == '/onboarding';
       if (atOnboarding) {
-        // Прошедшие не могут остаться в онбординге
-        // (например, при возврате по back-stack).
         return onboardingFlag.completed ? '/coach' : null;
       }
       return onboardingFlag.completed ? null : '/onboarding';
     },
     routes: [
+      GoRoute(
+        path: '/theme',
+        name: 'theme',
+        builder: (context, state) => const ThemeSelectionScreen(),
+      ),
       GoRoute(
         path: '/onboarding',
         name: 'onboarding',

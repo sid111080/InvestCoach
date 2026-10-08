@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_dimensions.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../domain/entities/user_stats.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../shared/widgets/shimmer_skeleton.dart';
+import '../../../../core/theme/theme_provider.dart';
 
 /// Вкладка «Прогресс» — стрики, средние, топ-темы, bias-паттерны.
 class ProgressTab extends ConsumerWidget {
@@ -34,7 +34,7 @@ class ProgressTab extends ConsumerWidget {
                 Expanded(
                   child: _StatCard(
                     icon: Icons.local_fire_department,
-                    iconColor: AppColors.warning,
+                    iconColor: context.palette.warning,
                     label: l10n.learnProgressStreak,
                     value: l10n.learnProgressStreakDays(stats.currentStreak),
                   ),
@@ -43,7 +43,7 @@ class ProgressTab extends ConsumerWidget {
                 Expanded(
                   child: _StatCard(
                     icon: Icons.trending_up,
-                    iconColor: AppColors.primary,
+                    iconColor: context.palette.primary,
                     label: l10n.learnProgressAvg,
                     value: l10n.learnProgressAvgValue(
                       stats.avgInteractionsPerDay.round(),
@@ -94,15 +94,15 @@ class ProgressTab extends ConsumerWidget {
             Container(
               padding: const EdgeInsets.all(AppDimensions.spaceMd),
               decoration: BoxDecoration(
-                color: AppColors.surface,
+                color: context.palette.surface,
                 borderRadius: BorderRadius.circular(AppDimensions.radiusMd),
-                border: Border.all(color: AppColors.outline),
+                border: Border.all(color: context.palette.outline),
               ),
               child: Row(
                 children: [
                   Icon(
                     Icons.calendar_today_outlined,
-                    color: AppColors.textSecondary,
+                    color: context.palette.textSecondary,
                     size: 20,
                   ),
                   const SizedBox(width: AppDimensions.spaceSm),
@@ -139,9 +139,9 @@ class _StatCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(AppDimensions.spaceLg),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: context.palette.surface,
         borderRadius: BorderRadius.circular(AppDimensions.radiusMd),
-        border: Border.all(color: AppColors.outline),
+        border: Border.all(color: context.palette.outline),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -177,7 +177,7 @@ class _TopicChip extends StatelessWidget {
         vertical: AppDimensions.spaceXs,
       ),
       decoration: BoxDecoration(
-        color: AppColors.surfaceElevated,
+        color: context.palette.surfaceElevated,
         borderRadius: BorderRadius.circular(AppDimensions.radiusFull),
       ),
       child: Text(
@@ -202,7 +202,7 @@ class _BiasChip extends StatelessWidget {
         vertical: AppDimensions.spaceXs,
       ),
       decoration: BoxDecoration(
-        color: AppColors.primaryContainer,
+        color: context.palette.primaryContainer,
         borderRadius: BorderRadius.circular(AppDimensions.radiusFull),
       ),
       child: Row(
@@ -211,13 +211,13 @@ class _BiasChip extends StatelessWidget {
           Icon(
             Icons.psychology_outlined,
             size: 14,
-            color: AppColors.onPrimaryContainer,
+            color: context.palette.onPrimaryContainer,
           ),
           const SizedBox(width: 6),
           Text(
             label,
             style: AppTextStyles.labelLarge.copyWith(
-              color: AppColors.onPrimaryContainer,
+              color: context.palette.onPrimaryContainer,
             ),
           ),
         ],
@@ -270,9 +270,9 @@ class _StatGhost extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(AppDimensions.spaceLg),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: context.palette.surface,
         borderRadius: BorderRadius.circular(AppDimensions.radiusMd),
-        border: Border.all(color: AppColors.outline),
+        border: Border.all(color: context.palette.outline),
       ),
       child: const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -300,7 +300,7 @@ class _GhostBar extends StatelessWidget {
       width: width,
       height: height,
       decoration: BoxDecoration(
-        color: AppColors.surfaceElevated,
+        color: context.palette.surfaceElevated,
         borderRadius: BorderRadius.circular(AppDimensions.radiusSm),
       ),
     );
@@ -320,14 +320,14 @@ class _ProgressEmpty extends StatelessWidget {
           children: [
             Icon(
               Icons.bar_chart_outlined,
-              color: AppColors.textSecondary,
+              color: context.palette.textSecondary,
               size: 40,
             ),
             const SizedBox(height: AppDimensions.spaceMd),
             Text(
               l10n.learnProgressEmpty,
               style: AppTextStyles.bodyMedium.copyWith(
-                color: AppColors.textSecondary,
+                color: context.palette.textSecondary,
               ),
               textAlign: TextAlign.center,
             ),
@@ -351,7 +351,7 @@ class _ProgressError extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(Icons.error_outline, color: AppColors.error, size: 40),
+          Icon(Icons.error_outline, color: context.palette.error, size: 40),
           const SizedBox(height: AppDimensions.spaceMd),
           Text(
             l10n.somethingWentWrong,

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../core/debug/debug_flags.dart';
-import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_dimensions.dart';
+import '../../core/theme/theme_provider.dart';
 
 /// Круглая кнопка микрофона — главный CTA приложения (Voice-First).
 ///
@@ -64,7 +64,7 @@ class _VoiceButtonState extends State<VoiceButton>
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     border: Border.all(
-                      color: AppColors.primary.withValues(
+                      color: context.palette.primary.withValues(
                         alpha: 0.5 * (1 - _ringProgress(phase)),
                       ),
                       width: 2,
@@ -87,14 +87,14 @@ class _VoiceButtonState extends State<VoiceButton>
           height: widget.size,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            gradient: const LinearGradient(
+            gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: [AppColors.primary, Color(0xFF15803D)],
+              colors: [context.palette.primary, context.palette.primaryContainer],
             ),
             boxShadow: [
               BoxShadow(
-                color: AppColors.primary.withValues(alpha: 0.45),
+                color: context.palette.primary.withValues(alpha: 0.45),
                 blurRadius: 32,
                 offset: const Offset(0, 12),
                 spreadRadius: 2,
@@ -103,7 +103,7 @@ class _VoiceButtonState extends State<VoiceButton>
           ),
           child: Icon(
             Icons.mic,
-            color: AppColors.onPrimary,
+            color: context.palette.onPrimary,
             size: widget.size * 0.42,
           ),
         ),

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
-import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_dimensions.dart';
 import '../../../../core/theme/app_text_styles.dart';
+import '../../../../core/theme/theme_provider.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../shared/widgets/app_button.dart';
 import '../../../../shared/widgets/app_card.dart';
@@ -28,12 +28,13 @@ class PaywallOverlay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+    final palette = context.palette;
 
     return Positioned.fill(
       child: Stack(
         children: [
           Positioned.fill(
-            child: ColoredBox(color: AppColors.overlay),
+            child: ColoredBox(color: palette.overlay),
           ),
           Center(
             child: ConstrainedBox(
@@ -51,13 +52,12 @@ class PaywallOverlay extends StatelessWidget {
                         width: 64,
                         height: 64,
                         decoration: BoxDecoration(
-                          color: AppColors.warning
-                              .withValues(alpha: 0.15),
+                          color: palette.warning.withValues(alpha: 0.15),
                           shape: BoxShape.circle,
                         ),
-                        child: const Icon(
+                        child: Icon(
                           Icons.workspace_premium,
-                          color: AppColors.warning,
+                          color: palette.warning,
                           size: 30,
                         ),
                       ),
@@ -71,7 +71,7 @@ class PaywallOverlay extends StatelessWidget {
                       Text(
                         l10n.paywallText,
                         style: AppTextStyles.bodyMedium.copyWith(
-                          color: AppColors.textSecondary,
+                          color: palette.textSecondary,
                         ),
                         textAlign: TextAlign.center,
                       ),

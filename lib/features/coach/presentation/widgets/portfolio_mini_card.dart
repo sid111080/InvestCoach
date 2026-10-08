@@ -3,9 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../core/providers/repository_providers.dart';
-import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_dimensions.dart';
 import '../../../../core/theme/app_text_styles.dart';
+import '../../../../core/theme/theme_palette.dart';
+import '../../../../core/theme/theme_provider.dart';
 import '../../../../domain/entities/portfolio_summary.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../shared/widgets/app_card.dart';
@@ -47,18 +48,19 @@ class _PortfolioContent extends StatelessWidget {
     return '${percent >= 0 ? '+' : '−'}$digits%';
   }
 
-  Color _allocationColor(String key) => switch (key) {
-        'stocks' => AppColors.primary,
-        'bonds' => AppColors.onPrimaryContainer,
-        'etf' => AppColors.primaryContainer,
-        _ => AppColors.textSecondary.withValues(alpha: 0.5),
+  Color _allocationColor(String key, ThemePalette palette) => switch (key) {
+        'stocks' => palette.primary,
+        'bonds' => palette.onPrimaryContainer,
+        'etf' => palette.primaryContainer,
+        _ => palette.textSecondary.withValues(alpha: 0.5),
       };
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+    final palette = context.palette;
     final rising = summary.dailyChangePercent >= 0;
-    final changeColor = rising ? AppColors.success : AppColors.error;
+    final changeColor = rising ? palette.success : palette.error;
 
     return AppCard(
       child: Column(
@@ -67,7 +69,7 @@ class _PortfolioContent extends StatelessWidget {
           Text(
             l10n.portfolioCardTitle,
             style: AppTextStyles.labelMedium.copyWith(
-              color: AppColors.textSecondary,
+              color: palette.textSecondary,
             ),
           ),
           const SizedBox(height: AppDimensions.space2xs),
@@ -87,7 +89,7 @@ class _PortfolioContent extends StatelessWidget {
                   '${rising ? '+' : '−'}'
                   '${_formatRubles(summary.dailyChangeRub!.abs())}',
                   style: AppTextStyles.labelMedium.copyWith(
-                    color: AppColors.textSecondary,
+                    color: palette.textSecondary,
                   ),
                 ),
               ],
@@ -105,7 +107,7 @@ class _PortfolioContent extends StatelessWidget {
                   _LegendChip(
                     label: _labelFor(l10n, entry.key),
                     percent: entry.value,
-                    color: _allocationColor(entry.key),
+                    color: _allocationColor(entry.key, palette),
                   ),
               ],
             ),
@@ -131,6 +133,7 @@ class _AllocationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.palette;
     final total = allocation.values.fold<double>(0, (sum, value) => sum + value);
     final remainder = (100 - total).clamp(0.0, 100.0);
 
@@ -144,14 +147,14 @@ class _AllocationBar extends StatelessWidget {
               Expanded(
                 flex: entry.value.round().clamp(1, 999),
                 child: ColoredBox(
-                  color: _colorFor(entry.key),
+                  color: _colorFor(entry.key, palette),
                 ),
               ),
             if (remainder > 0.5)
               Expanded(
                 flex: remainder.round().clamp(1, 999),
-                child: const ColoredBox(
-                  color: AppColors.surfaceElevated,
+                child: ColoredBox(
+                  color: palette.surfaceElevated,
                 ),
               ),
           ],
@@ -160,11 +163,11 @@ class _AllocationBar extends StatelessWidget {
     );
   }
 
-  Color _colorFor(String key) => switch (key) {
-        'stocks' => AppColors.primary,
-        'bonds' => AppColors.onPrimaryContainer,
-        'etf' => AppColors.primaryContainer,
-        _ => AppColors.textSecondary.withValues(alpha: 0.5),
+  Color _colorFor(String key, ThemePalette palette) => switch (key) {
+        'stocks' => palette.primary,
+        'bonds' => palette.onPrimaryContainer,
+        'etf' => palette.primaryContainer,
+        _ => palette.textSecondary.withValues(alpha: 0.5),
       };
 }
 
@@ -193,7 +196,7 @@ class _LegendChip extends StatelessWidget {
         Text(
           '$label ${percent.round()}%',
           style: AppTextStyles.labelSmall.copyWith(
-            color: AppColors.textSecondary,
+            color: context.palette.textSecondary,
           ),
         ),
       ],
@@ -207,15 +210,15 @@ class _CardGhost extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppCard(
-      child: const Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _GhostBar(width: 110, height: 10),
-          SizedBox(height: AppDimensions.spaceSm),
+          const SizedBox(height: AppDimensions.spaceSm),
           _GhostBar(width: 120, height: 22),
-          SizedBox(height: AppDimensions.spaceXs),
+          const SizedBox(height: AppDimensions.spaceXs),
           _GhostBar(width: 90, height: 12),
-          SizedBox(height: AppDimensions.spaceSm),
+          const SizedBox(height: AppDimensions.spaceSm),
           _GhostBar(width: double.infinity, height: 8, radius: 999),
         ],
       ),
@@ -240,7 +243,7 @@ class _GhostBar extends StatelessWidget {
       width: width,
       height: height,
       decoration: BoxDecoration(
-        color: AppColors.surfaceElevated,
+        color: context.palette.surfaceElevated,
         borderRadius: BorderRadius.circular(radius),
       ),
     );

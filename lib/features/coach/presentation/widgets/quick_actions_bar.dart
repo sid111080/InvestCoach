@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_dimensions.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../l10n/app_localizations.dart';
+import '../../../../core/theme/theme_provider.dart';
 
 /// Горизонтальный скролл чипсов с примерами вопросов (Quick Actions).
 ///
@@ -37,7 +37,7 @@ class QuickActionsBar extends StatelessWidget {
           child: Text(
             l10n.quickActions,
             style: AppTextStyles.labelSmall.copyWith(
-              color: AppColors.textSecondary,
+              color: context.palette.textSecondary,
             ),
           ),
         ),
@@ -82,15 +82,15 @@ class _ActionChip extends StatelessWidget {
             minHeight: AppDimensions.minTapTarget * 0.6,
           ),
           decoration: BoxDecoration(
-            color: AppColors.surfaceElevated,
+            color: context.palette.surfaceElevated,
             borderRadius: BorderRadius.circular(AppDimensions.radiusFull),
-            border: Border.all(color: AppColors.outline),
+            border: Border.all(color: context.palette.outline),
           ),
           child: Center(
             child: Text(
               label,
               style: AppTextStyles.labelMedium.copyWith(
-                color: AppColors.textPrimary,
+                color: context.palette.textPrimary,
               ),
               maxLines: 1,
             ),

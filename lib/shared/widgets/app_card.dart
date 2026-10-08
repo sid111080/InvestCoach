@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_dimensions.dart';
+import '../../core/theme/theme_provider.dart';
 
 /// Базовая карточка дизайн-системы: surface, мягкие тени,
 /// скругление 16–24 dp (Calm Tech + Financial Trust).
@@ -13,7 +13,7 @@ class AppCard extends StatelessWidget {
     this.padding = const EdgeInsets.all(AppDimensions.spaceMd),
     this.margin,
     this.radius = AppDimensions.radiusMd,
-    this.color = AppColors.surface,
+    this.color,
   });
 
   final Widget child;
@@ -21,22 +21,25 @@ class AppCard extends StatelessWidget {
   final EdgeInsetsGeometry padding;
   final EdgeInsetsGeometry? margin;
   final double radius;
-  final Color color;
+
+  /// Цвет карточки; если не задан — `surface` текущей темы.
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
+    final palette = context.palette;
     final card = Container(
       padding: padding,
       margin: margin,
       decoration: BoxDecoration(
-        color: color,
+        color: color ?? palette.surface,
         borderRadius: BorderRadius.circular(radius),
-        border: Border.all(color: AppColors.outline),
-        boxShadow: const [
+        border: Border.all(color: palette.outline),
+        boxShadow: [
           BoxShadow(
-            color: AppColors.shadow,
+            color: palette.shadow,
             blurRadius: 24,
-            offset: Offset(0, 8),
+            offset: const Offset(0, 8),
           ),
         ],
       ),

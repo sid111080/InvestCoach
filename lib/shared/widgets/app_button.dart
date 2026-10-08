@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_dimensions.dart';
 import '../../core/theme/app_text_styles.dart';
+import '../../core/theme/theme_provider.dart';
 
 /// Вариант кнопки.
 enum AppButtonVariant {
@@ -77,19 +77,19 @@ class _AppButtonState extends State<AppButton>
 
   (Color, Color, Color?) get _palette => switch (widget.variant) {
         AppButtonVariant.primary => (
-            AppColors.primary,
-            AppColors.onPrimary,
+            context.palette.primary,
+            context.palette.onPrimary,
             null,
           ),
         AppButtonVariant.secondary => (
-            AppColors.surfaceElevated,
-            AppColors.textPrimary,
-            AppColors.outline,
+            context.palette.surfaceElevated,
+            context.palette.textPrimary,
+            context.palette.outline,
           ),
         AppButtonVariant.ghost => (
             Colors.transparent,
-            AppColors.primary,
-            AppColors.outline,
+            context.palette.primary,
+            context.palette.outline,
           ),
       };
 

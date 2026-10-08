@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_dimensions.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../domain/entities/daily_news.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../shared/widgets/app_card.dart';
+import '../../../../core/theme/theme_provider.dart';
 
 /// Карточка новости в ленте.
 ///
@@ -32,7 +32,7 @@ class NewsCard extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: AppDimensions.spaceMd),
       child: AppCard(
         onTap: onTap,
-        color: isTop ? AppColors.primaryContainer : AppColors.surface,
+        color: isTop ? context.palette.primaryContainer : context.palette.surface,
         radius: isTop ? AppDimensions.radiusLg : AppDimensions.radiusMd,
         padding: const EdgeInsets.all(AppDimensions.spaceLg),
         child: Column(
@@ -45,13 +45,13 @@ class NewsCard extends StatelessWidget {
                   Icon(
                     Icons.trending_up,
                     size: 14,
-                    color: AppColors.onPrimaryContainer,
+                    color: context.palette.onPrimaryContainer,
                   ),
                   const SizedBox(width: AppDimensions.space2xs),
                   Text(
                     l10n.todayImportant.toUpperCase(),
                     style: AppTextStyles.labelSmall.copyWith(
-                      color: AppColors.onPrimaryContainer,
+                      color: context.palette.onPrimaryContainer,
                     ),
                   ),
                 ],
@@ -73,8 +73,8 @@ class NewsCard extends StatelessWidget {
               news.summary,
               style: AppTextStyles.bodyMedium.copyWith(
                 color: isTop
-                    ? AppColors.textPrimary.withValues(alpha: 0.75)
-                    : AppColors.textSecondary,
+                    ? context.palette.textPrimary.withValues(alpha: 0.75)
+                    : context.palette.textSecondary,
               ),
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
@@ -86,13 +86,13 @@ class NewsCard extends StatelessWidget {
                 Icon(
                   Icons.schedule,
                   size: 14,
-                  color: AppColors.textSecondary,
+                  color: context.palette.textSecondary,
                 ),
                 const SizedBox(width: AppDimensions.space2xs),
                 Text(
                   _formatTime(news.publishedAt),
                   style: AppTextStyles.labelSmall.copyWith(
-                    color: AppColors.textSecondary,
+                    color: context.palette.textSecondary,
                   ),
                 ),
                 const SizedBox(width: AppDimensions.spaceSm),
@@ -101,8 +101,8 @@ class NewsCard extends StatelessWidget {
                     Icons.insights,
                     size: 14,
                     color: isTop
-                        ? AppColors.onPrimaryContainer
-                        : AppColors.primary,
+                        ? context.palette.onPrimaryContainer
+                        : context.palette.primary,
                   ),
                   const SizedBox(width: AppDimensions.space2xs),
                   Flexible(
@@ -110,8 +110,8 @@ class NewsCard extends StatelessWidget {
                       l10n.newsImpactPortfolio,
                       style: AppTextStyles.labelSmall.copyWith(
                         color: isTop
-                            ? AppColors.onPrimaryContainer
-                            : AppColors.primary,
+                            ? context.palette.onPrimaryContainer
+                            : context.palette.primary,
                       ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -124,8 +124,8 @@ class NewsCard extends StatelessWidget {
                       '${impact.abs().toStringAsFixed(1).replaceAll('.', ',')}',
                       style: AppTextStyles.labelSmall.copyWith(
                         color: isTop
-                            ? AppColors.onPrimaryContainer
-                            : AppColors.primary,
+                            ? context.palette.onPrimaryContainer
+                            : context.palette.primary,
                       ),
                     ),
                   ],

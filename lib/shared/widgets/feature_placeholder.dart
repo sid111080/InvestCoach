@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_dimensions.dart';
 import '../../core/theme/app_text_styles.dart';
 import '../../l10n/app_localizations.dart';
 import 'app_card.dart';
+import '../../core/theme/theme_provider.dart';
 
 /// Плейсхолдер экрана, ещё не реализованного в текущем спринте.
 class FeaturePlaceholderScreen extends StatelessWidget {
@@ -35,10 +35,10 @@ class FeaturePlaceholderScreen extends StatelessWidget {
                   width: 72,
                   height: 72,
                   decoration: BoxDecoration(
-                    color: AppColors.primaryContainer.withValues(alpha: 0.35),
+                    color: context.palette.primaryContainer.withValues(alpha: 0.35),
                     shape: BoxShape.circle,
                   ),
-                  child: Icon(icon, size: 32, color: AppColors.primary),
+                  child: Icon(icon, size: 32, color: context.palette.primary),
                 ),
                 const SizedBox(height: AppDimensions.spaceLg),
                 Container(
@@ -47,7 +47,7 @@ class FeaturePlaceholderScreen extends StatelessWidget {
                     vertical: AppDimensions.spaceXs,
                   ),
                   decoration: BoxDecoration(
-                    color: AppColors.warning.withValues(alpha: 0.15),
+                    color: context.palette.warning.withValues(alpha: 0.15),
                     borderRadius: BorderRadius.circular(
                       AppDimensions.radiusFull,
                     ),
@@ -55,7 +55,7 @@ class FeaturePlaceholderScreen extends StatelessWidget {
                   child: Text(
                     l10n.featureInDevelopment,
                     style: AppTextStyles.labelSmall.copyWith(
-                      color: AppColors.warning,
+                      color: context.palette.warning,
                     ),
                   ),
                 ),

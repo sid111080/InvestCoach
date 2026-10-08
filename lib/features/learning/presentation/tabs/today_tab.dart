@@ -3,12 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/providers/repository_providers.dart';
-import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_dimensions.dart';
 import '../../../../core/theme/app_text_styles.dart';
 import '../../../../domain/entities/micro_lesson.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../shared/widgets/shimmer_skeleton.dart';
+import '../../../../core/theme/theme_provider.dart';
 
 /// Вкладка «Сегодня» — рекомендованные микро-уроки.
 class TodayTab extends ConsumerWidget {
@@ -56,9 +56,9 @@ class _LessonCard extends ConsumerWidget {
     return Container(
       padding: const EdgeInsets.all(AppDimensions.spaceLg),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: context.palette.surface,
         borderRadius: BorderRadius.circular(AppDimensions.radiusMd),
-        border: Border.all(color: AppColors.outline),
+        border: Border.all(color: context.palette.outline),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,7 +72,7 @@ class _LessonCard extends ConsumerWidget {
                   vertical: 4,
                 ),
                 decoration: BoxDecoration(
-                  color: AppColors.surfaceElevated,
+                  color: context.palette.surfaceElevated,
                   borderRadius: BorderRadius.circular(AppDimensions.radiusFull),
                 ),
                 child: Text(
@@ -88,7 +88,7 @@ class _LessonCard extends ConsumerWidget {
                     vertical: 4,
                   ),
                   decoration: BoxDecoration(
-                    color: AppColors.primaryContainer,
+                    color: context.palette.primaryContainer,
                     borderRadius: BorderRadius.circular(
                       AppDimensions.radiusFull,
                     ),
@@ -96,14 +96,14 @@ class _LessonCard extends ConsumerWidget {
                   child: Text(
                     lesson.biasTag!,
                     style: AppTextStyles.labelMedium.copyWith(
-                      color: AppColors.onPrimaryContainer,
+                      color: context.palette.onPrimaryContainer,
                     ),
                   ),
                 ),
               ],
               const Spacer(),
               if (lesson.completed)
-                Icon(Icons.check_circle, color: AppColors.primary, size: 20),
+                Icon(Icons.check_circle, color: context.palette.primary, size: 20),
             ],
           ),
           const SizedBox(height: AppDimensions.spaceSm),
@@ -153,7 +153,7 @@ class _LessonCard extends ConsumerWidget {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      backgroundColor: AppColors.surface,
+      backgroundColor: context.palette.surface,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
@@ -185,7 +185,7 @@ class _LessonActionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = isActive ? AppColors.primary : AppColors.textSecondary;
+    final color = isActive ? context.palette.primary : context.palette.textSecondary;
     return Expanded(
       child: InkWell(
         onTap: onPressed,
@@ -197,8 +197,8 @@ class _LessonActionButton extends StatelessWidget {
           ),
           decoration: BoxDecoration(
             color: isActive
-                ? AppColors.primaryContainer
-                : AppColors.surfaceElevated,
+                ? context.palette.primaryContainer
+                : context.palette.surfaceElevated,
             borderRadius: BorderRadius.circular(AppDimensions.radiusSm),
           ),
           child: Row(
@@ -249,9 +249,9 @@ class _LessonGhost extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(AppDimensions.spaceLg),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: context.palette.surface,
         borderRadius: BorderRadius.circular(AppDimensions.radiusMd),
-        border: Border.all(color: AppColors.outline),
+        border: Border.all(color: context.palette.outline),
       ),
       child: const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -285,7 +285,7 @@ class _GhostBar extends StatelessWidget {
       width: width,
       height: height,
       decoration: BoxDecoration(
-        color: AppColors.surfaceElevated,
+        color: context.palette.surfaceElevated,
         borderRadius: BorderRadius.circular(AppDimensions.radiusSm),
       ),
     );
@@ -305,14 +305,14 @@ class _LessonsEmpty extends StatelessWidget {
           children: [
             Icon(
               Icons.school_outlined,
-              color: AppColors.textSecondary,
+              color: context.palette.textSecondary,
               size: 40,
             ),
             const SizedBox(height: AppDimensions.spaceMd),
             Text(
               l10n.learnNoLessons,
               style: AppTextStyles.bodyMedium.copyWith(
-                color: AppColors.textSecondary,
+                color: context.palette.textSecondary,
               ),
               textAlign: TextAlign.center,
             ),
@@ -336,7 +336,7 @@ class _TabError extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(Icons.error_outline, color: AppColors.error, size: 40),
+          Icon(Icons.error_outline, color: context.palette.error, size: 40),
           const SizedBox(height: AppDimensions.spaceMd),
           Text(
             l10n.somethingWentWrong,
@@ -381,7 +381,7 @@ class _LessonDetailSheet extends StatelessWidget {
                   width: 36,
                   height: 4,
                   decoration: BoxDecoration(
-                    color: AppColors.outline,
+                    color: context.palette.outline,
                     borderRadius: BorderRadius.circular(2),
                   ),
                 ),
@@ -396,7 +396,7 @@ class _LessonDetailSheet extends StatelessWidget {
                       vertical: 4,
                     ),
                     decoration: BoxDecoration(
-                      color: AppColors.surfaceElevated,
+                      color: context.palette.surfaceElevated,
                       borderRadius: BorderRadius.circular(AppDimensions.radiusFull),
                     ),
                     child: Text(
@@ -412,13 +412,13 @@ class _LessonDetailSheet extends StatelessWidget {
                         vertical: 4,
                       ),
                       decoration: BoxDecoration(
-                        color: AppColors.primaryContainer,
+                        color: context.palette.primaryContainer,
                         borderRadius: BorderRadius.circular(AppDimensions.radiusFull),
                       ),
                       child: Text(
                         lesson.biasTag!,
                         style: AppTextStyles.labelMedium
-                            .copyWith(color: AppColors.primary),
+                            .copyWith(color: context.palette.primary),
                       ),
                     ),
                   ],
@@ -436,7 +436,7 @@ class _LessonDetailSheet extends StatelessWidget {
                 Text(
                   lesson.description!,
                   style: AppTextStyles.bodyLarge
-                      .copyWith(color: AppColors.textSecondary),
+                      .copyWith(color: context.palette.textSecondary),
                 ),
               const SizedBox(height: AppDimensions.spaceXl),
               // Кнопка завершения
@@ -446,7 +446,7 @@ class _LessonDetailSheet extends StatelessWidget {
                 child: FilledButton(
                   onPressed: onComplete,
                   style: FilledButton.styleFrom(
-                    backgroundColor: AppColors.primary,
+                    backgroundColor: context.palette.primary,
                     foregroundColor: Colors.black,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(AppDimensions.radiusMd),

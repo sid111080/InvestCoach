@@ -292,5 +292,10 @@
         "type": "int"
       }
     }
-  }
+  },
+  "themeSelectTitle": "Выберите тему",
+  "themeSelectSubtitle": "Каждое утро начинается с настроения. Выберите свой.",
+  "themeSelectStart": "Начать",
+  "profileThemeSection": "Тема интерфейса",
+  "profileThemeHint": "Можно поменять в любой момент"
 }

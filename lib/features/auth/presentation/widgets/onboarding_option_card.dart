@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_dimensions.dart';
 import '../../../../core/theme/app_text_styles.dart';
+import '../../../../core/theme/theme_provider.dart';
 
 /// Карточка-вариант для шагов онбординга (опыт, цели, риск, стиль).
 ///
@@ -36,11 +36,11 @@ class OnboardingOptionCard extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           color: selected
-              ? AppColors.primaryContainer.withValues(alpha: 0.35)
-              : AppColors.surface,
+              ? context.palette.primaryContainer.withValues(alpha: 0.35)
+              : context.palette.surface,
           borderRadius: BorderRadius.circular(AppDimensions.radiusMd),
           border: Border.all(
-            color: selected ? AppColors.primary : AppColors.outline,
+            color: selected ? context.palette.primary : context.palette.outline,
             width: selected ? 1.5 : 1,
           ),
         ),
@@ -50,8 +50,8 @@ class OnboardingOptionCard extends StatelessWidget {
               icon,
               size: 24,
               color: selected
-                  ? AppColors.onPrimaryContainer
-                  : AppColors.textSecondary,
+                  ? context.palette.onPrimaryContainer
+                  : context.palette.textSecondary,
             ),
             const SizedBox(width: AppDimensions.spaceSm),
             Expanded(
@@ -72,7 +72,7 @@ class OnboardingOptionCard extends StatelessWidget {
             Icon(
               selected ? Icons.check_circle : Icons.circle_outlined,
               size: 22,
-              color: selected ? AppColors.primary : AppColors.outline,
+              color: selected ? context.palette.primary : context.palette.outline,
             ),
           ],
         ),
