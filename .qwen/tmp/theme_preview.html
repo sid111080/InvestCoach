@@ -1,0 +1,95 @@
+<div id="app"></div>
+<script>
+const themes = [
+  { name: 'Весна',  emoji: '🌿', bg: '#0A1410', surface: '#12201A', surfaceElevated: '#1B2E25', primary: '#6B8E5A', onPrimary: '#16240E', primaryContainer: '#4A6B3A', onPrimaryContainer: '#DCE8CE', textSecondary: '#8CA89A', outline: '#1E3A2E' },
+  { name: 'Лето',   emoji: '☀️', bg: '#141208', surface: '#201D10', surfaceElevated: '#2E2A18', primary: '#C9B84A', onPrimary: '#26220C', primaryContainer: '#8A7A2A', onPrimaryContainer: '#F5F0C8', textSecondary: '#A8A07A', outline: '#3A3520' },
+  { name: 'Осень',  emoji: '🍂', bg: '#140D08', surface: '#201610', surfaceElevated: '#2E2018', primary: '#C97B4A', onPrimary: '#26140A', primaryContainer: '#8A4A2A', onPrimaryContainer: '#F5E0D0', textSecondary: '#A89080', outline: '#3A2A20' },
+  { name: 'Зима',   emoji: '❄️', bg: '#081218', surface: '#101E28', surfaceElevated: '#182E3C', primary: '#5C9BC4', onPrimary: '#0A2030', primaryContainer: '#3A6A8A', onPrimaryContainer: '#D8E8F5', textSecondary: '#7A9AAA', outline: '#1E3A4A' },
+  { name: 'Розовая', emoji: '🌹', bg: '#140810', surface: '#20101A', surfaceElevated: '#2E1824', primary: '#C47BA0', onPrimary: '#260A16', primaryContainer: '#8A4A6A', onPrimaryContainer: '#F5D8E8', textSecondary: '#A88FA0', outline: '#3A1E2E' },
+];
+
+function swatch(color, label) {
+  return `<div class="sw"><div class="chip" style="background:${color}"></div><span>${label}</span></div>`;
+}
+
+function phone(t) {
+  return `
+  <div class="phone" style="background:${t.bg}">
+    <div class="phead">
+      <div class="avatar" style="background:linear-gradient(135deg,${t.primary},${t.primaryContainer})"></div>
+      <div class="ptitles">
+        <div class="pt1">Доброе утро, Алекс</div>
+        <div class="pt2" style="color:${t.textSecondary}">Coach · Онлайн</div>
+      </div>
+    </div>
+
+    <div class="card" style="background:${t.primaryContainer};border-color:transparent">
+      <div class="cardtag" style="color:${t.onPrimaryContainer}">📈 СЕГОДНЯ ВАЖНО</div>
+      <div class="cardtitle" style="color:${t.onPrimaryContainer}">ЦБ сохранил ключевую ставку</div>
+      <div class="cardbtn" style="background:${t.primary};color:${t.onPrimary}">Обсудить с Coach</div>
+    </div>
+
+    <div class="chat">
+      <div class="bubble coach" style="background:${t.surface};color:#F1F5F9">Расскажу, что это значит для портфеля 👇</div>
+      <div class="bubble user" style="background:${t.primary};color:${t.onPrimary}">А что делать с облигациями?</div>
+    </div>
+
+    <div class="bottom">
+      <div class="nav">
+        <div class="tab sel" style="color:${t.primary}">🎙️</div>
+        <div class="tab" style="color:${t.textSecondary}">📰</div>
+        <div class="tab" style="color:${t.textSecondary}">💼</div>
+        <div class="tab" style="color:${t.textSecondary}">📚</div>
+        <div class="tab" style="color:${t.textSecondary}">👤</div>
+      </div>
+      <div class="mic" style="background:linear-gradient(135deg,${t.primary},${t.primaryContainer});box-shadow:0 8px 24px ${t.primary}66">🎤</div>
+    </div>
+  </div>`;
+}
+
+const app = document.getElementById('app');
+app.innerHTML = `
+  <style>
+    #app { font-family: -apple-system, 'Inter', sans-serif; color:#F1F5F9; background:#05070d; padding:28px; box-sizing:border-box; }
+    #app h1 { font-size:22px; margin:0 0 6px; }
+    #app .sub { color:#94A3B8; font-size:14px; margin-bottom:24px; max-width:760px; line-height:1.5; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:22px; }
+    .card-wrap { }
+    .tname { font-size:16px; font-weight:600; margin-bottom:10px; display:flex; align-items:center; gap:8px; }
+    .phone { background:#111; border-radius:26px; padding:16px; position:relative; overflow:hidden; border:1px solid #ffffff14; }
+    .phead { display:flex; align-items:center; gap:10px; margin-bottom:14px; }
+    .avatar { width:38px; height:38px; border-radius:50%; flex-shrink:0; }
+    .pt1 { font-size:13px; font-weight:600; }
+    .pt2 { font-size:11px; }
+    .card { border-radius:16px; padding:14px; border:1px solid; margin-bottom:14px; }
+    .cardtag { font-size:10px; letter-spacing:.6px; font-weight:600; margin-bottom:6px; }
+    .cardtitle { font-size:14px; font-weight:600; margin-bottom:10px; }
+    .cardbtn { display:inline-block; border-radius:10px; padding:8px 12px; font-size:12px; font-weight:600; }
+    .chat { display:flex; flex-direction:column; gap:8px; margin-bottom:16px; }
+    .bubble { max-width:80%; padding:9px 12px; font-size:12px; border-radius:14px; line-height:1.4; }
+    .bubble.coach { align-self:flex-start; border-bottom-left-radius:4px; }
+    .bubble.user { align-self:flex-end; border-bottom-right-radius:4px; font-weight:500; }
+    .bottom { position:relative; height:56px; }
+    .nav { display:flex; justify-content:space-around; align-items:center; height:44px; background:#ffffff08; border-radius:14px; }
+    .tab { font-size:18px; }
+    .mic { position:absolute; right:14px; bottom:-6px; width:52px; height:52px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:22px; }
+    .swatches { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+    .sw { display:flex; align-items:center; gap:6px; font-size:11px; color:#cbd5e1; }
+    .chip { width:16px; height:16px; border-radius:5px; border:1px solid #ffffff22; }
+  </style>
+  <h1>Расцветка InvestCoach — приглушённые «землистые» акценты</h1>
+  <div class="sub">Фон — тёмный, слегка тонированный под тему. <b>Мягкий приглушённый акцент</b> (зелёный — болотный, остальные — землистые) идёт на иконки, микрофон, кнопки и пузырь чата пользователя. Заметно, но не неоновым. При смене темы меняются именно эти элементы.</div>
+  <div class="grid">
+    ${themes.map(t => `
+      <div class="card-wrap">
+        <div class="tname">${t.emoji} ${t.name}</div>
+        ${phone(t)}
+        <div class="swatches">
+          ${swatch(t.bg,'фон')}
+          ${swatch(t.primary,'акцент')}
+          ${swatch(t.primaryContainer,'контейнер')}
+          ${swatch(t.surface,'поверхность')}
+        </div>
+      </div>`).join('')}
+  </div>`;
+</script>
