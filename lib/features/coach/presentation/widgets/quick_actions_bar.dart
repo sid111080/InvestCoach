@@ -74,12 +74,11 @@ class _ActionChip extends StatelessWidget {
       child: GestureDetector(
         onTap: onTap,
         child: Container(
+          // Минимальный tap target 44dp (accessibility).
+          constraints: const BoxConstraints(minHeight: 44),
           padding: const EdgeInsets.symmetric(
             horizontal: AppDimensions.spaceMd,
             vertical: AppDimensions.spaceSm,
-          ),
-          constraints: const BoxConstraints(
-            minHeight: AppDimensions.minTapTarget * 0.6,
           ),
           decoration: BoxDecoration(
             color: context.palette.surfaceElevated,
