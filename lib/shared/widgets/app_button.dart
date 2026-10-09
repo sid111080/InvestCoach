@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import '../../core/theme/app_dimensions.dart';
 import '../../core/theme/app_text_styles.dart';
 import '../../core/theme/theme_provider.dart';
+import '../utils/haptics.dart';
 
 /// Вариант кнопки.
 enum AppButtonVariant {
@@ -71,7 +71,7 @@ class _AppButtonState extends State<AppButton>
 
   void _handleTap() {
     if (!_enabled) return;
-    HapticFeedback.mediumImpact();
+    Haptics.success();
     widget.onPressed!();
   }
 

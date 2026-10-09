@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../l10n/app_localizations.dart';
+import '../../shared/utils/haptics.dart';
 import 'app_tabs.dart';
 
 /// Каркас главного приложения: контент + нижняя навигация (5 вкладок).
@@ -31,8 +32,10 @@ class AppShell extends StatelessWidget {
       body: child,
       bottomNavigationBar: NavigationBar(
         selectedIndex: _selectedIndex(),
-        onDestinationSelected: (index) =>
-            context.go(AppTab.all[index].path),
+        onDestinationSelected: (index) {
+          Haptics.light();
+          context.go(AppTab.all[index].path);
+        },
         destinations: [
           for (final tab in AppTab.all)
             NavigationDestination(

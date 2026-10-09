@@ -12,6 +12,7 @@ import '../../../domain/entities/user_preferences.dart';
 import '../../../domain/entities/user_stats.dart';
 import '../../../domain/services/notification_service.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../../shared/utils/haptics.dart';
 import '../../../shared/widgets/shimmer_skeleton.dart';
 
 /// Экран «Профиль» — header, статистика, стиль Coach, тарифы.
@@ -411,6 +412,7 @@ class _SubscriptionSection extends ConsumerWidget {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () async {
+                      Haptics.success();
                       final service =
                           ref.read(subscriptionServiceProvider);
                       await service.purchase(UserTier.newsPlus);
@@ -702,6 +704,7 @@ class _PushToggleRowState extends State<_PushToggleRow> {
             value: _value,
             activeThumbColor: context.palette.primary,
             onChanged: (v) async {
+              Haptics.selection();
               setState(() => _value = v);
               await widget.service.setCategoryEnabled(widget.category, v);
             },
@@ -925,6 +928,7 @@ class _ThemeSection extends ConsumerWidget {
                   palette: palette,
                   isSelected: palette.id == currentPalette.id,
                   onTap: () {
+                    Haptics.selection();
                     ref
                         .read(themePaletteProvider.notifier)
                         .setTheme(palette.id);

@@ -12,6 +12,7 @@ import '../../../domain/entities/chat_session.dart';
 import '../../../domain/entities/daily_news.dart';
 import '../../../domain/entities/micro_lesson.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../../shared/utils/haptics.dart';
 import '../../../shared/widgets/coach_avatar.dart';
 import 'chat_session_notifier.dart';
 import 'voice_session_notifier.dart';
@@ -124,6 +125,7 @@ class _CoachHomeScreenState extends ConsumerState<CoachHomeScreen> {
   }
 
   Future<void> _onPaywallUpgrade() async {
+    Haptics.success();
     final service = ref.read(subscriptionServiceProvider);
     final success = await service.purchase(UserTier.newsPlus);
     if (success) {
@@ -177,9 +179,12 @@ class _CoachHomeScreenState extends ConsumerState<CoachHomeScreen> {
                       l10n.quickQ3,
                       l10n.quickQ4,
                     ],
-                    onSend: (question) => ref
-                        .read(chatSessionProvider.notifier)
-                        .sendQuickAction(question),
+                    onSend: (question) {
+                      Haptics.light();
+                      ref
+                          .read(chatSessionProvider.notifier)
+                          .sendQuickAction(question);
+                    },
                     isEnabled: !busy,
                   ),
                   const SizedBox(height: AppDimensions.spaceLg),

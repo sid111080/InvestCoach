@@ -3,11 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/theme/app_dimensions.dart';
 import '../../../../core/theme/app_text_styles.dart';
+import '../../../../core/theme/theme_provider.dart';
 import '../../../../domain/entities/chat_session.dart';
 import '../../../../l10n/app_localizations.dart';
+import '../../../../shared/utils/haptics.dart';
 import '../../../../shared/widgets/voice_button.dart';
 import '../chat_session_notifier.dart';
-import '../../../../core/theme/theme_provider.dart';
 
 /// Строка ввода чата: поле вопроса + круглая кнопка микрофона.
 ///
@@ -125,6 +126,7 @@ class _CoachInputBarState extends ConsumerState<CoachInputBar> {
   void _send(String raw) {
     final text = raw.trim();
     if (text.isEmpty) return;
+    Haptics.success();
     _controller.clear();
     _focusNode.unfocus();
     ref.read(chatSessionProvider.notifier).sendText(text);

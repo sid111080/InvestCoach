@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import '../../core/debug/debug_flags.dart';
 import '../../core/theme/app_dimensions.dart';
 import '../../core/theme/theme_provider.dart';
+import '../utils/haptics.dart';
 
 /// Круглая кнопка микрофона — главный CTA приложения (Voice-First).
 ///
@@ -79,7 +79,7 @@ class _VoiceButtonState extends State<VoiceButton>
       child: GestureDetector(
         onTap: () {
           if (widget.onTap == null) return;
-          HapticFeedback.mediumImpact();
+          Haptics.success();
           widget.onTap!();
         },
         child: Container(

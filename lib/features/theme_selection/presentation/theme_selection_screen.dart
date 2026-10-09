@@ -7,6 +7,7 @@ import '../../../core/theme/app_text_styles.dart';
 import '../../../core/theme/theme_palette.dart';
 import '../../../core/theme/theme_provider.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../../shared/utils/haptics.dart';
 
 /// Экран «Выберите тему» — показывается при первом запуске.
 ///
@@ -57,6 +58,7 @@ class ThemeSelectionScreen extends ConsumerWidget {
                     palette: palette,
                     isSelected: isSelected,
                     onTap: () {
+                      Haptics.selection();
                       ref.read(themePaletteProvider.notifier).setTheme(palette.id);
                     },
                   );
@@ -73,7 +75,10 @@ class ThemeSelectionScreen extends ConsumerWidget {
                 width: double.infinity,
                 height: 52,
                 child: FilledButton(
-                  onPressed: () => context.go('/onboarding'),
+                  onPressed: () {
+                    Haptics.success();
+                    context.go('/onboarding');
+                  },
                   style: FilledButton.styleFrom(
                     backgroundColor: context.palette.primary,
                     foregroundColor: context.palette.onPrimary,

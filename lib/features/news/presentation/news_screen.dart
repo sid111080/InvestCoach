@@ -7,6 +7,7 @@ import '../../../core/theme/app_dimensions.dart';
 import '../../../core/theme/app_text_styles.dart';
 import '../../../domain/entities/daily_news.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../../shared/utils/haptics.dart';
 import '../../../shared/widgets/app_button.dart';
 import '../../../shared/widgets/shimmer_skeleton.dart';
 import 'widgets/news_card.dart';
@@ -38,10 +39,10 @@ class NewsScreen extends ConsumerWidget {
             if (news.isEmpty) return const _NewsEmpty();
             return _NewsFeed(
               news: news,
-              onCardTap: (item) => context.go(
-                '/coach',
-                extra: item,
-              ),
+              onCardTap: (item) {
+                Haptics.light();
+                context.go('/coach', extra: item);
+              },
             );
           },
         ),
