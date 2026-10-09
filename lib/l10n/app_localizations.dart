@@ -1087,6 +1087,12 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Можно поменять в любой момент'**
   String get profileThemeHint;
+
+  /// No description provided for @offlineBanner.
+  ///
+  /// In ru, this message translates to:
+  /// **'Вы оффлайн. Coach ответит, когда появится связь.'**
+  String get offlineBanner;
 }
 
 class _AppLocalizationsDelegate

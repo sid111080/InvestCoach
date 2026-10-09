@@ -550,4 +550,8 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profileThemeHint => 'You can change it anytime';
+
+  @override
+  String get offlineBanner =>
+      'Вы оффлайн. Coach ответит, когда появится связь.';
 }

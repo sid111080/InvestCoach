@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../shared/utils/haptics.dart';
+import '../../shared/widgets/offline_banner.dart';
 import 'app_tabs.dart';
 
 /// Каркас главного приложения: контент + нижняя навигация (5 вкладок).
@@ -29,7 +30,12 @@ class AppShell extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     return Scaffold(
-      body: child,
+      body: Column(
+        children: [
+          const OfflineBanner(),
+          Expanded(child: child),
+        ],
+      ),
       bottomNavigationBar: NavigationBar(
         selectedIndex: _selectedIndex(),
         onDestinationSelected: (index) {

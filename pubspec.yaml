@@ -48,6 +48,7 @@ dependencies:
   fl_chart: ^1.2.0
   shimmer: ^4.0.0
   flutter_animate: ^4.5.2
+  connectivity_plus: ^6.1.0
   lottie: ^3.6.1
   intl: ^0.20.3
   flutter_localizations:

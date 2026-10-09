@@ -297,5 +297,6 @@
   "themeSelectSubtitle": "Каждое утро начинается с настроения. Выберите свой.",
   "themeSelectStart": "Начать",
   "profileThemeSection": "Тема интерфейса",
-  "profileThemeHint": "Можно поменять в любой момент"
+  "profileThemeHint": "Можно поменять в любой момент",
+  "offlineBanner": "Вы оффлайн. Coach ответит, когда появится связь."
 }
