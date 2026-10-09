@@ -26,6 +26,8 @@ import '../../domain/repositories/learning_repository.dart';
 import '../../domain/repositories/news_repository.dart';
 import '../../domain/repositories/portfolio_repository.dart';
 import '../../domain/repositories/profile_repository.dart';
+import '../../domain/services/notification_service.dart';
+import '../../domain/services/subscription_service.dart';
 import '../../shared/onboarding/onboarding_state_repository.dart';
 import '../config/app_config.dart';
 import '../di/injection_container.dart';
@@ -141,5 +143,19 @@ final userStatsProvider = FutureProvider<UserStats>((ref) {
 final subscriptionStatusProvider =
     FutureProvider<SubscriptionStatus>((ref) {
   return ref.watch(profileRepositoryProvider).fetchSubscriptionStatus();
+});
+
+/// Сервис подписки (RevenueCat).
+final subscriptionServiceProvider =
+    Provider<SubscriptionService>((ref) => getIt<SubscriptionService>());
+
+/// Сервис push-уведомлений (FCM).
+final notificationServiceProvider =
+    Provider<NotificationService>((ref) => getIt<NotificationService>());
+
+/// Текущий тариф (из RevenueCat entitlement; обновляется в реальном времени).
+final currentTierProvider = StreamProvider<UserTier>((ref) {
+  final service = ref.watch(subscriptionServiceProvider);
+  return service.tierChanged;
 });
 

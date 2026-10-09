@@ -10,6 +10,7 @@ import '../../../domain/entities/app_user.dart';
 import '../../../domain/entities/subscription_status.dart';
 import '../../../domain/entities/user_preferences.dart';
 import '../../../domain/entities/user_stats.dart';
+import '../../../domain/services/notification_service.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../shared/widgets/shimmer_skeleton.dart';
 
@@ -409,8 +410,12 @@ class _SubscriptionSection extends ConsumerWidget {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {
-                      ref
+                    onPressed: () async {
+                      final service =
+                          ref.read(subscriptionServiceProvider);
+                      await service.purchase(UserTier.newsPlus);
+                      // Синхронизируем статус с backend.
+                      await ref
                           .read(profileRepositoryProvider)
                           .upgradeSubscription(UserTier.newsPlus);
                     },
@@ -605,12 +610,14 @@ class _StyleOption extends StatelessWidget {
 }
 
 /// Секция push-уведомлений.
-class _PushSection extends StatelessWidget {
+class _PushSection extends ConsumerWidget {
   const _PushSection();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
+    final service = ref.watch(notificationServiceProvider);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -629,17 +636,20 @@ class _PushSection extends StatelessWidget {
             children: [
               _PushToggleRow(
                 label: l10n.profilePushDaily,
-                initiallyOn: true,
+                category: 'daily_news',
+                service: service,
               ),
               Divider(height: 1, indent: 16, color: context.palette.outline),
               _PushToggleRow(
                 label: l10n.profilePushReview,
-                initiallyOn: true,
+                category: 'weekly_review',
+                service: service,
               ),
               Divider(height: 1, indent: 16, color: context.palette.outline),
               _PushToggleRow(
                 label: l10n.profilePushLesson,
-                initiallyOn: false,
+                category: 'new_lesson',
+                service: service,
               ),
             ],
           ),
@@ -652,11 +662,13 @@ class _PushSection extends StatelessWidget {
 class _PushToggleRow extends StatefulWidget {
   const _PushToggleRow({
     required this.label,
-    required this.initiallyOn,
+    required this.category,
+    required this.service,
   });
 
   final String label;
-  final bool initiallyOn;
+  final String category;
+  final NotificationService service;
 
   @override
   State<_PushToggleRow> createState() => _PushToggleRowState();
@@ -668,7 +680,7 @@ class _PushToggleRowState extends State<_PushToggleRow> {
   @override
   void initState() {
     super.initState();
-    _value = widget.initiallyOn;
+    _value = widget.service.isCategoryEnabled(widget.category);
   }
 
   @override
@@ -689,7 +701,10 @@ class _PushToggleRowState extends State<_PushToggleRow> {
           Switch(
             value: _value,
             activeThumbColor: context.palette.primary,
-            onChanged: (v) => setState(() => _value = v),
+            onChanged: (v) async {
+              setState(() => _value = v);
+              await widget.service.setCategoryEnabled(widget.category, v);
+            },
           ),
         ],
       ),

@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:investcoach/core/providers/repository_providers.dart';
+import 'package:investcoach/data/services/mock_notification_service.dart';
+import 'package:investcoach/data/services/mock_subscription_service.dart';
 import 'package:investcoach/domain/entities/app_user.dart';
 import 'package:investcoach/domain/entities/subscription_status.dart';
 import 'package:investcoach/domain/entities/user_stats.dart';
@@ -34,6 +36,10 @@ void main() {
               pullRequestsLimit: 8,
               canUpgradeTo: UserTier.newsPlus,
             )),
+        subscriptionServiceProvider
+            .overrideWithValue(MockSubscriptionService()),
+        notificationServiceProvider
+            .overrideWithValue(MockNotificationService()),
       ],
       child: MaterialApp(
         locale: const Locale('ru'),

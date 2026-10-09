@@ -8,7 +8,9 @@ import 'package:investcoach/core/config/app_config.dart';
 import 'package:investcoach/core/providers/app_providers.dart';
 import 'package:investcoach/core/providers/repository_providers.dart';
 import 'package:investcoach/core/router/app_shell.dart';
+import 'package:investcoach/data/services/mock_notification_service.dart';
 import 'package:investcoach/data/services/mock_speech_services.dart';
+import 'package:investcoach/data/services/mock_subscription_service.dart';
 import 'package:investcoach/features/coach/presentation/coach_home_screen.dart';
 import 'package:investcoach/l10n/app_localizations.dart';
 import 'package:investcoach/shared/onboarding/onboarding_state_repository.dart';
@@ -31,6 +33,10 @@ void main() {
         // В тесте DI (get_it) не инициализируется.
         analyticsServiceProvider
             .overrideWithValue(const DebugAnalyticsService()),
+        subscriptionServiceProvider
+            .overrideWithValue(MockSubscriptionService()),
+        notificationServiceProvider
+            .overrideWithValue(MockNotificationService()),
         if (voice) ...[
           speechTranscriberProvider.overrideWithValue(
             MockSpeechTranscriber(),

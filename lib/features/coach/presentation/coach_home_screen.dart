@@ -5,6 +5,7 @@ import '../../../core/providers/app_providers.dart';
 import '../../../core/providers/repository_providers.dart';
 import '../../../core/theme/app_dimensions.dart';
 import '../../../core/theme/app_text_styles.dart';
+import '../../../domain/entities/app_user.dart';
 import '../../../domain/entities/chat_context.dart';
 import '../../../domain/entities/chat_message.dart';
 import '../../../domain/entities/chat_session.dart';
@@ -122,15 +123,13 @@ class _CoachHomeScreenState extends ConsumerState<CoachHomeScreen> {
     ref.read(chatSessionProvider.notifier).exitVoiceMode();
   }
 
-  void _onPaywallUpgrade() {
-    final l10n = AppLocalizations.of(context);
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(l10n.paywallStubHint),
-        behavior: SnackBarBehavior.floating,
-      ),
-    );
-    ref.read(chatSessionProvider.notifier).dismissLimitReached();
+  Future<void> _onPaywallUpgrade() async {
+    final service = ref.read(subscriptionServiceProvider);
+    final success = await service.purchase(UserTier.newsPlus);
+    if (success) {
+      ref.read(chatSessionProvider.notifier).dismissLimitReached();
+      ref.invalidate(subscriptionStatusProvider);
+    }
   }
 
   @override

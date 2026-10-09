@@ -2,11 +2,17 @@ import 'package:get_it/get_it.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../data/services/fcm_notification_service.dart';
 import '../../data/services/flutter_tts_synthesizer.dart';
+import '../../data/services/mock_notification_service.dart';
 import '../../data/services/mock_speech_services.dart';
+import '../../data/services/mock_subscription_service.dart';
+import '../../data/services/revenuecat_subscription_service.dart';
 import '../../data/services/speech_transcriber_impl.dart';
+import '../../domain/services/notification_service.dart';
 import '../../domain/services/speech_synthesizer.dart';
 import '../../domain/services/speech_transcriber.dart';
+import '../../domain/services/subscription_service.dart';
 import '../../shared/onboarding/onboarding_state_repository.dart';
 import '../analytics/analytics_service.dart';
 import '../auth/auth_token_provider.dart';
@@ -46,6 +52,23 @@ void registerDependencies(AppConfig config) {
     config.useRealServices
         ? FlutterTtsSynthesizer()
         : MockSpeechSynthesizer(),
+  );
+
+  // Подписка (RevenueCat) и push-уведомления (FCM).
+  _singleton<SubscriptionService>(
+    config.useRealServices
+        ? RevenueCatSubscriptionService(
+            apiKey: const String.fromEnvironment(
+              'REVENUECAT_API_KEY',
+              defaultValue: 'rc_placeholder',
+            ),
+          )
+        : MockSubscriptionService(),
+  );
+  _singleton<NotificationService>(
+    config.useRealServices
+        ? FcmNotificationService()
+        : MockNotificationService(),
   );
 
   // Ядро сети.
