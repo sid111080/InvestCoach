@@ -226,13 +226,17 @@ class _AllocationChart extends StatelessWidget {
             ],
           ),
           const SizedBox(height: AppDimensions.spaceMd),
-          SizedBox(
-            height: 160,
-            child: PieChart(
-              PieChartData(
-                sections: pieData,
-                sectionsSpace: 2,
-                centerSpaceRadius: 30,
+          // RepaintBoundary: fl_chart — тяжёлый для repaint, изолируем
+          // чтобы скролл списка не перерисовывал чарт.
+          RepaintBoundary(
+            child: SizedBox(
+              height: 160,
+              child: PieChart(
+                PieChartData(
+                  sections: pieData,
+                  sectionsSpace: 2,
+                  centerSpaceRadius: 30,
+                ),
               ),
             ),
           ),

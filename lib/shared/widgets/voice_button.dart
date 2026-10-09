@@ -48,35 +48,38 @@ class _VoiceButtonState extends State<VoiceButton>
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: _ripple,
-      builder: (context, child) {
-        return Stack(
-          alignment: Alignment.center,
-          clipBehavior: Clip.none,
-          children: [
-            // Два расходящихся кольца с фазовым сдвигом.
-            for (final phase in const [0.0, 0.5])
-              Positioned(
-                width: widget.size * (1 + 0.55 * _ringProgress(phase)),
-                height: widget.size * (1 + 0.55 * _ringProgress(phase)),
-                child: Container(
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                      color: context.palette.primary.withValues(
-                        alpha: 0.5 * (1 - _ringProgress(phase)),
+    // RepaintBoundary: ripple-анимация (бесконечная) не должна
+    // заставлять перерисовывать соседние виджеты.
+    return RepaintBoundary(
+      child: AnimatedBuilder(
+        animation: _ripple,
+        builder: (context, child) {
+          return Stack(
+            alignment: Alignment.center,
+            clipBehavior: Clip.none,
+            children: [
+              // Два расходящихся кольца с фазовым сдвигом.
+              for (final phase in const [0.0, 0.5])
+                Positioned(
+                  width: widget.size * (1 + 0.55 * _ringProgress(phase)),
+                  height: widget.size * (1 + 0.55 * _ringProgress(phase)),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: context.palette.primary.withValues(
+                          alpha: 0.5 * (1 - _ringProgress(phase)),
+                        ),
+                        width: 2,
                       ),
-                      width: 2,
                     ),
                   ),
                 ),
-              ),
-            child!,
-          ],
-        );
-      },
-      child: GestureDetector(
+              child!,
+            ],
+          );
+        },
+        child: GestureDetector(
         onTap: () {
           if (widget.onTap == null) return;
           Haptics.success();
@@ -106,6 +109,7 @@ class _VoiceButtonState extends State<VoiceButton>
             color: context.palette.onPrimary,
             size: widget.size * 0.42,
           ),
+        ),
         ),
       ),
     );
