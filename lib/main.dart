@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'app.dart';
 import 'core/config/app_config.dart';
@@ -28,6 +29,9 @@ Future<void> main() async {
     await getIt<SubscriptionService>().initialize();
     await getIt<NotificationService>().initialize();
   }
+
+  // Инициализация SharedPreferences (нужно для темы и онбординга).
+  await SharedPreferences.getInstance();
 
   runApp(
     ProviderScope(

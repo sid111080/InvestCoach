@@ -26,6 +26,10 @@ class InvestCoachApp extends ConsumerWidget {
     return ThemeProvider(
       palette: palette,
       child: MaterialApp.router(
+        // Key по id темы: при смене темы Flutter делает полный rebuild
+        // дерева, чтобы ThemeData корректно прокинулся во все Material-виджеты
+        // (NavigationBar, FilledButton, иконки).
+        key: ValueKey(palette.id),
         title: 'InvestCoach',
         debugShowCheckedModeBanner: false,
         theme: theme,

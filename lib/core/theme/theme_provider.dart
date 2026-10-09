@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'theme_palette.dart';
 
@@ -10,15 +11,33 @@ final themePaletteProvider =
 );
 
 final class ThemePaletteNotifier extends Notifier<ThemePalette> {
+  static const _storageKey = 'theme_id';
+
   @override
   ThemePalette build() {
-    // TODO: читать из SharedPreferences при старте
+    // Синхронный фолбэк; асинхронная загрузка — в [loadSaved].
     return springPalette;
+  }
+
+  /// Загрузить сохранённую тему (вызывать после инициализации
+  /// [SharedPreferences] в main).
+  Future<void> loadSaved() async {
+    final prefs = await SharedPreferences.getInstance();
+    final savedName = prefs.getString(_storageKey);
+    if (savedName != null) {
+      for (final p in allPalettes) {
+        if (p.name == savedName) {
+          state = p;
+          return;
+        }
+      }
+    }
   }
 
   void setTheme(ThemeId id) {
     state = paletteFor(id);
-    // TODO: сохранить в SharedPreferences
+    SharedPreferences.getInstance()
+        .then((prefs) => prefs.setString(_storageKey, state.name));
   }
 }
 
