@@ -8,6 +8,7 @@ import '../../../core/theme/app_text_styles.dart';
 import '../../../domain/entities/daily_news.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../shared/utils/haptics.dart';
+import '../../../shared/widgets/animated_reveal.dart';
 import '../../../shared/widgets/app_button.dart';
 import '../../../shared/widgets/shimmer_skeleton.dart';
 import 'widgets/news_card.dart';
@@ -75,10 +76,13 @@ class _NewsFeed extends StatelessWidget {
           );
         }
         final item = news[index - 1];
-        return NewsCard(
-          news: item,
-          isTop: index == 1,
-          onTap: () => onCardTap(item),
+        return AnimatedReveal(
+          delay: Duration(milliseconds: (index - 1) * 60),
+          child: NewsCard(
+            news: item,
+            isTop: index == 1,
+            onTap: () => onCardTap(item),
+          ),
         );
       },
     );

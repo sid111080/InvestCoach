@@ -10,6 +10,7 @@ import '../../../domain/entities/portfolio_position.dart';
 import '../../../domain/entities/portfolio_summary.dart';
 import '../../../domain/entities/trade.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../../shared/widgets/animated_reveal.dart';
 import '../../../shared/widgets/app_button.dart';
 import '../../../shared/widgets/app_card.dart';
 import '../../../shared/widgets/shimmer_skeleton.dart';
@@ -255,7 +256,11 @@ class _PositionsSection extends StatelessWidget {
       children: [
         Text(l10n.portfolioPositions, style: AppTextStyles.titleMedium),
         const SizedBox(height: AppDimensions.spaceSm),
-        for (final pos in positions) _PositionRow(position: pos),
+        for (var i = 0; i < positions.length; i++)
+          AnimatedReveal(
+            delay: Duration(milliseconds: i * 50),
+            child: _PositionRow(position: positions[i]),
+          ),
       ],
     );
   }
@@ -345,7 +350,11 @@ class _TradesSection extends StatelessWidget {
       children: [
         Text(l10n.portfolioTrades, style: AppTextStyles.titleMedium),
         const SizedBox(height: AppDimensions.spaceSm),
-        for (final trade in trades) _TradeCard(trade: trade),
+        for (var i = 0; i < trades.length; i++)
+          AnimatedReveal(
+            delay: Duration(milliseconds: i * 50),
+            child: _TradeCard(trade: trades[i]),
+          ),
       ],
     );
   }
