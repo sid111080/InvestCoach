@@ -42,20 +42,18 @@ class QuickActionsBar extends StatelessWidget {
           ),
         ),
         const SizedBox(height: AppDimensions.spaceXs),
-        // SingleChildScrollView + Row: высота определяется чипсами,
-        // без жёсткого ограничения и без parentDataDirty в тестах.
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            children: [
-              for (var i = 0; i < questions.length; i++) ...[
-                if (i > 0) const SizedBox(width: AppDimensions.spaceXs),
-                _ActionChip(
-                  label: questions[i],
-                  onTap: isEnabled ? () => onSend(questions[i]) : null,
-                ),
-              ],
-            ],
+        // Bounded height: чипсы не сжимаются (padding 8dp + текст ≈ 32dp < 48dp).
+        SizedBox(
+          height: AppDimensions.minTapTarget,
+          child: ListView.separated(
+            scrollDirection: Axis.horizontal,
+            itemCount: questions.length,
+            separatorBuilder: (_, _) =>
+                const SizedBox(width: AppDimensions.spaceXs),
+            itemBuilder: (context, index) => _ActionChip(
+              label: questions[index],
+              onTap: isEnabled ? () => onSend(questions[index]) : null,
+            ),
           ),
         ),
       ],
