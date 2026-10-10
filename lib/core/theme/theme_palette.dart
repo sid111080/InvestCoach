@@ -3,6 +3,9 @@ import 'dart:ui';
 /// Идентификатор темы интерфейса.
 enum ThemeId { spring, summer, autumn, winter, rose }
 
+/// Режим отображения: тёмная / светлая.
+enum AppThemeMode { dark, light }
+
 /// Палитра цветов для одной темы.
 ///
 /// Принцип: фон — тёмный, слегка тонированный под тему; **мягкий,
@@ -177,7 +180,126 @@ const ThemePalette rosePalette = ThemePalette(
   overlay: Color(0xB3140810),
 );
 
-/// Все доступные темы.
+// ─── Светлые варианты ────────────────────────────────────────────────────────
+
+/// 🌿 Весна (светлая) — мягкий зелёный акцент на светлом фоне.
+const ThemePalette springLightPalette = ThemePalette(
+  id: ThemeId.spring,
+  name: 'Весна',
+  background: Color(0xFFF5F8F3),
+  surface: Color(0xFFEDF2EB),
+  surfaceElevated: Color(0xFFE2EAE0),
+  primary: Color(0xFF4A6B3A),
+  onPrimary: Color(0xFFFFFFFF),
+  primaryContainer: Color(0xFFDCE8CE),
+  onPrimaryContainer: Color(0xFF2A4A1A),
+  textPrimary: Color(0xFF1A2A1E),
+  textSecondary: Color(0xFF5A7A6A),
+  success: Color(0xFF3D8A56),
+  warning: Color(0xFFB8860B),
+  error: Color(0xFFC0392B),
+  errorContainer: Color(0xFFF5E0E0),
+  onError: Color(0xFF7F1D1D),
+  outline: Color(0xFFC8D8C8),
+  shadow: Color(0x1A000000),
+  overlay: Color(0xB3F5F8F3),
+);
+
+/// ☀️ Лето (светлая) — горчичный акцент на тёплом светлом фоне.
+const ThemePalette summerLightPalette = ThemePalette(
+  id: ThemeId.summer,
+  name: 'Лето',
+  background: Color(0xFFF8F6F0),
+  surface: Color(0xFFF0EDE3),
+  surfaceElevated: Color(0xFFE8E4D8),
+  primary: Color(0xFF8A7A2A),
+  onPrimary: Color(0xFFFFFFFF),
+  primaryContainer: Color(0xFFF5F0C8),
+  onPrimaryContainer: Color(0xFF4A3A0A),
+  textPrimary: Color(0xFF2A2618),
+  textSecondary: Color(0xFF7A7050),
+  success: Color(0xFF3D8A56),
+  warning: Color(0xFFB8860B),
+  error: Color(0xFFC0392B),
+  errorContainer: Color(0xFFF5E0E0),
+  onError: Color(0xFF7F1D1D),
+  outline: Color(0xFFD8D0B8),
+  shadow: Color(0x1A000000),
+  overlay: Color(0xB3F8F6F0),
+);
+
+/// 🍂 Осень (светлая) — глиняный акцент на тёплом светлом фоне.
+const ThemePalette autumnLightPalette = ThemePalette(
+  id: ThemeId.autumn,
+  name: 'Осень',
+  background: Color(0xFFF8F4F0),
+  surface: Color(0xFFF0EAE3),
+  surfaceElevated: Color(0xFFE8DED5),
+  primary: Color(0xFF8A4A2A),
+  onPrimary: Color(0xFFFFFFFF),
+  primaryContainer: Color(0xFFF5E0D0),
+  onPrimaryContainer: Color(0xFF4A2A1A),
+  textPrimary: Color(0xFF2A1A10),
+  textSecondary: Color(0xFF7A6050),
+  success: Color(0xFF3D8A56),
+  warning: Color(0xFFB8860B),
+  error: Color(0xFFC0392B),
+  errorContainer: Color(0xFFF5E0E0),
+  onError: Color(0xFF7F1D1D),
+  outline: Color(0xFFD8C8B8),
+  shadow: Color(0x1A000000),
+  overlay: Color(0xB3F8F4F0),
+);
+
+/// ❄️ Зима (светлая) — стальной акцент на холодном светлом фоне.
+const ThemePalette winterLightPalette = ThemePalette(
+  id: ThemeId.winter,
+  name: 'Зима',
+  background: Color(0xFFF3F6F8),
+  surface: Color(0xFFE8EEF2),
+  surfaceElevated: Color(0xFFDDE5EA),
+  primary: Color(0xFF2A6A9A),
+  onPrimary: Color(0xFFFFFFFF),
+  primaryContainer: Color(0xFFD8E8F5),
+  onPrimaryContainer: Color(0xFF1A3A5A),
+  textPrimary: Color(0xFF1A2A38),
+  textSecondary: Color(0xFF5A7A8A),
+  success: Color(0xFF3D8A56),
+  warning: Color(0xFFB8860B),
+  error: Color(0xFFC0392B),
+  errorContainer: Color(0xFFF5E0E0),
+  onError: Color(0xFF7F1D1D),
+  outline: Color(0xFFB8C8D8),
+  shadow: Color(0x1A000000),
+  overlay: Color(0xB3F3F6F8),
+);
+
+/// 🌹 Розовая (светлая) — пыльно-розовый акцент на светлом фоне.
+const ThemePalette roseLightPalette = ThemePalette(
+  id: ThemeId.rose,
+  name: 'Розовая',
+  background: Color(0xFFF8F3F5),
+  surface: Color(0xFFF0E8EC),
+  surfaceElevated: Color(0xFFE8DDE3),
+  primary: Color(0xFF8A3A6A),
+  onPrimary: Color(0xFFFFFFFF),
+  primaryContainer: Color(0xFFF5D8E8),
+  onPrimaryContainer: Color(0xFF4A1A3A),
+  textPrimary: Color(0xFF2A1A24),
+  textSecondary: Color(0xFF7A5A6A),
+  success: Color(0xFF3D8A56),
+  warning: Color(0xFFB8860B),
+  error: Color(0xFFC0392B),
+  errorContainer: Color(0xFFF5E0E0),
+  onError: Color(0xFF7F1D1D),
+  outline: Color(0xFFD8C0D0),
+  shadow: Color(0x1A000000),
+  overlay: Color(0xB3F8F3F5),
+);
+
+// ─── Реестр ─────────────────────────────────────────────────────────────────
+
+/// Все тёмные палитры (для выбора в UI).
 const List<ThemePalette> allPalettes = [
   springPalette,
   summerPalette,
@@ -186,6 +308,23 @@ const List<ThemePalette> allPalettes = [
   rosePalette,
 ];
 
-/// Получить палитру по [ThemeId].
-ThemePalette paletteFor(ThemeId id) =>
-    allPalettes.firstWhere((p) => p.id == id, orElse: () => springPalette);
+/// Светлые варианты, индексы соответствуют [allPalettes].
+const List<ThemePalette> allLightPalettes = [
+  springLightPalette,
+  summerLightPalette,
+  autumnLightPalette,
+  winterLightPalette,
+  roseLightPalette,
+];
+
+/// Получить палитру по [ThemeId] и [AppThemeMode].
+ThemePalette paletteFor(ThemeId id, [AppThemeMode mode = AppThemeMode.dark]) {
+  final index = id.index;
+  if (mode == AppThemeMode.light) {
+    return allLightPalettes[index];
+  }
+  return allPalettes.firstWhere(
+    (p) => p.id == id,
+    orElse: () => springPalette,
+  );
+}

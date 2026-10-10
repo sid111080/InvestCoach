@@ -10,34 +10,69 @@ final themePaletteProvider =
   ThemePaletteNotifier.new,
 );
 
-final class ThemePaletteNotifier extends Notifier<ThemePalette> {
-  static const _storageKey = 'theme_id';
+/// Текущий режим (dark/light) — отдельный провайдер для UI-тогла.
+final themeModeProvider =
+    NotifierProvider<ThemeModeNotifier, AppThemeMode>(
+  ThemeModeNotifier.new,
+);
+
+final class ThemeModeNotifier extends Notifier<AppThemeMode> {
+  static const _storageKey = 'theme_mode';
 
   @override
-  ThemePalette build() {
-    // Синхронный фолбэк; асинхронная загрузка — в [loadSaved].
-    return springPalette;
+  AppThemeMode build() => AppThemeMode.dark;
+
+  Future<void> loadSaved() async {
+    final prefs = await SharedPreferences.getInstance();
+    final saved = prefs.getString(_storageKey);
+    if (saved == 'light') state = AppThemeMode.light;
   }
 
-  /// Загрузить сохранённую тему (вызывать после инициализации
-  /// [SharedPreferences] в main).
+  void setMode(AppThemeMode mode) {
+    state = mode;
+    SharedPreferences.getInstance()
+        .then((prefs) => prefs.setString(_storageKey, mode.name));
+    // Обновляем палитру с новым режимом.
+    ref.read(themePaletteProvider.notifier).applyMode(mode);
+  }
+}
+
+final class ThemePaletteNotifier extends Notifier<ThemePalette> {
+  static const _storageKey = 'theme_id';
+  ThemeId _currentId = ThemeId.spring;
+  AppThemeMode _currentMode = AppThemeMode.dark;
+
+  @override
+  ThemePalette build() => springPalette;
+
   Future<void> loadSaved() async {
     final prefs = await SharedPreferences.getInstance();
     final savedName = prefs.getString(_storageKey);
     if (savedName != null) {
       for (final p in allPalettes) {
         if (p.name == savedName) {
-          state = p;
-          return;
+          _currentId = p.id;
+          break;
         }
       }
     }
+    // Применяем с учётом сохранённого режима.
+    final mode = ref.read(themeModeProvider);
+    _currentMode = mode;
+    state = paletteFor(_currentId, mode);
   }
 
   void setTheme(ThemeId id) {
-    state = paletteFor(id);
+    _currentId = id;
+    state = paletteFor(id, _currentMode);
     SharedPreferences.getInstance()
         .then((prefs) => prefs.setString(_storageKey, state.name));
+  }
+
+  /// Вызывается из [ThemeModeNotifier] при смене режима.
+  void applyMode(AppThemeMode mode) {
+    _currentMode = mode;
+    state = paletteFor(_currentId, mode);
   }
 }
 

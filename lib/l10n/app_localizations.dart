@@ -1088,6 +1088,18 @@ abstract class AppLocalizations {
   /// **'Можно поменять в любой момент'**
   String get profileThemeHint;
 
+  /// No description provided for @themeDark.
+  ///
+  /// In ru, this message translates to:
+  /// **'Тёмная тема'**
+  String get themeDark;
+
+  /// No description provided for @themeLight.
+  ///
+  /// In ru, this message translates to:
+  /// **'Светлая тема'**
+  String get themeLight;
+
   /// No description provided for @offlineBanner.
   ///
   /// In ru, this message translates to:

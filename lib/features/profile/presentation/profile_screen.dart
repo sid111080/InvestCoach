@@ -887,7 +887,7 @@ class _SectionError extends StatelessWidget {
   }
 }
 
-/// Секция «Тема интерфейса» — переключение между 5 палитрами.
+/// Секция «Тема интерфейса» — режим (dark/light) + выбор палитры.
 class _ThemeSection extends ConsumerWidget {
   const _ThemeSection();
 
@@ -895,6 +895,7 @@ class _ThemeSection extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
     final currentPalette = ref.watch(themePaletteProvider);
+    final mode = ref.watch(themeModeProvider);
 
     return Container(
       padding: const EdgeInsets.all(AppDimensions.spaceMd),
@@ -918,14 +919,31 @@ class _ThemeSection extends ConsumerWidget {
                 .copyWith(color: context.palette.textSecondary),
           ),
           const SizedBox(height: AppDimensions.spaceMd),
-          // Чипсы тем
+
+          // Тогл Тёмная / Светлая
+          _ThemeModeToggle(
+            mode: mode,
+            onToggle: () {
+              Haptics.selection();
+              final newMode =
+                  mode == AppThemeMode.dark
+                      ? AppThemeMode.light
+                      : AppThemeMode.dark;
+              ref.read(themeModeProvider.notifier).setMode(newMode);
+            },
+          ),
+          const SizedBox(height: AppDimensions.spaceMd),
+
+          // Чипсы палитр
           Wrap(
             spacing: AppDimensions.spaceXs,
             runSpacing: AppDimensions.spaceXs,
             children: [
               for (final palette in allPalettes)
                 _ThemeChip(
-                  palette: palette,
+                  palette: mode == AppThemeMode.light
+                      ? allLightPalettes[palette.id.index]
+                      : palette,
                   isSelected: palette.id == currentPalette.id,
                   onTap: () {
                     Haptics.selection();
@@ -938,6 +956,43 @@ class _ThemeSection extends ConsumerWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+/// Переключатель Тёмная / Светлая.
+class _ThemeModeToggle extends StatelessWidget {
+  const _ThemeModeToggle({required this.mode, required this.onToggle});
+
+  final AppThemeMode mode;
+  final VoidCallback onToggle;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    return Row(
+      children: [
+        Icon(
+          mode == AppThemeMode.dark
+              ? Icons.dark_mode_rounded
+              : Icons.light_mode_rounded,
+          size: 18,
+          color: context.palette.textSecondary,
+        ),
+        const SizedBox(width: AppDimensions.spaceXs),
+        Expanded(
+          child: Text(
+            mode == AppThemeMode.dark ? l10n.themeDark : l10n.themeLight,
+            style: AppTextStyles.bodyMedium
+                .copyWith(color: context.palette.textPrimary),
+          ),
+        ),
+        Switch(
+          value: mode == AppThemeMode.light,
+          activeThumbColor: context.palette.primary,
+          onChanged: (_) => onToggle(),
+        ),
+      ],
     );
   }
 }

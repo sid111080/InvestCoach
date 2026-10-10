@@ -4,9 +4,19 @@ import 'app_dimensions.dart';
 import 'app_text_styles.dart';
 import 'theme_palette.dart';
 
-/// Тёмная тема InvestCoach (MVP — только dark).
+/// Определяет яркость по фону палитры.
+Brightness _brightness(ThemePalette p) =>
+    allLightPalettes.contains(p) ? Brightness.light : Brightness.dark;
+
+/// Строит [ThemeData] для данной палитры (dark или light).
 ThemeData buildAppTheme(ThemePalette p) {
-  final colorScheme = ColorScheme.dark().copyWith(
+  final brightness = _brightness(p);
+
+  final baseScheme = brightness == Brightness.dark
+      ? ColorScheme.dark()
+      : ColorScheme.light();
+
+  final colorScheme = baseScheme.copyWith(
     primary: p.primary,
     onPrimary: p.onPrimary,
     primaryContainer: p.primaryContainer,
@@ -23,22 +33,23 @@ ThemeData buildAppTheme(ThemePalette p) {
   );
 
   return ThemeData(
-    brightness: Brightness.dark,
+    brightness: brightness,
     colorScheme: colorScheme,
     scaffoldBackgroundColor: p.background,
-    textTheme: const TextTheme(
-      displaySmall: AppTextStyles.display,
-      headlineSmall: AppTextStyles.titleLarge,
-      titleLarge: AppTextStyles.titleMedium,
-      titleMedium: AppTextStyles.titleSmall,
-      bodyLarge: AppTextStyles.bodyLarge,
-      bodyMedium: AppTextStyles.bodyMedium,
-      bodySmall: AppTextStyles.bodySmall,
-      labelLarge: AppTextStyles.labelLarge,
-      labelMedium: AppTextStyles.labelMedium,
-      labelSmall: AppTextStyles.labelSmall,
+    // Цвет текста берётся из палитры — корректно и для dark, и для light.
+    textTheme: TextTheme(
+      displaySmall: AppTextStyles.display.copyWith(color: p.textPrimary),
+      headlineSmall: AppTextStyles.titleLarge.copyWith(color: p.textPrimary),
+      titleLarge: AppTextStyles.titleMedium.copyWith(color: p.textPrimary),
+      titleMedium: AppTextStyles.titleSmall.copyWith(color: p.textPrimary),
+      bodyLarge: AppTextStyles.bodyLarge.copyWith(color: p.textPrimary),
+      bodyMedium: AppTextStyles.bodyMedium.copyWith(color: p.textPrimary),
+      bodySmall: AppTextStyles.bodySmall.copyWith(color: p.textSecondary),
+      labelLarge: AppTextStyles.labelLarge.copyWith(color: p.textPrimary),
+      labelMedium: AppTextStyles.labelMedium.copyWith(color: p.textSecondary),
+      labelSmall: AppTextStyles.labelSmall.copyWith(color: p.textSecondary),
     ),
-    // Иконки по умолчанию — яркий акцент темы (яркие иконки везде).
+    // Иконки по умолчанию — акцент темы.
     iconTheme: IconThemeData(
       color: p.primary,
       size: 22,
@@ -74,12 +85,13 @@ ThemeData buildAppTheme(ThemePalette p) {
               : p.textSecondary,
         ),
       ),
-      labelTextStyle: const WidgetStatePropertyAll(
+      labelTextStyle: WidgetStatePropertyAll(
         TextStyle(
           fontFamily: AppFonts.body,
           fontSize: 11,
           fontWeight: FontWeight.w500,
           height: 1.2,
+          color: p.textSecondary,
         ),
       ),
     ),

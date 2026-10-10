@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'app_colors.dart';
-
 /// Шрифтовые семейства дизайн-системы.
 ///
 /// ТЗ предписывает Satoshi для заголовков, но лицензионные TTF ещё не
@@ -18,7 +16,11 @@ abstract final class AppFonts {
   static const String body = 'Inter';
 }
 
-/// Типографика InvestCoach.
+/// Типографика InvestCoach (чистая типографика без цвета).
+///
+/// Цвет текста назначается в `buildAppTheme` из активной палитры —
+/// так стили корректно работают и в тёмной, и в светлой теме.
+/// Если нужен конкретный цвет — используйте `.copyWith(color: …)`.
 abstract final class AppTextStyles {
   AppTextStyles._();
 
@@ -28,7 +30,6 @@ abstract final class AppTextStyles {
     fontSize: 30,
     height: 1.25,
     fontWeight: FontWeight.w700,
-    color: AppColors.textPrimary,
   );
 
   static const TextStyle titleLarge = TextStyle(
@@ -36,7 +37,6 @@ abstract final class AppTextStyles {
     fontSize: 20,
     height: 1.3,
     fontWeight: FontWeight.w700,
-    color: AppColors.textPrimary,
   );
 
   static const TextStyle titleMedium = TextStyle(
@@ -44,7 +44,6 @@ abstract final class AppTextStyles {
     fontSize: 16,
     height: 1.35,
     fontWeight: FontWeight.w600,
-    color: AppColors.textPrimary,
   );
 
   static const TextStyle titleSmall = TextStyle(
@@ -52,28 +51,24 @@ abstract final class AppTextStyles {
     fontSize: 14,
     height: 1.4,
     fontWeight: FontWeight.w600,
-    color: AppColors.textPrimary,
   );
 
   static const TextStyle bodyLarge = TextStyle(
     fontFamily: AppFonts.body,
     fontSize: 16,
     height: 1.5,
-    color: AppColors.textPrimary,
   );
 
   static const TextStyle bodyMedium = TextStyle(
     fontFamily: AppFonts.body,
     fontSize: 14,
     height: 1.45,
-    color: AppColors.textPrimary,
   );
 
   static const TextStyle bodySmall = TextStyle(
     fontFamily: AppFonts.body,
     fontSize: 12,
     height: 1.4,
-    color: AppColors.textSecondary,
   );
 
   static const TextStyle labelLarge = TextStyle(
@@ -81,7 +76,6 @@ abstract final class AppTextStyles {
     fontSize: 14,
     height: 1.3,
     fontWeight: FontWeight.w600,
-    color: AppColors.textPrimary,
   );
 
   static const TextStyle labelMedium = TextStyle(
@@ -89,7 +83,6 @@ abstract final class AppTextStyles {
     fontSize: 12,
     height: 1.3,
     fontWeight: FontWeight.w500,
-    color: AppColors.textSecondary,
   );
 
   static const TextStyle labelSmall = TextStyle(
@@ -98,6 +91,5 @@ abstract final class AppTextStyles {
     height: 1.2,
     fontWeight: FontWeight.w500,
     letterSpacing: 0.5,
-    color: AppColors.textSecondary,
   );
 }

@@ -551,6 +551,12 @@ class AppLocalizationsRu extends AppLocalizations {
   String get profileThemeHint => 'Можно поменять в любой момент';
 
   @override
+  String get themeDark => 'Тёмная тема';
+
+  @override
+  String get themeLight => 'Светлая тема';
+
+  @override
   String get offlineBanner =>
       'Вы оффлайн. Coach ответит, когда появится связь.';
 }

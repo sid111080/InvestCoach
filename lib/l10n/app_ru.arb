@@ -298,5 +298,7 @@
   "themeSelectStart": "Начать",
   "profileThemeSection": "Тема интерфейса",
   "profileThemeHint": "Можно поменять в любой момент",
+  "themeDark": "Тёмная тема",
+  "themeLight": "Светлая тема",
   "offlineBanner": "Вы оффлайн. Coach ответит, когда появится связь."
 }

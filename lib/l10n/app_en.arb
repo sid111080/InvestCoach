@@ -297,5 +297,7 @@
   "themeSelectSubtitle": "Every morning starts with a mood. Pick yours.",
   "themeSelectStart": "Get Started",
   "profileThemeSection": "Interface Theme",
-  "profileThemeHint": "You can change it anytime"
+  "profileThemeHint": "You can change it anytime",
+  "themeDark": "Dark theme",
+  "themeLight": "Light theme"
 }
