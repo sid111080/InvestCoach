@@ -170,7 +170,8 @@
       "Bash(py)",
       "Bash(xargs *)",
       "Bash(sudo *)",
-      "Bash(timeout *)"
+      "Bash(timeout *)",
+      "Bash(defaults *)"
     ]
   },
   "$version": 4
