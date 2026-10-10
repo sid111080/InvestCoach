@@ -8,9 +8,14 @@ class MainFlutterWindow: NSWindow {
     RegisterGeneratedPlugins(registry: flutterViewController)
     super.awakeFromNib()
 
-    // Размер смартфона (430 × 932 pt) — устанавливаем ПОСЛЕ super,
-    // чтобы переопределить frame, восстановленный macOS из прошлого запуска.
-    self.setContentSize(NSSize(width: 430, height: 932))
+    // Отключаем state restoration — macOS не будет восстанавливать
+    // старый frame из прошлого запуска.
+    self.isRestorable = false
+    self.setFrameAutosaveName("")
+
+    // Размер смартфона (430 × 932 pt, ~Pixel 10 Pro / iPhone 17 Pro).
+    let target = NSRect(x: 0, y: 0, width: 430, height: 932)
+    self.setContentSize(target.size)
     self.center()
 
     // Ограничения ресайза: компактный телефон → планшет.
